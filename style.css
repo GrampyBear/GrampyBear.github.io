@@ -1,6 +1,6 @@
 :root {
-    /* Nuevo degradado Gris Celeste Claro */
-    --winter-gradient: linear-gradient(135deg, #cfd8dc 0%, #b0bec5 50%, #eceff1 100%);
+    /* Degradado Vertical Notorio: Azul Gélido -> Gris Azulado -> Blanco */
+    --winter-gradient: linear-gradient(to bottom, #78909c 0%, #b0bec5 40%, #e1f5fe 100%);
     --accent: #5c9ead;
     --dark-bar: #1a1c1e;
     --text-light: #ffffff;
@@ -14,7 +14,15 @@ body, html {
     color: #263238;
 }
 
-/* Efecto de Nieve */
+/* Fondo Vertical */
+.winter-background {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--winter-gradient);
+    z-index: -999;
+}
+
+/* Nieve animada */
 #snow-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -27,59 +35,56 @@ body, html {
     background: white;
     border-radius: 50%;
     opacity: 0.8;
-    pointer-events: none;
     animation: fall linear infinite;
 }
 
 @keyframes fall {
-    to { transform: translateY(100vh); }
+    to { transform: translateY(110vh); }
 }
 
-.winter-background {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--winter-gradient);
-    z-index: -999;
-}
-
-/* --- Control de Scroll por página --- */
-body.lock-scroll {
-    overflow: hidden; /* Bloquea el slider */
-}
-
-body.allow-scroll {
-    overflow-y: auto; /* Permite el slider */
-}
-
-/* NAVBAR Y FOOTER */
+/* BARRAS OSCURAS */
 .top-navbar, .bottom-footer {
     background: var(--dark-bar);
     color: var(--text-light);
     position: fixed;
     width: 100%;
     z-index: 1000;
-    padding: 15px 10%;
 }
-.top-navbar { top: 0; }
-.bottom-footer { bottom: 0; text-align: center; font-size: 0.75rem; }
 
-.nav-container { display: flex; justify-content: space-between; align-items: center; }
-.logo a { color: white; text-decoration: none; font-weight: 600; }
-.nav-menu { display: flex; list-style: none; gap: 15px; }
-.nav-menu button { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 8px 20px; border-radius: 50px; color: white; cursor: pointer; transition: 0.3s; }
-.nav-menu button:hover { background: var(--accent); }
+.top-navbar { top: 0; padding: 10px 5%; }
+.bottom-footer { bottom: 0; padding: 15px; text-align: center; font-size: 0.7rem; }
 
-/* CONTENIDO */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo a { color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem; }
+
+.nav-menu { display: flex; list-style: none; gap: 10px; }
+.nav-menu button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 6px 15px;
+    border-radius: 50px;
+    color: white;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* RESPONSIVIDAD Y CONTENIDO */
 main {
-    padding-top: 80px;
-    padding-bottom: 80px;
+    padding: 80px 20px;
     min-height: 100vh;
 }
 
 .page {
     display: none;
     width: 100%;
-    min-height: calc(100vh - 160px);
 }
 
 .page.active {
@@ -90,42 +95,67 @@ main {
     animation: fadeIn 1.2s ease forwards;
 }
 
-/* Específicamente para FANBOX y ABOUT que no deben scrollear */
-.no-scroll.active {
-    height: calc(100vh - 160px);
-    overflow: hidden;
+/* BLOQUEO DE SCROLL */
+body.lock-scroll { overflow: hidden; }
+body.allow-scroll { overflow-y: auto; }
+
+.centered-content { text-align: center; width: 100%; max-width: 1200px; }
+
+/* TARJETAS FANBOX (Adaptables) */
+.tier-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap; /* Permite que bajen en móviles */
 }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-.centered-content { text-align: center; width: 95%; max-width: 1300px; }
-
-/* TIERS */
-.tier-container { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
 .tier-card {
-    width: 500px; height: 312px; border-radius: 20px; overflow: hidden;
-    position: relative; cursor: pointer; transition: 0.4s; color: white; text-align: left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    /* Tamaño base PC */
+    width: 500px; 
+    height: 312px; 
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: 0.4s;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
-.tier-card:hover { transform: scale(1.03); }
+
 .tier-1 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
 .tier-2 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
-.tier-content { padding: 30px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
-.price { font-size: 1.8rem; font-weight: 600; }
+
+.tier-content { padding: 25px; display: flex; flex-direction: column; height: 100%; justify-content: center; text-align: left; }
+.price { font-size: 1.6rem; font-weight: 600; }
 .benefits { list-style: none; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px; margin-top: 10px; }
 
-/* BOTÓN CTA */
+/* DISEÑO PARA MÓVILES (Celulares) */
+@media (max-width: 768px) {
+    .nav-container { flex-direction: column; gap: 10px; }
+    .logo { font-size: 1rem; }
+    .nav-menu button { padding: 5px 12px; font-size: 0.7rem; }
+    
+    .tier-card {
+        width: 100%; /* Ocupa el ancho del celular */
+        height: auto;
+        aspect-ratio: 1280 / 800; /* Mantiene la proporción */
+    }
+
+    .tier-content { padding: 15px; }
+    .price { font-size: 1.3rem; }
+    .benefits { font-size: 0.7rem; }
+
+    main { padding-top: 120px; } /* Más espacio arriba por la navbar doble en móvil */
+}
+
+/* BOTÓN PRINCIPAL */
 .main-cta-button {
-    display: inline-block; margin-top: 30px; padding: 15px 35px;
+    display: inline-block; margin-top: 30px; padding: 12px 30px;
     background: white; color: var(--accent); text-decoration: none;
-    border-radius: 50px; font-weight: 600; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-radius: 50px; font-weight: 600; font-size: 0.9rem;
     transition: 0.3s;
 }
 .main-cta-button:hover { background: var(--accent); color: white; }
 
-.social-btn { text-decoration: none; color: var(--accent); font-weight: 600; margin: 0 10px; }
-
-@media (max-width: 1100px) {
-    .tier-container { flex-direction: column; }
-    .tier-card { width: 90vw; height: calc(90vw * 0.625); }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
