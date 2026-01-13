@@ -5,47 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kumojiisanko / くもじいさんこ</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <header>
         <div class="header-container">
-            <h1 class="brand">Kumojiisanko <span class="jp-name">/ くもじいさんこ</span></h1>
+            <h1 class="brand" onclick="showPage('home')">Kumojiisanko</h1>
             <nav>
                 <ul>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="https://kumojiisanko.fanbox.cc" target="_blank" class="fanbox-link">pixivFANBOX</a></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('about')">About Me</a></li>
+                    <li><a href="javascript:void(0)" onclick="showPage('fanbox')">FANBOX</a></li>
+                    <li><a href="https://bsky.app/profile/kumojiisanko.bsky.social" target="_blank">Bluesky</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
-        <section id="gallery" class="gallery-grid">
-            <div class="art-card placeholder">
-                <div class="image-box">Coming Soon</div>
-                <p>Artwork Title 01</p>
+    <main id="content-area">
+        <section id="home" class="page active">
+            <div class="hero">
+                <h2>Welcome to my creative space</h2>
+                <p>Digital artist and character designer. Exploring colors and emotions through every stroke.</p>
+                <div class="status-badge">Available for Commissions</div>
             </div>
-            <div class="art-card placeholder">
-                <div class="image-box">Coming Soon</div>
-                <p>Artwork Title 02</p>
+        </section>
+
+        <section id="about" class="page">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <p>Hello! I am **Kumojiisanko**, an artist focused on [Your Art Style].</p>
+                <p>My work is inspired by [Inspirations like Riisago, etc]. I strive to create characters that tell a story.</p>
             </div>
-            <div class="art-card placeholder">
-                <div class="image-box">Coming Soon</div>
-                <p>Artwork Title 03</p>
+        </section>
+
+        <section id="fanbox" class="page">
+            <div class="fanbox-header">
+                <h2>pixivFANBOX Support</h2>
+                <p class="thanks-note">"Thank you so much for considering supporting my work. Every contribution helps me continue creating!"</p>
             </div>
-            <div class="art-card placeholder">
-                <div class="image-box">Coming Soon</div>
-                <p>Artwork Title 04</p>
+            
+            <div class="tier-container">
+                <div class="tier-card">
+                    <h3>Basic Support</h3>
+                    <p class="price">¥500 / month</p>
+                    <ul>
+                        <li>Access to high-res JPGs</li>
+                        <li>WIPs and sketches</li>
+                    </ul>
+                    <a href="https://kumojiisanko.fanbox.cc" class="btn-support">Select Tier</a>
+                </div>
+                <div class="tier-card premium">
+                    <h3>Premium Support</h3>
+                    <p class="price">¥1000 / month</p>
+                    <ul>
+                        <li>All previous rewards</li>
+                        <li>Layered PSD files</li>
+                        <li>Voting power for next art</li>
+                    </ul>
+                    <a href="https://kumojiisanko.fanbox.cc" class="btn-support">Select Tier</a>
+                </div>
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2026 Kumojiisanko. Follow me on <a href="https://kumojiisanko.fanbox.cc">FANBOX</a></p>
-    </footer>
 
     <script src="script.js"></script>
 </body>
