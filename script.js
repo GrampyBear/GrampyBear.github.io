@@ -1,9 +1,18 @@
 function showPage(pageId) {
+    // Seleccionar todas las páginas
     const pages = document.querySelectorAll('.page');
-    pages.forEach(p => p.classList.remove('active'));
     
-    document.getElementById(pageId).classList.add('active');
+    // Ocultar todas
+    pages.forEach(page => {
+        page.classList.remove('active');
+    });
+
+    // Mostrar la seleccionada
+    const activePage = document.getElementById(pageId);
+    if (activePage) {
+        activePage.classList.add('active');
+    }
 }
 
-// Iniciar siempre en Home
+// Asegurar que carga la Home al inicio
 window.onload = () => showPage('home');
