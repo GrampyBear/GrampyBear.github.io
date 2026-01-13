@@ -1,80 +1,82 @@
 :root {
-    --bg-color: #ffffff;
-    --text-color: #1a1a1a;
-    --accent-color: #0096fa; /* Color inspirado en Pixiv */
-    --gray-light: #f4f4f4;
+    --fanbox-pink: #ff5a5f;
+    --text-main: #333;
+    --bg-light: #ffffff;
+    --transition-speed: 0.5s;
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
     font-family: 'Inter', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    color: var(--text-main);
+    background: #fafafa;
+    overflow-x: hidden;
 }
 
+/* Navegación */
 .header-container {
-    padding: 40px 5%;
+    padding: 30px 10%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: white;
+    border-bottom: 1px solid #eee;
 }
 
-.brand {
-    font-size: 1.5rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+.brand { cursor: pointer; font-weight: 600; text-transform: uppercase; }
+
+nav ul { display: flex; list-style: none; gap: 25px; }
+nav a { text-decoration: none; color: #666; font-size: 0.9rem; transition: 0.3s; }
+nav a:hover { color: var(--fanbox-pink); }
+
+/* Sistema de Páginas */
+.page {
+    display: none; /* Ocultas por defecto */
+    padding: 60px 10%;
+    animation: slideUp var(--transition-speed) ease forwards;
+    position: absolute;
+    width: 80%;
+    background: #fafafa;
 }
 
-.jp-name {
-    font-size: 1rem;
-    color: #888;
-    font-weight: 300;
+.page.active {
+    display: block;
 }
 
-nav ul { list-style: none; display: flex; gap: 30px; }
-nav a { text-decoration: none; color: var(--text-color); font-weight: 500; transition: 0.3s; }
-nav a:hover { color: var(--accent-color); }
-
-.fanbox-link {
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
-    padding: 5px 15px;
-    border-radius: 20px;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Galería Grid */
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 0 5% 100px 5%;
-}
-
-.art-card {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.art-card:hover { transform: translateY(-5px); }
-
-.image-box {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    background-color: var(--gray-light);
+/* Estilo de Tarjetas FANBOX */
+.tier-container {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ccc;
-    font-size: 0.8rem;
-    border-radius: 4px;
+    gap: 20px;
+    margin-top: 40px;
 }
 
-.art-card p { margin-top: 10px; font-size: 0.9rem; text-align: center; }
-
-footer {
-    padding: 40px;
+.tier-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    flex: 1;
+    border: 1px solid #eee;
     text-align: center;
-    font-size: 0.8rem;
-    color: #666;
 }
+
+.tier-card.premium { border: 2px solid var(--fanbox-pink); }
+
+.price { font-size: 1.5rem; font-weight: 600; margin: 15px 0; color: var(--fanbox-pink); }
+
+.tier-card ul { list-style: none; margin-bottom: 25px; font-size: 0.9rem; color: #777; }
+
+.btn-support {
+    display: inline-block;
+    padding: 10px 20px;
+    background: var(--fanbox-pink);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+.thanks-note { font-style: italic; color: #888; margin-top: 10px; }
