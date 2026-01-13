@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Kumojiisanko's website is ready!");
-    
-    // Animación simple al hacer scroll
-    const cards = document.querySelectorAll('.card');
-    window.addEventListener('scroll', () => {
-        cards.forEach(card => {
-            const cardTop = card.getBoundingClientRect().top;
-            if(cardTop < window.innerHeight - 100) {
-                card.style.opacity = '1';
-            }
-        });
+    console.log("Kumojiisanko site loaded.");
+
+    // Efecto de aparición gradual para las tarjetas
+    const cards = document.querySelectorAll('.art-card');
+    cards.forEach((card, index) => {
+        card.style.opacity = "0";
+        card.style.transition = "opacity 0.5s ease " + (index * 0.1) + "s";
+        setTimeout(() => {
+            card.style.opacity = "1";
+        }, 100);
     });
 });
