@@ -13,19 +13,21 @@
 
     <header class="top-navbar">
         <div class="nav-container">
-            <div class="logo" onclick="showPage('home')">Kumojiisanko</div>
+            <div class="logo">
+                <a href="#home">Kumojiisanko</a>
+            </div>
             <nav>
                 <ul class="nav-menu">
-                    <li><button onclick="showPage('home')">Home</button></li>
-                    <li><button onclick="showPage('about')">About Me</button></li>
-                    <li><button onclick="showPage('fanbox')">FANBOX</button></li>
+                    <li><a href="#home"><button>Home</button></a></li>
+                    <li><a href="#about"><button>About Me</button></a></li>
+                    <li><a href="#fanbox"><button>FANBOX</button></a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
     <main id="content-area">
-        <section id="home" class="page active">
+        <section id="home" class="page">
             <div class="centered-content">
                 <h1 class="brand-title">Kumojiisanko</h1>
                 <p class="subtitle">Digital Artist / くもじいさんこ</p>
@@ -60,13 +62,13 @@
                             <h3>夢のない放浪者</h3>
                             <p class="price">¥500</p>
                             <div class="tier-description">
-                                <p class="jp-text">むちゃくちゃありがとうございます！</p>
-                                <p class="en-text">Thank you so much for your support.</p>
+                                <p class="jp-text">むちゃくちゃありがとうございます！応援してくれて、本当に嬉しいです。</p>
+                                <p class="en-text">Thank you so much for your support. I hope you enjoy what I offer.</p>
                             </div>
                             <ul class="benefits">
-                                <li>Early access to illustrations</li>
-                                <li>WIP updates</li>
-                                <li>Small exclusives</li>
+                                <li>Early access to all new illustrations</li>
+                                <li>Work-in-progress (WIP) updates</li>
+                                <li>Exclusive small illustrations</li>
                             </ul>
                         </div>
                     </div>
@@ -76,29 +78,29 @@
                             <h3>ささやくそよ風</h3>
                             <p class="price">¥1000</p>
                             <div class="tier-description">
-                                <p class="jp-text">温かいそよ風があなたの到来を告げます。</p>
-                                <p class="en-text">A warm breeze announces your arrival.</p>
+                                <p class="jp-text">温かいそよ風があなたの到来を告げます。むちゃくちゃありがとうございます！</p>
+                                <p class="en-text">A warm breeze announces your arrival. Thank you so much!</p>
                             </div>
                             <ul class="benefits">
-                                <li>Previous rewards</li>
+                                <li>Everything in the previous tier</li>
                                 <li class="plus">+</li>
-                                <li>Monthly Render Commission</li>
+                                <li>One free monthly "Full render frame commission"</li>
                             </ul>
                         </div>
                     </div>
                 </div>
 
-                <div class="fanbox-footer">
-                    <a href="https://kumojiisanko.fanbox.cc" target="_blank" class="mini-card-link">Visit my pixivFANBOX →</a>
+                <div class="fanbox-footer-action">
+                    <a href="https://kumojiisanko.fanbox.cc" target="_blank" class="main-cta-button">
+                        Visit my official pixivFANBOX →
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
     <footer class="bottom-footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Kumojiisanko | Digital Art Portfolio</p>
-        </div>
+        <p>&copy; 2026 Kumojiisanko | Digital Art Portfolio</p>
     </footer>
 
     <script src="script.js"></script>
