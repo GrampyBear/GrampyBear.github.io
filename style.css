@@ -1,8 +1,9 @@
 :root {
     --winter-gradient: linear-gradient(135deg, #e0f2f1 0%, #e1f5fe 50%, #f3e5f5 100%);
     --accent: #5c9ead;
-    --text: #2c3e50;
-    --white-glass: rgba(255, 255, 255, 0.7);
+    --dark-bar: #1a1c1e;
+    --text-light: #ffffff;
+    --text-dark: #2c3e50;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -10,7 +11,7 @@
 body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    color: var(--text);
+    color: var(--text-dark);
     overflow-x: hidden;
 }
 
@@ -21,15 +22,16 @@ body, html {
     z-index: -999;
 }
 
-/* NAVBAR SUPERIOR */
+/* NAVBAR SUPERIOR OSCURA */
 .top-navbar {
     width: 100%;
-    padding: 20px 10%;
+    padding: 15px 10%;
     position: fixed;
     top: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.1); /* Efecto sutil */
-    backdrop-filter: blur(5px);
+    background: var(--dark-bar);
+    color: var(--text-light);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .nav-container {
@@ -43,6 +45,7 @@ body, html {
     font-size: 1.2rem;
     cursor: pointer;
     letter-spacing: 1px;
+    color: var(--text-light);
 }
 
 .nav-menu {
@@ -52,38 +55,40 @@ body, html {
 }
 
 .nav-menu button {
-    background: white;
-    border: none;
-    padding: 10px 22px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 20px;
     border-radius: 50px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    color: var(--text);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    color: var(--text-light);
     transition: 0.3s;
 }
 
 .nav-menu button:hover {
     background: var(--accent);
-    color: white;
+    border-color: var(--accent);
 }
 
-/* FOOTER INFERIOR */
-footer {
+/* FOOTER INFERIOR OSCURO */
+.bottom-footer {
     width: 100%;
-    padding: 20px 0;
+    padding: 15px 0;
     position: fixed;
     bottom: 0;
+    background: var(--dark-bar);
+    color: var(--text-light);
     text-align: center;
     font-size: 0.75rem;
-    color: #888;
     z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
 }
 
-/* CONTENIDO Y TRANSICIÓN */
+/* ESPACIADO PARA EL CONTENIDO */
 main {
-    height: 100vh;
+    height: calc(100vh - 120px); 
+    margin-top: 60px;
     width: 100%;
 }
 
@@ -97,7 +102,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Aumento de tiempo de transición a 1.2s */
     animation: fadeIn 1.2s ease forwards;
 }
 
@@ -108,59 +112,71 @@ main {
 
 .centered-content {
     text-align: center;
-    width: 90%;
-    max-width: 1200px;
+    width: 95%;
+    max-width: 1400px;
 }
 
-/* TARJETAS CON PROPORCIÓN 1280x800 */
+/* TARJETAS LATERALES - NUEVAS IMÁGENES NO-TEXT */
 .tier-container {
     display: flex;
+    flex-direction: row;
     gap: 30px;
     justify-content: center;
-    flex-wrap: wrap;
+    align-items: center;
     margin-top: 30px;
+    width: 100%;
 }
 
 .tier-card {
-    /* Basado en 1280x800, si height es 400px, width debe ser 640px */
-    width: 640px; 
-    height: 400px;
+    width: 550px; 
+    height: 343px; 
     border-radius: 20px;
     overflow: hidden;
     position: relative;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.4s ease;
     color: white;
     text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* Ajuste para pantallas pequeñas */
-@media (max-width: 700px) {
-    .tier-card {
-        width: 90vw;
-        height: calc(90vw * 0.625);
-    }
+.tier-card:hover { 
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
-.tier-card:hover { transform: scale(1.02); }
-
+/* Reemplazo con versiones sin texto (usando raw) */
 .tier-1 {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), 
-    url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/aea28727fcba804163701db235d0306cda5894ea/FANBOX%20card%20Tier%201.png') center/cover;
+    url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover;
 }
 
 .tier-2 {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), 
-    url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/aea28727fcba804163701db235d0306cda5894ea/FANBOX%20card%20Tier%202.png') center/cover;
+    url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover;
 }
 
-.tier-content { padding: 40px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
-.price { font-size: 2rem; font-weight: 600; margin: 10px 0; }
-.benefits { list-style: none; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 20px; margin-top: 10px;}
+.tier-content { padding: 30px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
 
-/* BOTÓN FINAL */
-.mini-card-link { 
-    display: inline-block; margin-top: 40px; padding: 12px 30px; 
-    background: white; border-radius: 50px; text-decoration: none; color: var(--text);
-    font-weight: 600; font-size: 0.85rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.price { font-size: 2rem; font-weight: 600; margin: 5px 0; }
+.jp-text { font-size: 0.85rem; font-weight: 300; margin-bottom: 5px; }
+.en-text { font-size: 0.85rem; font-style: italic; opacity: 0.9; margin-bottom: 15px; }
+.benefits { list-style: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; }
+
+/* REFUERZO DE LEGIBILIDAD (Sombra de texto sutil) */
+.tier-content h3, .price, .jp-text, .en-text, .benefits li {
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 1150px) {
+    .tier-container {
+        flex-direction: column;
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+    .tier-card {
+        width: 90vw;
+        height: calc(90vw * 0.625);
+        flex-shrink: 0;
+    }
 }
