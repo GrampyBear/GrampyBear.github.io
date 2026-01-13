@@ -1,33 +1,61 @@
 /**
- * Control de navegación Kumojiisanko
- * Maneja el cambio de secciones basado en el Hash (#) de la URL
+ * Efecto de Nieve Dinámica
  */
+function createSnow() {
+    const container = document.getElementById('snow-container');
+    const count = 50; // Número de copos
 
-function handleNavigation() {
-    // Obtener el ID de la URL (ej: #fanbox), por defecto #home
-    const hash = window.location.hash || '#home';
-    const targetId = hash.substring(1); // Quitar el símbolo '#'
+    for (let i = 0; i < count; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        
+        // Atributos aleatorios
+        const size = Math.random() * 4 + 2 + 'px';
+        const left = Math.random() * 100 + '%';
+        const duration = Math.random() * 5 + 5 + 's';
+        const delay = Math.random() * 5 + 's';
+        const opacity = Math.random();
 
-    // Seleccionar todas las páginas
-    const pages = document.querySelectorAll('.page');
-    
-    // Ocultar todas las páginas
-    pages.forEach(page => {
-        page.classList.remove('active');
-    });
+        snowflake.style.width = size;
+        snowflake.style.height = size;
+        snowflake.style.left = left;
+        snowflake.style.animationDuration = duration;
+        snowflake.style.animationDelay = delay;
+        snowflake.style.opacity = opacity;
+        snowflake.style.top = '-10px';
 
-    // Mostrar la página objetivo
-    const activePage = document.getElementById(targetId);
-    if (activePage) {
-        activePage.classList.add('active');
-    } else {
-        // Si el hash es inválido, volver a home
-        document.getElementById('home').classList.add('active');
+        container.appendChild(snowflake);
     }
 }
 
-// Escuchar cambios en la URL (al presionar atrás/adelante o clics en anclas)
-window.addEventListener('hashchange', handleNavigation);
+/**
+ * Gestión de Navegación y Bloqueo de Scroll
+ */
+function handleNavigation() {
+    const hash = window.location.hash || '#home';
+    const targetId = hash.substring(1);
+    const pages = document.querySelectorAll('.page');
+    
+    pages.forEach(page => page.classList.remove('active'));
 
-// Ejecutar al cargar la página por primera vez
-window.addEventListener('DOMContentLoaded', handleNavigation);
+    const activePage = document.getElementById(targetId);
+    if (activePage) {
+        activePage.classList.add('active');
+        
+        // Control del Scroll en el Body
+        if (targetId === 'home') {
+            document.body.classList.remove('lock-scroll');
+            document.body.classList.add('allow-scroll');
+        } else {
+            document.body.classList.remove('allow-scroll');
+            document.body.classList.add('lock-scroll');
+            window.scrollTo(0, 0); // Resetear posición al bloquear
+        }
+    }
+}
+
+window.addEventListener('hashchange', handleNavigation);
+window.addEventListener('DOMContentLoaded', () => {
+    createSnow();
+    handleNavigation();
+});
