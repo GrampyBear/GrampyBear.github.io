@@ -12,7 +12,7 @@ body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
     color: var(--text-dark);
-    overflow-x: hidden;
+    background: #f0f0f0;
 }
 
 .winter-background {
@@ -30,7 +30,6 @@ body, html {
     top: 0;
     z-index: 1000;
     background: var(--dark-bar);
-    color: var(--text-light);
     box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
@@ -40,12 +39,12 @@ body, html {
     align-items: center;
 }
 
-.logo {
+.logo a {
     font-weight: 600;
     font-size: 1.2rem;
-    cursor: pointer;
     letter-spacing: 1px;
     color: var(--text-light);
+    text-decoration: none;
 }
 
 .nav-menu {
@@ -57,18 +56,18 @@ body, html {
 .nav-menu button {
     background: rgba(255,255,255,0.1);
     border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 20px;
+    padding: 8px 22px;
     border-radius: 50px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     color: var(--text-light);
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .nav-menu button:hover {
     background: var(--accent);
-    border-color: var(--accent);
+    transform: translateY(-2px);
 }
 
 /* FOOTER INFERIOR OSCURO */
@@ -82,13 +81,12 @@ body, html {
     text-align: center;
     font-size: 0.75rem;
     z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
 }
 
-/* ESPACIADO PARA EL CONTENIDO */
+/* MAIN CONTENT AREA */
 main {
-    height: calc(100vh - 120px); 
-    margin-top: 60px;
+    height: calc(100vh - 110px);
+    margin-top: 55px;
     width: 100%;
 }
 
@@ -96,6 +94,7 @@ main {
     display: none;
     height: 100%;
     width: 100%;
+    padding: 20px;
 }
 
 .page.active {
@@ -112,22 +111,22 @@ main {
 
 .centered-content {
     text-align: center;
-    width: 95%;
+    width: 100%;
     max-width: 1400px;
 }
 
-/* TARJETAS LATERALES - NUEVAS IMÁGENES NO-TEXT */
+/* TIERS HORIZONTALES */
 .tier-container {
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 25px;
     justify-content: center;
     align-items: center;
     margin-top: 30px;
-    width: 100%;
 }
 
 .tier-card {
+    /* Proporción 1280x800 escalada */
     width: 550px; 
     height: 343px; 
     border-radius: 20px;
@@ -137,15 +136,11 @@ main {
     transition: 0.4s ease;
     color: white;
     text-align: left;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
-.tier-card:hover { 
-    transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-}
+.tier-card:hover { transform: scale(1.04); }
 
-/* Reemplazo con versiones sin texto (usando raw) */
 .tier-1 {
     background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), 
     url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover;
@@ -156,27 +151,41 @@ main {
     url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover;
 }
 
-.tier-content { padding: 30px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
+.tier-content { padding: 35px; display: flex; flex-direction: column; height: 100%; justify-content: center; }
+.tier-content h3, .price, .jp-text, .en-text, .benefits li { text-shadow: 1px 1px 4px rgba(0,0,0,0.6); }
 
-.price { font-size: 2rem; font-weight: 600; margin: 5px 0; }
-.jp-text { font-size: 0.85rem; font-weight: 300; margin-bottom: 5px; }
-.en-text { font-size: 0.85rem; font-style: italic; opacity: 0.9; margin-bottom: 15px; }
-.benefits { list-style: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 15px; }
+.price { font-size: 1.8rem; font-weight: 600; margin: 5px 0; }
+.jp-text, .en-text { font-size: 0.8rem; line-height: 1.3; }
+.en-text { font-style: italic; opacity: 0.9; margin-bottom: 12px; }
+.benefits { list-style: none; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 12px; }
+.plus { text-align: center; font-weight: bold; margin: 2px 0; }
 
-/* REFUERZO DE LEGIBILIDAD (Sombra de texto sutil) */
-.tier-content h3, .price, .jp-text, .en-text, .benefits li {
-    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+/* BOTÓN CTA FANBOX */
+.fanbox-footer-action { margin-top: 40px; }
+.main-cta-button {
+    display: inline-block;
+    padding: 15px 35px;
+    background: white;
+    color: var(--accent);
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: 0.3s;
 }
 
+.main-cta-button:hover {
+    background: var(--accent);
+    color: white;
+    transform: translateY(-3px);
+}
+
+/* RESPONSIVE */
 @media (max-width: 1150px) {
-    .tier-container {
-        flex-direction: column;
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-    .tier-card {
-        width: 90vw;
-        height: calc(90vw * 0.625);
-        flex-shrink: 0;
-    }
+    .tier-container { flex-direction: column; }
+    .tier-card { width: 90vw; height: calc(90vw * 0.625); }
 }
+
+/* ABOUT SECTION SOCIALS */
+.social-links { margin-top: 20px; display: flex; justify-content: center; gap: 20px; }
+.social-btn { text-decoration: none; color: var(--accent); font-weight: 600; }
