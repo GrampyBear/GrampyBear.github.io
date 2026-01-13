@@ -1,11 +1,14 @@
-// Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("Kumojiisanko's website is ready!");
     
-    const button = document.getElementById('cta-button');
-
-    button.addEventListener('click', () => {
-        alert('Hello! This button works. Now you can start coding your logic!');
-        console.log('Button was clicked successfully.');
+    // Animación simple al hacer scroll
+    const cards = document.querySelectorAll('.card');
+    window.addEventListener('scroll', () => {
+        cards.forEach(card => {
+            const cardTop = card.getBoundingClientRect().top;
+            if(cardTop < window.innerHeight - 100) {
+                card.style.opacity = '1';
+            }
+        });
     });
-
 });
