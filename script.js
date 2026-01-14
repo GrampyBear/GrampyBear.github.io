@@ -20,15 +20,16 @@ const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Cloud.png"
 ];
 
-// 2. GENERADOR DE NIEVE (Optimizado)
+// 2. GENERADOR DE NIEVE (Editado para aumentar cantidad)
 const createSnow = () => {
     const container = document.getElementById('snow-container');
     if (!container) return;
     
     const isMobile = window.innerWidth < 768;
-    const snowCount = isMobile ? 25 : 65;
+    // Aumentamos: de 25 a 45 en móvil, y de 65 a 110 en PC
+    const snowCount = isMobile ? 45 : 110; 
     
-    container.innerHTML = ''; // Limpiar nieve anterior
+    container.innerHTML = ''; 
 
     for (let i = 0; i < snowCount; i++) {
         const flake = document.createElement('div');
@@ -39,8 +40,10 @@ const createSnow = () => {
         flake.style.height = size;
         flake.style.left = Math.random() * 100 + '%';
         flake.style.opacity = Math.random() * 0.8;
-        flake.style.animationDuration = Math.random() * 3 + 4 + 's';
-        flake.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Aumentamos el rango de tiempo (de 4 a 10 segundos) para que no caigan todos al mismo tiempo
+        flake.style.animationDuration = Math.random() * 6 + 4 + 's'; 
+        flake.style.animationDelay = Math.random() * 8 + 's'; // Más retraso inicial para que aparezcan gradualmente
         flake.style.top = '-10px';
         
         container.appendChild(flake);
