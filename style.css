@@ -1,7 +1,9 @@
 :root {
+    /* Degradado vertical: Azul Gélido -> Gris Azulado -> Blanco Nieve */
     --winter-gradient: linear-gradient(to bottom, #455a64 0%, #90a4ae 50%, #eceff1 100%);
     --accent: #5c9ead;
     --dark-bar: #1a1c1e;
+    --text-main: #000000; /* Texto central negro solicitado */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -9,9 +11,10 @@
 body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    color: #000000; /* Texto central ahora negro */
+    color: var(--text-main);
 }
 
+/* --- ELEMENTOS DE FONDO --- */
 .winter-background {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -26,53 +29,182 @@ body, html {
     z-index: -5;
 }
 
-.snowflake { position: absolute; background: white; border-radius: 50%; animation: fall linear infinite; }
+.snowflake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: fall linear infinite;
+}
+
 @keyframes fall { to { transform: translateY(110vh); } }
 
-/* Barras */
-.top-navbar, .bottom-footer { background: var(--dark-bar); color: white; position: fixed; width: 100%; z-index: 1000; padding: 15px 5%; }
+/* --- BARRAS DE NAVEGACIÓN Y FOOTER --- */
+.top-navbar, .bottom-footer {
+    background: var(--dark-bar);
+    color: white;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    padding: 15px 5%;
+}
+
 .top-navbar { top: 0; }
 .bottom-footer { bottom: 0; text-align: center; font-size: 0.75rem; }
 
-.nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 .logo a { color: white; text-decoration: none; font-weight: 600; font-size: 1.2rem; }
 .nav-menu { display: flex; list-style: none; gap: 10px; }
-.nav-menu button { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 50px; color: white; cursor: pointer; transition: 0.3s; font-size: 0.8rem; }
 
-/* Contenido */
-.page { display: none; width: 100%; padding: 100px 20px; }
-.page.full-center.active { display: flex; position: fixed; top: 0; left: 0; height: 100vh; justify-content: center; align-items: center; padding: 0; z-index: 10; }
-#home.active { display: block; }
+.nav-menu button {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 8px 18px;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.8rem;
+}
 
-.centered-content { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
+.nav-menu button:hover { background: var(--accent); }
 
-/* Estilo para los H1 centrales */
-h1 { margin-bottom: 20px; font-weight: 600; letter-spacing: 2px; }
-.subtitle { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.8; font-weight: 300; }
+/* --- SISTEMA DE PÁGINAS --- */
+main { width: 100%; }
 
-.fanbox-intro { max-width: 700px; margin: 0 auto 30px auto; font-size: 0.95rem; line-height: 1.6; }
+.page {
+    display: none;
+    width: 100%;
+    padding: 120px 20px; /* Espacio para no chocar con la navbar */
+}
 
-/* Sección de Noticias en Home */
-.news-section { margin-top: 50px; padding: 30px; background: rgba(255, 255, 255, 0.2); border-radius: 20px; backdrop-filter: blur(5px); }
-.separator { border: none; height: 1px; background: rgba(0,0,0,0.1); margin-bottom: 30px; }
+/* CENTRADO ABSOLUTO (Punto Muerto) para About y Fanbox */
+.page.full-center.active {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    z-index: 10;
+}
 
-/* Tarjetas (Texto dentro de tarjetas se mantiene blanco para legibilidad) */
-.tier-card { width: 500px; height: 312px; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; transition: 0.4s; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.tier-card h3, .price, .benefits { color: white; }
-.tier-1 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
-.tier-2 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
-.tier-content { padding: 30px; text-align: left; }
-.tier-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+#home.active { display: block; } /* Home permite scroll natural */
 
-/* Scroll Management */
+.centered-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeIn 1s ease;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 600; }
+.subtitle { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.7; }
+
+/* Introducción de Fanbox */
+.fanbox-intro {
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* --- TARJETAS FANBOX (ESTILO PREMIUM RESTAURADO) --- */
+.tier-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.tier-card {
+    width: 550px; 
+    height: 380px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tier-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+}
+
+.tier-1 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
+.tier-2 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
+
+.tier-content {
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    /* Degradado para legibilidad total del texto blanco sobre el arte */
+    background: linear-gradient(to top, 
+        rgba(0,0,0,0.95) 0%, 
+        rgba(0,0,0,0.6) 50%, 
+        rgba(0,0,0,0.2) 100%);
+    color: #ffffff; /* El texto dentro de la tarjeta DEBE ser blanco */
+}
+
+.tier-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.price { font-size: 2.2rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+
+.tier-description { margin-bottom: 15px; }
+.jp-text { font-size: 0.85rem; margin-bottom: 4px; color: #e0e0e0; }
+.en-text { font-size: 0.8rem; font-style: italic; opacity: 0.9; }
+
+.benefits {
+    list-style: none;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 12px;
+}
+
+.benefits li { margin-bottom: 4px; padding-left: 18px; position: relative; }
+.benefits li::before { content: "✦"; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
+.plus { text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem; margin: 2px 0; }
+
+/* --- BOTONES Y EXTRAS --- */
+.main-cta-button {
+    display: inline-block;
+    padding: 15px 40px;
+    background: #000000;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 30px;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.main-cta-button:hover { background: var(--accent); transform: scale(1.05); }
+
+/* Gestión de Scroll */
 body.lock-scroll { overflow: hidden !important; }
 body.allow-scroll { overflow-y: auto !important; }
 
-/* Botón CTA */
-.main-cta-button { display: inline-block; padding: 15px 35px; background: #000; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; margin-top: 20px; transition: 0.3s; }
-.main-cta-button:hover { background: var(--accent); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
     .tier-card { width: 95vw; height: auto; aspect-ratio: 1280/800; }
+    .nav-container { flex-direction: column; gap: 10px; }
+    /* En móviles desactivamos el centrado absoluto para evitar que el contenido se corte */
     .page.full-center.active { position: relative; height: auto; padding: 120px 20px; }
 }
