@@ -9,10 +9,9 @@
 body, html {
     height: 100%;
     font-family: 'Montserrat', sans-serif;
-    color: #263238;
+    color: #000000; /* Texto central ahora negro */
 }
 
-/* Background y Nieve */
 .winter-background {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -27,132 +26,53 @@ body, html {
     z-index: -5;
 }
 
-.snowflake {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: fall linear infinite;
-}
-
+.snowflake { position: absolute; background: white; border-radius: 50%; animation: fall linear infinite; }
 @keyframes fall { to { transform: translateY(110vh); } }
 
 /* Barras */
-.top-navbar, .bottom-footer {
-    background: var(--dark-bar);
-    color: white;
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    padding: 15px 5%;
-}
+.top-navbar, .bottom-footer { background: var(--dark-bar); color: white; position: fixed; width: 100%; z-index: 1000; padding: 15px 5%; }
 .top-navbar { top: 0; }
 .bottom-footer { bottom: 0; text-align: center; font-size: 0.75rem; }
 
 .nav-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
 .logo a { color: white; text-decoration: none; font-weight: 600; font-size: 1.2rem; }
 .nav-menu { display: flex; list-style: none; gap: 10px; }
+.nav-menu button { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 50px; color: white; cursor: pointer; transition: 0.3s; font-size: 0.8rem; }
 
-.nav-menu button {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.2);
-    padding: 8px 15px;
-    border-radius: 50px;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 0.8rem;
-}
-
-.nav-menu button:hover { background: var(--accent); }
-
-/* Control de Páginas */
-main { width: 100%; }
-
-.page {
-    display: none;
-    width: 100%;
-    padding: 100px 20px;
-}
-
-/* Centrado en secciones estáticas */
-.page.full-center.active {
-    display: flex;
-    position: fixed;
-    top: 0; left: 0;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    z-index: 10;
-}
-
+/* Contenido */
+.page { display: none; width: 100%; padding: 100px 20px; }
+.page.full-center.active { display: flex; position: fixed; top: 0; left: 0; height: 100vh; justify-content: center; align-items: center; padding: 0; z-index: 10; }
 #home.active { display: block; }
 
-.centered-content {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    text-align: center;
-    animation: fadeIn 1s ease;
-}
+.centered-content { width: 100%; max-width: 1200px; margin: 0 auto; text-align: center; }
 
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+/* Estilo para los H1 centrales */
+h1 { margin-bottom: 20px; font-weight: 600; letter-spacing: 2px; }
+.subtitle { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.8; font-weight: 300; }
 
-/* Tarjetas FANBOX */
-.tier-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 30px;
-}
+.fanbox-intro { max-width: 700px; margin: 0 auto 30px auto; font-size: 0.95rem; line-height: 1.6; }
 
-.tier-card {
-    width: 500px; 
-    height: 312px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: 0.4s;
-    color: white;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
+/* Sección de Noticias en Home */
+.news-section { margin-top: 50px; padding: 30px; background: rgba(255, 255, 255, 0.2); border-radius: 20px; backdrop-filter: blur(5px); }
+.separator { border: none; height: 1px; background: rgba(0,0,0,0.1); margin-bottom: 30px; }
 
-.tier-card:hover { transform: scale(1.03); }
-
+/* Tarjetas (Texto dentro de tarjetas se mantiene blanco para legibilidad) */
+.tier-card { width: 500px; height: 312px; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer; transition: 0.4s; color: white; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+.tier-card h3, .price, .benefits { color: white; }
 .tier-1 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
 .tier-2 { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
-
-.tier-content { padding: 30px; text-align: left; height: 100%; display: flex; flex-direction: column; justify-content: center; }
-.price { font-size: 1.8rem; font-weight: 600; margin-bottom: 10px; }
-.benefits { list-style: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 15px; }
+.tier-content { padding: 30px; text-align: left; }
+.tier-container { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
 
 /* Scroll Management */
 body.lock-scroll { overflow: hidden !important; }
 body.allow-scroll { overflow-y: auto !important; }
 
-.spacer { height: 120vh; padding-top: 50px; color: #546e7a; font-style: italic; }
-
 /* Botón CTA */
-.cta-wrapper { margin-top: 40px; }
-.main-cta-button {
-    display: inline-block;
-    padding: 15px 35px;
-    background: white;
-    color: var(--accent);
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
-.main-cta-button:hover { background: var(--accent); color: white; }
+.main-cta-button { display: inline-block; padding: 15px 35px; background: #000; color: #fff; text-decoration: none; border-radius: 50px; font-weight: 600; margin-top: 20px; transition: 0.3s; }
+.main-cta-button:hover { background: var(--accent); }
 
-/* Responsive móvil */
 @media (max-width: 768px) {
     .tier-card { width: 95vw; height: auto; aspect-ratio: 1280/800; }
-    .nav-container { flex-direction: column; gap: 10px; }
     .page.full-center.active { position: relative; height: auto; padding: 120px 20px; }
-    body.lock-scroll { overflow-y: auto !important; } /* Permitir scroll en móvil si el contenido es grande */
 }
