@@ -1,8 +1,18 @@
+// Configuración de Textos Random
+const titles = ["Kumojiisanko", "くもじいさんこ"];
+const welcomePhrases = [
+    "Welcome to my winter corner.",
+    "Enjoy the visit!",
+    "It's snowing a lot, bundle up!",
+    "Beautiful weather, isn't it?",
+    "Make yourself at home in this cold season.",
+    "Thanks for stopping by!"
+];
+
 const createSnow = () => {
     const container = document.getElementById('snow-container');
     const snowCount = window.innerWidth < 768 ? 25 : 65;
     container.innerHTML = '';
-
     for (let i = 0; i < snowCount; i++) {
         const flake = document.createElement('div');
         flake.className = 'snowflake';
@@ -18,6 +28,19 @@ const createSnow = () => {
     }
 };
 
+// Función para aplicar los textos aleatorios
+const applyRandomTexts = () => {
+    const titleElement = document.getElementById('main-title');
+    const phraseElement = document.getElementById('welcome-phrase');
+    
+    if (titleElement) {
+        titleElement.innerText = titles[Math.floor(Math.random() * titles.length)];
+    }
+    if (phraseElement) {
+        phraseElement.innerText = welcomePhrases[Math.floor(Math.random() * welcomePhrases.length)];
+    }
+};
+
 const handleRoute = () => {
     const hash = window.location.hash || '#home';
     const target = hash.substring(1);
@@ -29,11 +52,11 @@ const handleRoute = () => {
     if (activePage) {
         activePage.classList.add('active');
         
-        // Bloqueo de scroll inteligente
+        // Cada vez que volvemos a Home, podemos refrescar los textos aleatorios
         if (target === 'home') {
+            applyRandomTexts();
             document.body.className = 'allow-scroll';
         } else {
-            // Solo bloqueamos scroll en pantallas que no sean móviles pequeños
             if (window.innerWidth > 768) {
                 document.body.className = 'lock-scroll';
             } else {
@@ -47,6 +70,6 @@ const handleRoute = () => {
 window.addEventListener('hashchange', handleRoute);
 window.addEventListener('load', () => {
     createSnow();
-    handleRoute();
+    handleRoute(); // Esto ya llama a applyRandomTexts indirectamente
 });
 window.addEventListener('resize', createSnow);
