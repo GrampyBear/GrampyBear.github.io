@@ -1,17 +1,18 @@
 :root {
-    /* Degradado vertical: Azul Gélido -> Gris Azulado -> Blanco Nieve */
     --winter-gradient: linear-gradient(to bottom, #455a64 0%, #90a4ae 50%, #eceff1 100%);
     --accent: #5c9ead;
     --dark-bar: #1a1c1e;
-    --text-main: #000000; /* Texto central negro solicitado */
+    --text-main: #000000;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body, html {
-    height: 100%;
+    min-height: 100%;
     font-family: 'Montserrat', sans-serif;
     color: var(--text-main);
+    overflow-x: hidden;
+    overflow-y: auto; /* Scroll habilitado globalmente */
 }
 
 /* --- ELEMENTOS DE FONDO --- */
@@ -38,7 +39,7 @@ body, html {
 
 @keyframes fall { to { transform: translateY(110vh); } }
 
-/* --- BARRAS DE NAVEGACIÓN Y FOOTER --- */
+/* --- BARRAS --- */
 .top-navbar, .bottom-footer {
     background: var(--dark-bar);
     color: white;
@@ -75,28 +76,21 @@ body, html {
 
 .nav-menu button:hover { background: var(--accent); }
 
-/* --- SISTEMA DE PÁGINAS --- */
-main { width: 100%; }
+/* --- SISTEMA DE PÁGINAS (SCROLL NATURAL) --- */
+main { width: 100%; min-height: 100vh; }
 
 .page {
     display: none;
     width: 100%;
-    padding: 120px 20px; /* Espacio para no chocar con la navbar */
-}
-
-/* CENTRADO ABSOLUTO (Punto Muerto) para About y Fanbox */
-.page.full-center.active {
-    display: flex;
-    position: fixed;
-    top: 0; left: 0;
-    height: 100vh;
-    justify-content: center;
+    padding: 110px 20px 80px; /* Espacio para navbar y footer */
+    flex-direction: column;
     align-items: center;
-    padding: 0;
-    z-index: 10;
 }
 
-#home.active { display: block; } /* Home permite scroll natural */
+.page.active { display: flex; }
+
+/* Centrado vertical solo en About/Fanbox si hay espacio */
+.page.full-center.active { justify-content: center; min-height: 100vh; }
 
 .centered-content {
     width: 100%;
@@ -106,157 +100,35 @@ main { width: 100%; }
     animation: fadeIn 1s ease;
 }
 
-h1 { font-size: 2.5rem; margin-bottom: 15px; font-weight: 600; }
+h1 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 600; }
 .subtitle { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.7; }
 
-/* Introducción de Fanbox */
-.fanbox-intro {
-    max-width: 800px;
-    margin: 0 auto 30px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-/* --- TARJETAS FANBOX (ESTILO PREMIUM RESTAURADO) --- */
-.tier-container {
-    display: flex;
-    gap: 25px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 20px;
-}
-
-.tier-card {
-    width: 550px; 
-    height: 380px;
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+/* --- SECCIÓN ABOUT --- */
+.about-container, .name-breakdown-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    width: 100%;
+    max-width: 1000px;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.tier-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(0,0,0,0.5);
-}
-
-.tier-1 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
-.tier-2 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
-
-.tier-content {
-    padding: 30px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    text-align: left;
-    /* Degradado para legibilidad total del texto blanco sobre el arte */
-    background: linear-gradient(to top, 
-        rgba(0,0,0,0.95) 0%, 
-        rgba(0,0,0,0.6) 50%, 
-        rgba(0,0,0,0.2) 100%);
-    color: #ffffff; /* El texto dentro de la tarjeta DEBE ser blanco */
-}
-
-.tier-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
-.price { font-size: 2.2rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
-
-.tier-description { margin-bottom: 15px; }
-.jp-text { font-size: 0.85rem; margin-bottom: 4px; color: #e0e0e0; }
-.en-text { font-size: 0.8rem; font-style: italic; opacity: 0.9; }
-
-.benefits {
-    list-style: none;
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: 12px;
-}
-
-.benefits li { margin-bottom: 4px; padding-left: 18px; position: relative; }
-.benefits li::before { content: "✦"; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
-.plus { text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem; margin: 2px 0; }
-
-/* --- BOTONES Y EXTRAS --- */
-.main-cta-button {
-    display: inline-block;
-    padding: 15px 40px;
-    background: #000000;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 600;
-    margin-top: 30px;
-    transition: 0.3s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.main-cta-button:hover { background: var(--accent); transform: scale(1.05); }
-
-/* Gestión de Scroll */
-body.lock-scroll { overflow: hidden !important; }
-body.allow-scroll { overflow-y: auto !important; }
-
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-    .tier-card { width: 95vw; height: auto; aspect-ratio: 1280/800; }
-    .nav-container { flex-direction: column; gap: 10px; }
-    /* En móviles desactivamos el centrado absoluto para evitar que el contenido se corte */
-    .page.full-center.active { position: relative; height: auto; padding: 120px 20px; }
-}
-
-
-/* Contenedor About con imagen y texto */
 .about-container {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 40px;
-    max-width: 1000px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.15);
     padding: 40px;
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
+    margin-bottom: 20px;
     text-align: left;
 }
 
-/* Imagen a la izquierda */
-.about-image-side {
-    flex: 1;
-    max-width: 350px;
-}
+.about-image-side { flex: 1; max-width: 350px; }
+.profile-pic { width: 100%; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.about-text-side { flex: 1.5; }
 
-.profile-pic {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
+.bio-paragraphs p { margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5; color: #000; }
+.bio-paragraphs strong { font-weight: 700; }
 
-/* Texto a la derecha */
-.about-text-side {
-    flex: 1.5;
-}
-
-.bio-paragraphs p {
-    margin-bottom: 15px; /* Espaciado entre los 4 párrafos */
-    font-size: 1.1rem;
-    line-height: 1.5;
-    color: #000;
-}
-
-/* Resaltado simple solicitado: solo negrita */
-.bio-paragraphs strong {
-    font-weight: 600;
-    color: #000;
-}
-
-/* Grid de botones sociales (ahora de 4 elementos) */
 .social-links-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -276,84 +148,39 @@ body.allow-scroll { overflow-y: auto !important; }
     transition: 0.3s;
 }
 
-.social-btn:hover {
-    background: var(--accent);
-    transform: translateY(-2px);
-}
+.social-btn:hover { background: var(--accent); transform: translateY(-2px); }
 
-/* Adaptación para móviles */
+/* Breakdown Card */
+.name-breakdown-card { padding: 30px; text-align: center; }
+.breakdown-grid { text-align: left; display: inline-block; margin-bottom: 20px; }
+.breakdown-item { font-size: 1rem; margin-bottom: 8px; }
+.japanese-name { font-size: 2rem; font-weight: 600; letter-spacing: 4px; margin: 10px 0; }
+.learning-note { font-size: 0.85rem; font-style: italic; opacity: 0.7; margin-top: 15px; }
+
+/* --- FANBOX --- */
+.tier-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.tier-card {
+    width: 550px; height: 380px; border-radius: 24px; overflow: hidden;
+    position: relative; cursor: pointer; transition: 0.4s;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.tier-card:hover { transform: translateY(-8px); }
+.tier-content {
+    padding: 30px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
+    text-align: left; color: #fff;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+}
+.price { font-size: 2rem; font-weight: 600; color: var(--accent); }
+.benefits { list-style: none; font-size: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 12px; }
+.benefits li::before { content: "✦"; margin-right: 8px; color: var(--accent); }
+
+/* --- RESPONSIVE --- */
 @media (max-width: 768px) {
-    .about-container {
-        flex-direction: column;
-        padding: 30px 20px;
-        text-align: center;
-    }
-    
-    .about-image-side {
-        max-width: 220px;
-        margin-bottom: 10px;
-    }
-
-    .social-links-grid {
-        grid-template-columns: 1fr 1fr;
-    }
+    .page { padding: 90px 15px 100px; justify-content: flex-start !important; }
+    .about-container { flex-direction: column; text-align: center; padding: 30px 20px; }
+    .about-image-side { max-width: 220px; }
+    .tier-card { width: 100%; height: auto; aspect-ratio: 16/10; }
+    .nav-container { flex-direction: column; gap: 10px; }
 }
 
-/* Segundo recuadro: Desglose del nombre */
-.name-breakdown-card {
-    max-width: 1000px;
-    margin: 20px auto 0; /* Separación de 20px del primer cuadro */
-    background: rgba(255, 255, 255, 0.15);
-    padding: 30px;
-    border-radius: 30px;
-    backdrop-filter: blur(10px);
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.breakdown-grid {
-    text-align: left;
-    display: inline-block;
-    margin-bottom: 20px;
-}
-
-.breakdown-item {
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: #000;
-}
-
-.writing-section {
-    margin: 15px 0;
-}
-
-.arrow-text {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 5px;
-}
-
-.japanese-name {
-    font-size: 1.8rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    color: #000;
-}
-
-.learning-note {
-    font-size: 0.85rem;
-    font-style: italic;
-    margin-top: 15px;
-    opacity: 0.7;
-}
-
-/* Ajuste móvil para el segundo recuadro */
-@media (max-width: 768px) {
-    .name-breakdown-card {
-        padding: 20px;
-        margin-top: 15px;
-    }
-    .japanese-name {
-        font-size: 1.4rem;
-    }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
