@@ -248,3 +248,15 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     .nav-menu { gap: 5px; }
     .nav-menu button { padding: 6px 10px; font-size: 0.7rem; }
 }
+
+#welcome-phrase::before {
+    content: '"'; /* Comilla de apertura */
+    color: var(--accent); /* Opcional: un toque de color */
+    margin-right: 2px;
+}
+
+#welcome-phrase::after {
+    content: '"'; /* Comilla de cierre */
+    color: var(--accent);
+    margin-left: 2px;
+}
