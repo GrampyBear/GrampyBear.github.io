@@ -210,10 +210,41 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 .social-btn { background: #000; color: #fff; padding: 10px; text-decoration: none; border-radius: 8px; text-align: center; transition: 0.3s; }
 .social-btn:hover { background: var(--accent); }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE --- (Optimizado para que en móvil también se vea pro) */
 @media (max-width: 900px) {
-    .about-container { flex-direction: column; padding: 25px; text-align: center; }
-    .about-image-side { flex: 0 0 auto; max-width: 200px; }
-    .tier-container { flex-direction: column; align-items: center; }
-    .tier-card { width: 95%; height: auto; }
+    /* Ajuste del margen superior en móvil para no dejar tanto hueco */
+    .page { padding: 110px 15px 100px; }
+
+    /* El "About Me" se apila verticalmente y se centra */
+    .about-container { 
+        flex-direction: column; 
+        padding: 25px; 
+        text-align: center; 
+        gap: 20px;
+    }
+    
+    .about-image-side { 
+        flex: 0 0 auto; 
+        max-width: 180px; /* Foto de perfil un poco más pequeña en móvil */
+    }
+
+    /* LAS TARJETAS EN MÓVIL: */
+    .tier-container { 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px;
+    }
+
+    .tier-card { 
+        width: 100%; 
+        max-width: 350px; /* No deja que la tarjeta sea gigante a lo ancho */
+        aspect-ratio: auto; /* Quitamos la proporción fija de PC para que no se vea aplastada */
+        height: 400px; /* Le damos una altura fija cómoda para leer los beneficios */
+    }
+
+    .tier-content h3 { font-size: 1.2rem; }
+    .price { font-size: 1.8rem; }
+    
+    .nav-menu { gap: 5px; }
+    .nav-menu button { padding: 6px 10px; font-size: 0.7rem; }
 }
