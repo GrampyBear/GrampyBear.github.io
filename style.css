@@ -50,11 +50,15 @@ body, html {
 .bottom-footer {
     background: var(--dark-bar);
     color: white;
-    position: relative;
+    position: fixed; /* Lo fijamos a la pantalla */
+    bottom: 0;      /* Siempre al fondo */
+    left: 0;
     width: 100%;
-    padding: 20px;
+    z-index: 1000;
+    padding: 15px;
     text-align: center;
     font-size: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Un detalle sutil para separarlo del fondo */
 }
 
 .nav-container {
@@ -86,8 +90,10 @@ main { width: 100%; padding-top: 80px; }
 .page {
     display: none;
     width: 100%;
-    padding: 40px 20px;
-    min-height: calc(100vh - 160px);
+    /* 140px arriba para la navbar, 100px abajo para el footer */
+    padding: 140px 20px 100px; 
+    min-height: 100vh; /* Asegura que cada sección ocupe al menos toda la pantalla */
+    animation: fadeIn 0.8s ease-out; /* Un efecto de entrada suave */
 }
 
 .page.active {
@@ -96,10 +102,11 @@ main { width: 100%; padding-top: 80px; }
 
 .centered-content {
     width: 100%;
-    max-width: 1100px;
+    max-width: 900px; /* Reducido un poco para que el texto sea más fácil de leer */
     margin: 0 auto;
     text-align: center;
 }
+
 
 h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 
