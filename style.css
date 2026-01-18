@@ -250,34 +250,30 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 }
 
 #welcome-phrase {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Un poco más grande para legibilidad */
     font-style: italic;
-    color: #000000; /* Un gris elegante */
+    color: #000000;
     display: inline-block;
-    position: relative;
-    padding: 0 25px; /* Espacio para que las comillas no choquen con el texto */
 }
 
 /* Comilla de apertura */
 #welcome-phrase::before {
-    content: '“'; /* Comilla doble elegante */
-    font-size: 2rem;
-    position: absolute;
-    left: -5px;
-    top: -15px;
-    color: #000000; /* Usamos tu color de acento */
+    content: '“';
+    font-size: 1.5rem; /* Tamaño proporcional al texto */
+    color: #000000;
     opacity: 0.5;
-    font-family: serif; /* Las comillas se ven mejor en fuentes con serifa */
+    font-family: serif;
+    margin-right: 8px; /* Espacio entre comilla y texto */
+    vertical-align: middle; /* Las alinea al centro de la letra */
 }
 
 /* Comilla de cierre */
 #welcome-phrase::after {
-    content: '”'; /* Comilla doble elegante */
-    font-size: 2rem;
-    position: absolute;
-    right: -5px;
-    bottom: -35px; /* Ajustado para que baje un poco */
+    content: '”';
+    font-size: 1.5rem;
     color: #000000;
     opacity: 0.5;
     font-family: serif;
+    margin-left: 8px; /* Espacio entre texto y comilla */
+    vertical-align: middle;
 }
