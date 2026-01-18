@@ -10,7 +10,6 @@ const welcomePhrases = [
     "Beautiful weather, isn't it?",
     "Make yourself at home in this cold season.",
     "Thanks for stopping by!"
-    "Winter is Beautiful"
 ];
 const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Snowflake.png",
@@ -63,12 +62,10 @@ const executePageSwitch = (oldPage, newPage) => {
         p.classList.remove('active', 'fading-out');
         p.style.display = 'none';
     });
-
     newPage.style.display = 'block';
     setTimeout(() => {
         newPage.classList.add('active');
     }, 20);
-
     applyRandomElements();
     window.scrollTo(0, 0);
 };
