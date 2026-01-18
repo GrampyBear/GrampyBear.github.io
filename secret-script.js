@@ -1,27 +1,25 @@
 const body = document.body;
 const flashlight = document.getElementById('flashlight');
-const lightSwitch = document.getElementById('light-switch');
+const pullChain = document.getElementById('light-switch');
 
-// Movimiento de linterna
+// Seguimiento de linterna
 document.addEventListener('mousemove', (e) => {
     flashlight.style.setProperty('--x', e.clientX + 'px');
     flashlight.style.setProperty('--y', e.clientY + 'px');
 });
 
-// Lógica del interruptor
-lightSwitch.addEventListener('click', () => {
+// Mecanismo de la luz cenital
+pullChain.addEventListener('click', () => {
     body.classList.toggle('light-on');
-    // Simular un pequeño tirón visual
-    lightSwitch.style.transform = 'translateY(10px)';
-    setTimeout(() => lightSwitch.style.transform = 'translateY(0)', 100);
+    
+    // Pequeño efecto visual de tirón
+    pullChain.style.transform = 'translateY(15px)';
+    setTimeout(() => {
+        pullChain.style.transform = 'translateY(0)';
+    }, 150);
 });
 
-// Botón de pánico mejorado
+// Cerrar habitación
 document.getElementById('exit-btn').addEventListener('click', () => {
-    // Intenta cerrar la ventana
-    window.close();
-    // Si falla (por seguridad del navegador), redirige a algo inocuo
-    setTimeout(() => {
-        window.location.href = "https://www.google.com/search?q=winter+landscapes";
-    }, 200);
+    window.location.href = "index.html"; // Regresa al sitio principal por seguridad
 });
