@@ -9,8 +9,19 @@ const welcomePhrases = [
     "It's snowing a lot, bundle up!",
     "Beautiful weather, isn't it?",
     "Make yourself at home in this cold season.",
-    "Thanks for stopping by!"
+    "Thanks for stopping by!",
+    "ようこそ",
+    "モノクロームのキャンバス？",
+    "愛は残酷だ",
+    "Winter is beautiful",
+    "Watch out, the ink is still wet.",
+    "A fat dragon and a fat bear",
+    "Love is Cruel",
+    "物語の始まり",
+    "Im Fat hehe"
 ];
+
+//64x64
 const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Snowflake.png",
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Cloud.png"
