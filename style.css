@@ -249,6 +249,8 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     .nav-menu button { padding: 6px 10px; font-size: 0.7rem; }
 }
 
+.subtitle { margin-bottom: 50px; }
+
 #welcome-phrase {
     font-size: 1.1rem; /* Un poco más grande para legibilidad */
     font-style: italic;
