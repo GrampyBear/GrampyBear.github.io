@@ -298,3 +298,62 @@ body.allow-scroll { overflow-y: auto !important; }
         grid-template-columns: 1fr 1fr;
     }
 }
+
+/* Segundo recuadro: Desglose del nombre */
+.name-breakdown-card {
+    max-width: 1000px;
+    margin: 20px auto 0; /* Separación de 20px del primer cuadro */
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.breakdown-grid {
+    text-align: left;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.breakdown-item {
+    font-size: 1rem;
+    margin-bottom: 8px;
+    color: #000;
+}
+
+.writing-section {
+    margin: 15px 0;
+}
+
+.arrow-text {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.japanese-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #000;
+}
+
+.learning-note {
+    font-size: 0.85rem;
+    font-style: italic;
+    margin-top: 15px;
+    opacity: 0.7;
+}
+
+/* Ajuste móvil para el segundo recuadro */
+@media (max-width: 768px) {
+    .name-breakdown-card {
+        padding: 20px;
+        margin-top: 15px;
+    }
+    .japanese-name {
+        font-size: 1.4rem;
+    }
+}
