@@ -12,7 +12,7 @@ body, html {
     font-family: 'Montserrat', sans-serif;
     color: var(--text-main);
     overflow-x: hidden;
-    overflow-y: auto; /* Scroll habilitado globalmente */
+    overflow-y: auto; 
 }
 
 /* --- ELEMENTOS DE FONDO --- */
@@ -76,20 +76,19 @@ body, html {
 
 .nav-menu button:hover { background: var(--accent); }
 
-/* --- SISTEMA DE PÁGINAS (SCROLL NATURAL) --- */
+/* --- SISTEMA DE PÁGINAS --- */
 main { width: 100%; min-height: 100vh; }
 
 .page {
     display: none;
     width: 100%;
-    padding: 110px 20px 80px; /* Espacio para navbar y footer */
+    padding: 110px 20px 80px; 
     flex-direction: column;
     align-items: center;
 }
 
 .page.active { display: flex; }
 
-/* Centrado vertical solo en About/Fanbox si hay espacio */
 .page.full-center.active { justify-content: center; min-height: 100vh; }
 
 .centered-content {
@@ -101,7 +100,6 @@ main { width: 100%; min-height: 100vh; }
 }
 
 h1 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 600; }
-.subtitle { font-size: 1.1rem; margin-bottom: 30px; opacity: 0.7; }
 
 /* --- SECCIÓN ABOUT --- */
 .about-container, .name-breakdown-card {
@@ -127,7 +125,6 @@ h1 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 600; }
 .about-text-side { flex: 1.5; }
 
 .bio-paragraphs p { margin-bottom: 15px; font-size: 1.1rem; line-height: 1.5; color: #000; }
-.bio-paragraphs strong { font-weight: 700; }
 
 .social-links-grid {
     display: grid;
@@ -137,42 +134,73 @@ h1 { font-size: 2.5rem; margin-bottom: 20px; font-weight: 600; }
 }
 
 .social-btn {
-    display: block;
-    padding: 10px;
-    background: #000;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    text-align: center;
-    transition: 0.3s;
+    display: block; padding: 10px; background: #000; color: #fff;
+    text-decoration: none; border-radius: 8px; font-size: 0.85rem;
+    text-align: center; transition: 0.3s;
 }
 
 .social-btn:hover { background: var(--accent); transform: translateY(-2px); }
 
-/* Breakdown Card */
 .name-breakdown-card { padding: 30px; text-align: center; }
 .breakdown-grid { text-align: left; display: inline-block; margin-bottom: 20px; }
-.breakdown-item { font-size: 1rem; margin-bottom: 8px; }
 .japanese-name { font-size: 2rem; font-weight: 600; letter-spacing: 4px; margin: 10px 0; }
-.learning-note { font-size: 0.85rem; font-style: italic; opacity: 0.7; margin-top: 15px; }
 
-/* --- FANBOX --- */
-.tier-container { display: flex; gap: 25px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+/* --- TARJETAS FANBOX (ESTILO RESTAURADO) --- */
+.tier-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
 .tier-card {
-    width: 550px; height: 380px; border-radius: 24px; overflow: hidden;
-    position: relative; cursor: pointer; transition: 0.4s;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3); border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 550px; 
+    height: 380px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
+
 .tier-card:hover { transform: translateY(-8px); }
+
+/* --- AQUÍ ESTÁN TUS IMÁGENES DE VUELTA --- */
+.tier-1 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%201%20-%20no%20text.png') center/cover; }
+.tier-2 { background: url('https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/31564f66d6e7ec6b8de963b465b283048908e272/FANBOX%20Card%20Tier%202%20-%20no%20text.png') center/cover; }
+
 .tier-content {
-    padding: 30px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end;
-    text-align: left; color: #fff;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 60%, transparent 100%);
+    padding: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: left;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%);
+    color: #ffffff;
 }
-.price { font-size: 2rem; font-weight: 600; color: var(--accent); }
-.benefits { list-style: none; font-size: 0.8rem; border-top: 1px solid rgba(255, 255, 255, 0.2); padding-top: 12px; }
-.benefits li::before { content: "✦"; margin-right: 8px; color: var(--accent); }
+
+.tier-card h3 { font-size: 1.4rem; margin-bottom: 5px; }
+.price { font-size: 2.2rem; font-weight: 600; color: var(--accent); margin-bottom: 12px; }
+
+/* --- TEXTOS JP/EN RESTAURADOS --- */
+.tier-description { margin-bottom: 15px; }
+.jp-text { font-size: 0.85rem; margin-bottom: 4px; color: #e0e0e0; }
+.en-text { font-size: 0.8rem; font-style: italic; opacity: 0.9; }
+
+.benefits {
+    list-style: none;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 12px;
+}
+
+.benefits li { margin-bottom: 4px; padding-left: 18px; position: relative; }
+.benefits li::before { content: "✦"; position: absolute; left: 0; color: var(--accent); font-size: 0.7rem; }
+.plus { text-align: center; font-weight: bold; color: var(--accent); font-size: 1.2rem; }
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {
