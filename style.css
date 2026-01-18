@@ -208,3 +208,93 @@ body.allow-scroll { overflow-y: auto !important; }
     /* En móviles desactivamos el centrado absoluto para evitar que el contenido se corte */
     .page.full-center.active { position: relative; height: auto; padding: 120px 20px; }
 }
+
+
+/* Contenedor About con imagen y texto */
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.15); /* Fondo muy sutil */
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    text-align: left;
+}
+
+/* Imagen a la izquierda */
+.about-image-side {
+    flex: 1;
+    max-width: 350px;
+}
+
+.profile-pic {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+/* Texto a la derecha */
+.about-text-side {
+    flex: 1.5;
+}
+
+.bio-paragraphs p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #000;
+}
+
+/* Resaltado de palabras en corchetes */
+.highlight {
+    font-weight: 600;
+    color: #2c3e50; /* Un tono oscuro elegante */
+    border-bottom: 2px solid var(--accent);
+}
+
+/* Grid de botones sociales */
+.social-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.social-btn {
+    display: block;
+    padding: 10px;
+    background: #000; /* Estilo simple solicitado */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.social-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+}
+
+/* Adaptación para móviles */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+        padding: 20px;
+        text-align: center;
+    }
+    
+    .about-image-side {
+        max-width: 250px;
+    }
+
+    .social-links-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
