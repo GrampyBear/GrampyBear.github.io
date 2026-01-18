@@ -1,25 +1,33 @@
 const body = document.body;
 const flashlight = document.getElementById('flashlight');
-const pullChain = document.getElementById('light-switch');
+const chain = document.querySelector('.pull-chain');
 
-// Seguimiento de linterna
+// Movimiento de linterna (Efecto túnel)
 document.addEventListener('mousemove', (e) => {
     flashlight.style.setProperty('--x', e.clientX + 'px');
     flashlight.style.setProperty('--y', e.clientY + 'px');
 });
 
-// Mecanismo de la luz cenital
-pullChain.addEventListener('click', () => {
+// Interruptor de Luz (80% Visibilidad)
+chain.addEventListener('click', () => {
     body.classList.toggle('light-on');
     
-    // Pequeño efecto visual de tirón
-    pullChain.style.transform = 'translateY(15px)';
+    // Efecto físico de la cuerda
+    chain.style.transform = 'translateY(25px)';
     setTimeout(() => {
-        pullChain.style.transform = 'translateY(0)';
+        chain.style.transform = 'translateY(0)';
     }, 150);
 });
 
-// Cerrar habitación
+// Botón de salida
 document.getElementById('exit-btn').addEventListener('click', () => {
-    window.location.href = "index.html"; // Regresa al sitio principal por seguridad
+    // Redirección directa al home
+    window.location.href = "index.html";
+});
+
+// Atajo de teclado: ESC para salir rápido
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") {
+        window.location.href = "index.html";
+    }
 });
