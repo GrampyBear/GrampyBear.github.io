@@ -218,7 +218,7 @@ body.allow-scroll { overflow-y: auto !important; }
     gap: 40px;
     max-width: 1000px;
     margin: 0 auto;
-    background: rgba(255, 255, 255, 0.15); /* Fondo muy sutil */
+    background: rgba(255, 255, 255, 0.15);
     padding: 40px;
     border-radius: 30px;
     backdrop-filter: blur(10px);
@@ -244,23 +244,22 @@ body.allow-scroll { overflow-y: auto !important; }
 }
 
 .bio-paragraphs p {
-    margin-bottom: 20px;
+    margin-bottom: 15px; /* Espaciado entre los 4 párrafos */
     font-size: 1.1rem;
-    line-height: 1.6;
+    line-height: 1.5;
     color: #000;
 }
 
-/* Resaltado de palabras en corchetes */
-.highlight {
+/* Resaltado simple solicitado: solo negrita */
+.bio-paragraphs strong {
     font-weight: 600;
-    color: #2c3e50; /* Un tono oscuro elegante */
-    border-bottom: 2px solid var(--accent);
+    color: #000;
 }
 
-/* Grid de botones sociales */
+/* Grid de botones sociales (ahora de 4 elementos) */
 .social-links-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 12px;
     margin-top: 25px;
 }
@@ -268,7 +267,7 @@ body.allow-scroll { overflow-y: auto !important; }
 .social-btn {
     display: block;
     padding: 10px;
-    background: #000; /* Estilo simple solicitado */
+    background: #000;
     color: #fff;
     text-decoration: none;
     border-radius: 8px;
@@ -286,12 +285,13 @@ body.allow-scroll { overflow-y: auto !important; }
 @media (max-width: 768px) {
     .about-container {
         flex-direction: column;
-        padding: 20px;
+        padding: 30px 20px;
         text-align: center;
     }
     
     .about-image-side {
-        max-width: 250px;
+        max-width: 220px;
+        margin-bottom: 10px;
     }
 
     .social-links-grid {
