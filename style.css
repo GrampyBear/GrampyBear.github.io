@@ -90,7 +90,7 @@ main { width: 100%; padding-top: 80px; }
 .page {
     display: none;
     width: 100%;
-    padding: 140px 20px 140px; 
+    padding: 100px 25px 80px; 
     min-height: 100vh;
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
