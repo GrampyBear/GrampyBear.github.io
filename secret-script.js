@@ -1,19 +1,27 @@
-// Mover la "luz" con el mouse
+const body = document.body;
+const flashlight = document.getElementById('flashlight');
+const lightSwitch = document.getElementById('light-switch');
+
+// Movimiento de linterna
 document.addEventListener('mousemove', (e) => {
-    const flashlight = document.getElementById('flashlight');
     flashlight.style.setProperty('--x', e.clientX + 'px');
     flashlight.style.setProperty('--y', e.clientY + 'px');
 });
 
-// Botón de pánico (Cerrar pestaña)
+// Lógica del interruptor
+lightSwitch.addEventListener('click', () => {
+    body.classList.toggle('light-on');
+    // Simular un pequeño tirón visual
+    lightSwitch.style.transform = 'translateY(10px)';
+    setTimeout(() => lightSwitch.style.transform = 'translateY(0)', 100);
+});
+
+// Botón de pánico mejorado
 document.getElementById('exit-btn').addEventListener('click', () => {
-    // Nota: Por seguridad, la mayoría de navegadores solo permiten 
-    // cerrar pestañas con JS si fueron abiertas mediante un link previo.
-    // De lo contrario, redirige a Google como "salida de emergencia".
+    // Intenta cerrar la ventana
     window.close();
-    
-    // Respaldo por si window.close() es bloqueado:
+    // Si falla (por seguridad del navegador), redirige a algo inocuo
     setTimeout(() => {
-        window.location.href = "https://www.google.com";
-    }, 100);
+        window.location.href = "https://www.google.com/search?q=winter+landscapes";
+    }, 200);
 });
