@@ -103,3 +103,27 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(createSnow, 250);
 });
+
+// --- SISTEMA DE SECRETO (5 CLICKS) ---
+let clickCount = 0;
+let clickTimer;
+
+const profilePic = document.getElementById('secret-trigger');
+
+if (profilePic) {
+    profilePic.addEventListener('click', () => {
+        clickCount++;
+        
+        // Reinicia el contador si el usuario tarda mucho entre clics
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            clickCount = 0;
+        }, 1000); 
+
+        // Al llegar a 5 clics...
+        if (clickCount === 5) {
+            // Cambia 'secreto.html' por el nombre exacto de tu archivo
+            window.location.href = 'secret.html'; 
+        }
+    });
+}
