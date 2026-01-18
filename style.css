@@ -50,15 +50,15 @@ body, html {
 .bottom-footer {
     background: var(--dark-bar);
     color: white;
-    position: fixed; /* Lo fijamos a la pantalla */
-    bottom: 0;      /* Siempre al fondo */
+    position: fixed;
+    bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     padding: 15px;
     text-align: center;
     font-size: 0.75rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Un detalle sutil para separarlo del fondo */
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .nav-container {
@@ -84,29 +84,34 @@ body, html {
 
 .nav-menu button:hover { background: var(--accent); }
 
-/* --- SISTEMA DE PÁGINAS --- */
+/* --- SISTEMA DE PÁGINAS Y TRANSICIONES --- */
 main { width: 100%; padding-top: 80px; }
 
 .page {
     display: none;
     width: 100%;
-    /* 140px arriba para la navbar, 100px abajo para el footer */
-    padding: 140px 20px 100px; 
-    min-height: 100vh; /* Asegura que cada sección ocupe al menos toda la pantalla */
-    animation: fadeIn 0.8s ease-out; /* Un efecto de entrada suave */
+    padding: 140px 20px 140px; 
+    min-height: 100vh;
+    opacity: 0; /* Para el efecto Fade In */
+    transition: opacity 0.5s ease-in-out; /* Velocidad del cambio */
 }
 
 .page.active {
     display: block !important;
+    opacity: 1;
+}
+
+/* Clase para el desvanecimiento de salida */
+.page.fading-out {
+    opacity: 0;
 }
 
 .centered-content {
     width: 100%;
-    max-width: 900px; /* Reducido un poco para que el texto sea más fácil de leer */
+    max-width: 900px;
     margin: 0 auto;
     text-align: center;
 }
-
 
 h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 
@@ -146,13 +151,15 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 .breakdown-item { margin-bottom: 8px; font-size: 1rem; }
 .japanese-name { font-size: 2rem; font-weight: 600; margin: 15px 0; letter-spacing: 2px; }
 
-/* --- FANBOX TIERS --- */
+/* --- FANBOX TIERS (CORRECCIÓN HORIZONTAL) --- */
 .tier-container {
     display: flex;
+    flex-direction: row; /* Asegura horizontalidad */
     gap: 25px;
     justify-content: center;
     flex-wrap: wrap;
     margin-top: 30px;
+    width: 100%;
 }
 
 .tier-card {
@@ -205,10 +212,11 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 .social-btn:hover { background: var(--accent); }
 
 /* --- RESPONSIVE --- */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
     .about-container { flex-direction: column; padding: 25px; text-align: center; }
     .about-image-side { flex: 0 0 auto; max-width: 200px; }
-    .tier-card { width: 100%; height: 320px; }
+    .tier-container { flex-direction: column; align-items: center; }
+    .tier-card { width: 100%; max-width: 500px; height: 320px; }
     .nav-menu { gap: 5px; }
     .nav-menu button { padding: 6px 12px; font-size: 0.75rem; }
 }
