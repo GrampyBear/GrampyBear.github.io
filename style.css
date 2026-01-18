@@ -1,6 +1,6 @@
 :root {
     --winter-gradient: linear-gradient(to bottom, #455a64 0%, #90a4ae 50%, #eceff1 100%);
-    --accent: #FF8A65;
+    --accent: #5c9ead;
     --dark-bar: #1a1c1e;
     --text-main: #000000;
 }
@@ -187,7 +187,7 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     color: #ffffff !important;
 }
 
-.price { font-size: 2.2rem; font-weight: 700; color: var(--accent); }
+.price { font-size: 2.2rem; font-weight: 700; color: #bde0fe; text-shadow: 0px 0px 15px rgba(189, 224, 254, 0.6), 2px 2px 4px rgba(0, 0, 0, 0.5); }
 .benefits { list-style: none; font-size: 0.85rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 10px; }
 .benefits li::before { content: "✦"; margin-right: 8px; color: var(--accent); }
 
