@@ -279,3 +279,11 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     margin-left: 8px; /* Espacio entre texto y comilla */
     vertical-align: middle;
 }
+
+.profile-pic {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Fuerza a que sea un cuadrado perfecto */
+    object-fit: cover;   /* Corta los bordes sobrantes sin deformar la imagen */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
