@@ -3,65 +3,76 @@ const categoryList = document.getElementById('category-list');
 const gameTitle = document.getElementById('current-game-name');
 const sectionTitle = document.getElementById('current-category');
 
-// 1. GENERAR CATEGORÍAS (Sidebar)
-const categories = ["Any%", "100%", "Glitchless", "No-BPM Mode", "Camellia Skip", "TAS"];
+// Generar Categorías Profesionales
+const categories = ["Any%", "100%", "Glitchless", "182 BPM", "Camellia%", "No-Fails"];
 categories.forEach(cat => {
     const li = document.createElement('li');
-    li.innerText = `SPEEDRUN (${cat})`;
+    li.innerHTML = `<span>⚡</span> ${cat}`;
     li.onclick = () => {
-        sectionTitle.innerText = li.innerText;
+        sectionTitle.innerText = `CATEGORY: ${cat}`;
         renderLeaderboard();
     };
     categoryList.appendChild(li);
 });
 
-// 2. FUNCIÓN: MOSTRAR LISTA DE JUEGOS
+// Renderizar la lista de juegos como un catálogo real
 function renderGameList() {
     const display = document.querySelector('.main-display');
-    display.innerHTML = `<h2>SELECT A GAME</h2><div class="game-grid" id="game-grid"></div>`;
+    display.innerHTML = `<h2 style="color:var(--neon-pink)">DATABASE: SELECT SPEEDRUN</h2><div class="game-grid" id="game-grid" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:15px;"></div>`;
     const grid = document.getElementById('game-grid');
     
-    for(let i=0; i<30; i++) {
+    for(let i=0; i<15; i++) {
         const card = document.createElement('div');
         card.className = 'game-card';
-        card.innerHTML = `<div style="height:120px; background:#222; margin-bottom:10px; display:flex; align-items:center; justify-content:center">SPEED</div><strong>SPEEDRUN ${i}</strong>`;
+        card.style = "background:#111; border:1px solid var(--neon-cyan); padding:20px; cursor:pointer; text-align:center";
+        card.innerHTML = `<div style="font-size:2rem">💿</div><b>SPEEDRUN VOL. ${i}</b>`;
         card.onclick = () => {
-            gameTitle.innerText = `SPEEDRUN ${i}`;
-            location.reload(); // Simula que entras al juego
+            gameTitle.innerText = `SPEEDRUN VOL. ${i}`;
+            display.innerHTML = `<h2>Loading...</h2>`; // Efecto de carga
+            setTimeout(() => location.reload(), 300);
         };
         grid.appendChild(card);
     }
 }
 
-// 3. FUNCIÓN: MOSTRAR LÍDERES (Por defecto)
+function renderUsers() {
+    sectionTitle.innerText = "TOP RUNNERS";
+    mainBody.innerHTML = '';
+    for(let i=0; i<30; i++) {
+        mainBody.innerHTML += `<tr><td>#${i}</td><td style="color:var(--neon-pink)">??? [VERIFIED]</td><td>4:23</td><td>WORLD</td><td>TODAY</td></tr>`;
+    }
+}
+
 function renderLeaderboard() {
     mainBody.innerHTML = '';
-    for(let i=1; i<=50; i++) {
+    for(let i=1; i<=25; i++) {
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${i}</td>
-            <td style="color: var(--neon-cyan)">???</td>
-            <td style="font-weight:bold">4:23.00</td>
-            <td>PC</td>
-            <td style="color:#666">182 BPM AGO</td>
+            <td style="color:var(--neon-cyan)">${i}</td>
+            <td>???</td>
+            <td style="color:var(--neon-pink); font-weight:bold">04:23.182</td>
+            <td>CAMELLIA_OS</td>
+            <td>01/01/2026</td>
         `;
         mainBody.appendChild(row);
     }
 }
 
-// 4. MANTENER EL BOTÓN RUN LOCO
+// Botón Run que huye (lo mantenemos porque es icónico)
 const runBtn = document.getElementById('run-btn');
 runBtn.addEventListener('mouseover', () => {
-    runBtn.style.position = 'absolute';
-    runBtn.style.left = Math.random() * 80 + 'vw';
-    runBtn.style.top = Math.random() * 80 + 'vh';
+    runBtn.style.position = 'fixed';
+    runBtn.style.left = Math.random() * 90 + 'vw';
+    runBtn.style.top = Math.random() * 90 + 'vh';
+    runBtn.style.zIndex = "1000";
 });
 
-// 5. GLITCH LOGO
+// Glitch effect en el logo
 setInterval(() => {
     const logo = document.getElementById('main-logo');
-    logo.style.textShadow = `${Math.random()*8}px ${Math.random()*8}px var(--neon-pink)`;
-}, 60);
+    logo.style.transform = `skew(${Math.random()*10 - 5}deg)`;
+    if(Math.random() > 0.8) logo.style.filter = "invert(1)";
+    else logo.style.filter = "none";
+}, 100);
 
-// Iniciar
 renderLeaderboard();
