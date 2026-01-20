@@ -1,176 +1,141 @@
 :root {
     --neon-cyan: #00ffff;
     --neon-pink: #ff00ff;
-    --bg-dark: #050505;
-    --glass: rgba(255, 255, 255, 0.03);
+    --bright-white: #ffffff;
 }
 
 body {
     margin: 0;
-    font-family: 'Orbitron', 'Segoe UI', sans-serif; /* Fuente futurista */
-    background-color: var(--bg-dark);
+    font-family: 'Impact', sans-serif;
+    background-color: #000;
     color: white;
     overflow: hidden;
     height: 100vh;
     text-transform: uppercase;
 }
 
-/* FLASH BPM 182 mejorado con degradado rosa/cian */
-@keyframes flash {
-    0% { background: radial-gradient(circle, #1a001a 0%, #000 70%); }
-    50% { background: radial-gradient(circle, #001a1a 0%, #000 70%); }
+/* EL FONDO: DESTELLOS NEÓN AGRESIVOS 182 BPM */
+@keyframes hyper-flash {
+    0% { background: #000; }
+    10% { background: var(--neon-cyan); box-shadow: inset 0 0 150px #000; }
+    20% { background: #000; }
+    30% { background: var(--neon-pink); box-shadow: inset 0 0 150px #000; }
+    40% { background: #000; }
     100% { background: #000; }
 }
-.bpm-bg { animation: flash 0.329s infinite; }
+.bpm-bg { 
+    animation: hyper-flash 0.329s infinite; 
+}
 
-/* HEADER CON ESTILO GLASSMORPHISM */
+/* EFECTO DE MOVIMIENTO CONSTANTE (VIBRACIÓN) */
+@keyframes jitter {
+    0% { transform: translate(0); }
+    25% { transform: translate(-1px, 1px) skewX(-1deg); }
+    75% { transform: translate(1px, -1px) skewX(1deg); }
+    100% { transform: translate(0); }
+}
+
+.main-header, .sidebar, .main-display, .game-header {
+    animation: jitter 0.05s infinite;
+}
+
+/* HEADER DINÁMICO */
 .main-header {
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid var(--neon-cyan);
-    padding: 1rem 3rem;
+    background: rgba(0, 0, 0, 0.9);
+    border-bottom: 5px solid var(--neon-cyan);
+    padding: 10px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
-    z-index: 100;
+    box-shadow: 0 0 30px var(--neon-cyan);
 }
 
 #main-logo {
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: -3px;
-    margin: 0;
-    color: white;
-    text-shadow: 3px 3px var(--neon-pink);
+    font-size: 4rem;
+    color: var(--bright-white);
+    text-shadow: 4px 4px var(--neon-pink), -4px -4px var(--neon-cyan);
 }
 
-/* BOTONES ESTILO GEOMETRY DASH */
+/* BOTONES QUE PARECEN SALIR DISPARADOS */
 .nav-btn {
-    background: transparent;
-    color: white;
-    border: 1px solid var(--neon-cyan);
-    padding: 12px 24px;
-    margin-left: 10px;
-    font-weight: bold;
+    background: black;
+    color: var(--neon-cyan);
+    border: 3px solid var(--neon-cyan);
+    padding: 15px 30px;
+    font-weight: 900;
     cursor: pointer;
-    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Forma de trapecio */
-    transition: 0.2s;
+    transition: 0.1s;
+    transform: skewX(-15deg);
 }
 .nav-btn:hover {
-    background: var(--neon-cyan);
-    color: black;
-    box-shadow: 0 0 20px var(--neon-cyan);
+    background: var(--neon-pink);
+    color: white;
+    border-color: white;
+    transform: skewX(-15deg) scale(1.1);
 }
 
-/* GAME DASHBOARD SECTION */
-.game-header {
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,20,20,0.5) 100%);
-    padding: 30px 50px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    gap: 30px;
-}
-
-.game-cover {
-    width: 120px;
-    height: 150px;
-    background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border: 3px solid white;
-    transform: rotate(-3deg);
-    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
-}
-
-/* MAIN CONTENT LAYOUT */
+/* LAYOUT EN MOVIMIENTO */
 .content-wrapper {
     display: grid;
-    grid-template-columns: 320px 1fr;
-    height: calc(100vh - 250px);
+    grid-template-columns: 350px 1fr;
+    height: calc(100vh - 200px);
     padding: 20px;
-    gap: 20px;
+    gap: 15px;
 }
 
 .sidebar {
-    background: var(--glass);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 10px;
-    padding: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid var(--neon-pink);
+    overflow-y: auto;
 }
 
 .category-list li {
-    background: rgba(255,255,255,0.05);
-    margin-bottom: 8px;
-    padding: 15px;
-    border-left: 4px solid var(--neon-pink);
-    cursor: pointer;
-    transition: 0.3s;
+    padding: 20px;
+    border-bottom: 1px solid var(--neon-pink);
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 255, 0.1));
+    transition: 0.05s;
 }
 .category-list li:hover {
-    background: rgba(255,0,255,0.1);
-    transform: translateX(10px);
+    background: var(--neon-cyan);
+    color: black;
+    padding-left: 40px;
 }
 
-/* TABLA DE RECORDS (The "Speedrun.com" Look) */
+/* TABLA TIPO GLITCH */
 .main-display {
-    background: rgba(0,0,0,0.6);
-    border-radius: 10px;
-    border: 1px solid rgba(0, 255, 255, 0.3);
-    padding: 20px;
-    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.9);
+    border: 2px solid var(--neon-cyan);
+    padding: 10px;
+    overflow-y: scroll;
 }
 
 .speed-table {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 5px;
+    border-collapse: collapse;
 }
 
 .speed-table th {
-    background: var(--neon-cyan);
-    color: black;
-    padding: 12px;
-}
-
-.speed-table tr {
-    background: rgba(255,255,255,0.03);
-    transition: 0.1s;
-}
-
-.speed-table tr:hover {
-    background: rgba(255,255,255,0.1);
-    box-shadow: 0 0 10px var(--neon-cyan);
+    background: var(--neon-pink);
+    font-size: 1.5rem;
+    padding: 10px;
 }
 
 .speed-table td {
     padding: 15px;
-    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    text-shadow: 0 0 5px var(--neon-cyan);
 }
 
-/* FOOTER */
+/* MARQUEE FOOTER */
 .footer-bar {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #ffea00;
-    color: black;
-    height: 35px;
-    font-family: 'Arial Black';
-    display: flex;
-    align-items: center;
-    box-shadow: 0 -5px 20px rgba(255, 234, 0, 0.3);
-}
-
-.marquee-content {
-    animation: marquee-loop 10s linear infinite;
-    font-size: 1.2rem;
-}
-
-@keyframes marquee-loop {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    background: #fff;
+    color: #000;
+    font-weight: 900;
+    font-size: 2rem;
+    height: 50px;
+    overflow: hidden;
 }
