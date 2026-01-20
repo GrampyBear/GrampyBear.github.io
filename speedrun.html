@@ -2,67 +2,54 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPEEDRUN.SPEED | LEADERBOARDS</title>
+    <title>SPEEDRUN.SPEED</title>
     <link rel="stylesheet" href="speedrun.css">
 </head>
 <body class="bpm-bg">
     <header class="main-header">
         <h1 id="main-logo">SPEEDRUN</h1>
-        <nav class="fake-nav">
+        <nav>
             <button class="nav-btn" onclick="renderGameList()">GAMES</button>
             <button class="nav-btn" onclick="renderUsers()">USERS</button>
-            <button class="nav-btn" onclick="renderForums()">FORUMS</button>
             <button class="nav-btn run-btn" id="run-btn">RUN!</button>
         </nav>
     </header>
 
     <div class="game-header">
-        <div class="game-info">
-            <div class="game-cover">SPEED</div>
-            <div>
-                <h2 id="current-game-name">SPEEDRUN (THE GAME)</h2>
-                <p class="game-meta">182 BPM | Released: 2018 | PC, GD, Camellia</p>
-            </div>
-        </div>
+        <h2 id="current-game-name">CURRENT GAME: SPEEDRUN</h2>
     </div>
 
     <main class="content-wrapper">
         <aside class="sidebar">
-            <h3>CATEGORIES</h3>
-            <ul class="category-list" id="category-list">
-                </ul>
+            <ul class="category-list">
+                <li onclick="renderLeaderboard()">ANY% SPEEDRUN</li>
+                <li onclick="renderLeaderboard()">100% SPEEDRUN</li>
+                <li onclick="renderLeaderboard()">GLITCHLESS SPEEDRUN</li>
+                <li onclick="renderLeaderboard()">CAMELLIA%</li>
+                <li onclick="renderLeaderboard()">HYPER SPEEDRUN</li>
+            </ul>
         </aside>
 
         <section class="main-display">
-            <div class="filter-bar">
-                <span id="current-category">Any% (Full Speed)</span>
-            </div>
-            <div class="table-container" style="height: 500px; overflow-y: auto;">
-                <table class="speed-table">
-                    <thead>
-                        <tr>
-                            <th>POS</th>
-                            <th>RUNNER</th>
-                            <th>TIME</th>
-                            <th>SYSTEM</th>
-                            <th>VERIFIED</th>
-                        </tr>
-                    </thead>
-                    <tbody id="main-body"></tbody>
-                </table>
-            </div>
+            <h3 id="current-category" style="color:var(--neon-cyan)">CATEGORY: ANY%</h3>
+            <table class="speed-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>PLAYER</th>
+                        <th>TIME</th>
+                        <th>STATUS</th>
+                    </tr>
+                </thead>
+                <tbody id="main-body"></tbody>
+            </table>
         </section>
     </main>
 
     <footer class="footer-bar">
-        <div class="marquee-container">
-            <div class="marquee-content">
-                SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;
-            </div>
-            <div class="marquee-content">
-                SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;
-            </div>
+        <div style="display: flex; animation: marquee-loop 2s linear infinite;">
+            <span>SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;</span>
+            <span>SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;</span>
         </div>
     </footer>
 
