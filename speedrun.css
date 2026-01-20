@@ -1,118 +1,107 @@
-/* Base */
 :root {
     --neon-cyan: #00ffff;
-    --neon-magenta: #ff00ff;
-    --bg-color: #000000;
+    --neon-pink: #ff00ff;
+    --bg-dark: #000000;
 }
 
 body {
     margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', 'Arial Black', sans-serif;
+    font-family: 'Segoe UI', Impact, sans-serif;
     background-color: var(--bg-dark);
     color: white;
-    overflow-x: hidden;
-    text-transform: uppercase;
+    overflow: hidden; /* Para que parezca una app */
+    height: 100vh;
 }
 
-/* Animación de Parpadeo Neon a 182 BPM */
-/* 182 BPM = 3.033 golpes por segundo = ~0.329s por golpe */
-@keyframes bpm-pulse {
+/* FLASH BPM 182 (0.329s) */
+@keyframes flash {
     0% { background-color: #000; }
-    10% { background-color: #0a1a1a; box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.2); }
+    20% { background-color: #1a001a; box-shadow: inset 0 0 100px rgba(255, 0, 255, 0.4); }
+    40% { background-color: #001a1a; box-shadow: inset 0 0 100px rgba(0, 255, 255, 0.4); }
     100% { background-color: #000; }
 }
+.bpm-bg { animation: flash 0.329s infinite; }
 
-.bpm-bg {
-    animation: bpm-pulse 0.329s infinite;
-}
-
-/* Estilo tipo Speedrun.com pero agresivo */
 .main-header {
-    background: rgba(20, 20, 20, 0.9);
-    border-bottom: 3px solid var(--neon-cyan);
-    padding: 10px 40px;
+    background: #111;
+    border-bottom: 4px solid var(--neon-cyan);
+    padding: 1rem 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
 }
 
-h1 {
-    font-size: 3rem;
-    margin: 0;
-    color: var(--neon-cyan);
-    text-shadow: 2px 2px var(--neon-magenta);
+/* Navegación */
+.nav-btn {
+    background: #222;
+    color: white;
+    border: 2px solid var(--neon-cyan);
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.1s;
 }
+.nav-btn:hover { background: var(--neon-cyan); color: black; }
+.run-btn { border-color: var(--neon-pink); color: var(--neon-pink); }
 
 .content-wrapper {
-    display: flex;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    height: calc(100vh - 120px);
+    gap: 30px;
+    padding: 30px;
 }
 
 .sidebar {
-    width: 250px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-right: 1px solid var(--neon-magenta);
-}
-
-.speed-list {
-    list-style: none;
-    padding: 0;
+    background: rgba(20, 20, 20, 0.8);
+    border: 1px solid #444;
+    padding: 20px;
+    overflow-y: auto;
 }
 
 .speed-list li {
-    padding: 10px;
+    padding: 12px;
     border-bottom: 1px solid #333;
-    font-size: 0.8rem;
+    cursor: pointer;
+    list-style: none;
+}
+.speed-list li:hover { color: var(--neon-pink); background: #222; }
+
+.main-display {
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--neon-cyan);
+    padding: 20px;
+    overflow-y: auto;
 }
 
-.speed-list li:hover {
-    background: var(--neon-magenta);
-    color: black;
-}
+.speed-table { width: 100%; border-collapse: collapse; }
+.speed-table th { color: var(--neon-cyan); text-align: left; padding: 15px; border-bottom: 2px solid var(--neon-cyan); }
+.speed-table td { padding: 15px; border-bottom: 1px solid #222; }
 
-.speed-table {
-    width: 100%;
-    margin-left: 20px;
-    border-collapse: collapse;
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.speed-table th {
-    background: #222;
-    color: var(--neon-cyan);
-    padding: 15px;
-    text-align: left;
-}
-
-.speed-table td {
-    padding: 15px;
-    border-bottom: 1px solid #222;
-}
-
-.speed-table tr:hover {
-    background: rgba(0, 255, 255, 0.1);
-    outline: 1px solid var(--neon-cyan);
-}
-
+/* FOOTER MARQUEE INFINITO */
 .footer-bar {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: yellow;
+    background: #ffea00;
     color: black;
-    font-weight: bold;
-    white-space: nowrap;
+    height: 40px;
+    display: flex;
+    align-items: center;
     overflow: hidden;
+    font-weight: 900;
 }
 
-.scrolling-text {
-    display: inline-block;
-    animation: scroll 2s linear infinite;
+.marquee-container { display: flex; width: 200%; }
+.marquee-content {
+    display: flex;
+    width: 50%;
+    animation: marquee-loop 5s linear infinite;
 }
 
-@keyframes scroll {
-    from { transform: translateX(100%); }
-    to { transform: translateX(-100%); }
+@keyframes marquee-loop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
 }
