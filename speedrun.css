@@ -1,0 +1,118 @@
+/* Base */
+:root {
+    --neon-cyan: #00ffff;
+    --neon-magenta: #ff00ff;
+    --bg-color: #000000;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', 'Arial Black', sans-serif;
+    background-color: var(--bg-dark);
+    color: white;
+    overflow-x: hidden;
+    text-transform: uppercase;
+}
+
+/* Animación de Parpadeo Neon a 182 BPM */
+/* 182 BPM = 3.033 golpes por segundo = ~0.329s por golpe */
+@keyframes bpm-pulse {
+    0% { background-color: #000; }
+    10% { background-color: #0a1a1a; box-shadow: inset 0 0 50px rgba(0, 255, 255, 0.2); }
+    100% { background-color: #000; }
+}
+
+.bpm-bg {
+    animation: bpm-pulse 0.329s infinite;
+}
+
+/* Estilo tipo Speedrun.com pero agresivo */
+.main-header {
+    background: rgba(20, 20, 20, 0.9);
+    border-bottom: 3px solid var(--neon-cyan);
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin: 0;
+    color: var(--neon-cyan);
+    text-shadow: 2px 2px var(--neon-magenta);
+}
+
+.content-wrapper {
+    display: flex;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-right: 1px solid var(--neon-magenta);
+}
+
+.speed-list {
+    list-style: none;
+    padding: 0;
+}
+
+.speed-list li {
+    padding: 10px;
+    border-bottom: 1px solid #333;
+    font-size: 0.8rem;
+}
+
+.speed-list li:hover {
+    background: var(--neon-magenta);
+    color: black;
+}
+
+.speed-table {
+    width: 100%;
+    margin-left: 20px;
+    border-collapse: collapse;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.speed-table th {
+    background: #222;
+    color: var(--neon-cyan);
+    padding: 15px;
+    text-align: left;
+}
+
+.speed-table td {
+    padding: 15px;
+    border-bottom: 1px solid #222;
+}
+
+.speed-table tr:hover {
+    background: rgba(0, 255, 255, 0.1);
+    outline: 1px solid var(--neon-cyan);
+}
+
+.footer-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.scrolling-text {
+    display: inline-block;
+    animation: scroll 2s linear infinite;
+}
+
+@keyframes scroll {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
