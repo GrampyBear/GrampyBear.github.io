@@ -1,82 +1,176 @@
-/* ... (Se mantiene todo lo anterior: BPM, Glitch, Marquee) ... */
-
 :root {
     --neon-cyan: #00ffff;
     --neon-pink: #ff00ff;
-    --bg-dark: #000000;
+    --bg-dark: #050505;
+    --glass: rgba(255, 255, 255, 0.03);
 }
 
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Orbitron', 'Segoe UI', sans-serif; /* Fuente futurista */
     background-color: var(--bg-dark);
     color: white;
     overflow: hidden;
     height: 100vh;
+    text-transform: uppercase;
 }
 
-/* --- NUEVAS CLASES TIPO SPEEDRUN.COM --- */
-
-.game-header {
-    background: linear-gradient(90deg, #111 0%, #222 100%);
-    padding: 20px 50px;
-    border-bottom: 1px solid #333;
+/* FLASH BPM 182 mejorado con degradado rosa/cian */
+@keyframes flash {
+    0% { background: radial-gradient(circle, #1a001a 0%, #000 70%); }
+    50% { background: radial-gradient(circle, #001a1a 0%, #000 70%); }
+    100% { background: #000; }
 }
+.bpm-bg { animation: flash 0.329s infinite; }
 
-.game-info {
+/* HEADER CON ESTILO GLASSMORPHISM */
+.main-header {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid var(--neon-cyan);
+    padding: 1rem 3rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+    z-index: 100;
+}
+
+#main-logo {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: -3px;
+    margin: 0;
+    color: white;
+    text-shadow: 3px 3px var(--neon-pink);
+}
+
+/* BOTONES ESTILO GEOMETRY DASH */
+.nav-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid var(--neon-cyan);
+    padding: 12px 24px;
+    margin-left: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Forma de trapecio */
+    transition: 0.2s;
+}
+.nav-btn:hover {
+    background: var(--neon-cyan);
+    color: black;
+    box-shadow: 0 0 20px var(--neon-cyan);
+}
+
+/* GAME DASHBOARD SECTION */
+.game-header {
+    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(20,20,20,0.5) 100%);
+    padding: 30px 50px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    gap: 30px;
 }
 
 .game-cover {
-    width: 80px;
-    height: 100px;
-    background: var(--neon-pink);
+    width: 120px;
+    height: 150px;
+    background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 1.2rem;
     font-weight: bold;
-    font-size: 0.7rem;
-    box-shadow: 0 0 15px var(--neon-pink);
+    border: 3px solid white;
+    transform: rotate(-3deg);
+    box-shadow: 10px 10px 0px rgba(255, 255, 255, 0.1);
 }
 
-.game-meta { font-size: 0.8rem; color: #888; }
-
-.filter-bar {
-    background: #1a1a1a;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    color: var(--neon-cyan);
-    font-weight: bold;
-}
-
-/* Adaptación para lista de juegos */
-.game-grid {
+/* MAIN CONTENT LAYOUT */
+.content-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: 320px 1fr;
+    height: calc(100vh - 250px);
+    padding: 20px;
     gap: 20px;
 }
 
-.game-card {
-    background: #111;
-    border: 1px solid #333;
-    padding: 10px;
-    text-align: center;
+.sidebar {
+    background: var(--glass);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.category-list li {
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 8px;
+    padding: 15px;
+    border-left: 4px solid var(--neon-pink);
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.3s;
+}
+.category-list li:hover {
+    background: rgba(255,0,255,0.1);
+    transform: translateX(10px);
 }
 
-.game-card:hover { border-color: var(--neon-cyan); transform: translateY(-5px); }
-
-/* (Mantener animaciones flash y marquee del código anterior) */
-.bpm-bg { animation: flash 0.329s infinite; }
-@keyframes flash {
-    0% { background-color: #000; }
-    20% { background-color: #1a001a; box-shadow: inset 0 0 100px rgba(255, 0, 255, 0.4); }
-    40% { background-color: #001a1a; box-shadow: inset 0 0 100px rgba(0, 255, 255, 0.4); }
-    100% { background-color: #000; }
+/* TABLA DE RECORDS (The "Speedrun.com" Look) */
+.main-display {
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    padding: 20px;
+    overflow-y: auto;
 }
 
-/* ... (El resto del CSS se mantiene igual) ... */
+.speed-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+.speed-table th {
+    background: var(--neon-cyan);
+    color: black;
+    padding: 12px;
+}
+
+.speed-table tr {
+    background: rgba(255,255,255,0.03);
+    transition: 0.1s;
+}
+
+.speed-table tr:hover {
+    background: rgba(255,255,255,0.1);
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+.speed-table td {
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* FOOTER */
+.footer-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: #ffea00;
+    color: black;
+    height: 35px;
+    font-family: 'Arial Black';
+    display: flex;
+    align-items: center;
+    box-shadow: 0 -5px 20px rgba(255, 234, 0, 0.3);
+}
+
+.marquee-content {
+    animation: marquee-loop 10s linear infinite;
+    font-size: 1.2rem;
+}
+
+@keyframes marquee-loop {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
