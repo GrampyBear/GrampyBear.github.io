@@ -3,52 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPEEDRUN.SPEED | OFFICIAL</title>
+    <title>SPEEDRUN.SPEED | THE OFFICIAL AUTHORITY</title>
     <link rel="stylesheet" href="speedrun.css">
 </head>
 <body class="bpm-bg">
     <header class="main-header">
-        <h1>SPEEDRUN</h1>
+        <h1 id="main-logo">SPEEDRUN</h1>
         <nav class="fake-nav">
-            <span>GAMES</span>
-            <span>USERS</span>
-            <span>FORUMS</span>
-            <span class="highlight">RUN!</span>
+            <button class="nav-btn" onclick="showSection('games')">GAMES</button>
+            <button class="nav-btn" onclick="showSection('users')">USERS</button>
+            <button class="nav-btn" onclick="showSection('forums')">FORUMS</button>
+            <button class="nav-btn run-btn" id="run-btn">RUN!</button>
         </nav>
     </header>
 
     <main class="content-wrapper">
         <aside class="sidebar">
-            <h3>CATEGORIES</h3>
-            <ul class="speed-list">
-                <li>SPEEDRUN</li>
-                <li>SPEEDRUN (ANY%)</li>
-                <li>SPEEDRUN (GLITCHLESS)</li>
-                <li>SPEEDRUN (100%)</li>
-                <li>SPEEDRUN (TAS)</li>
-            </ul>
+            <h3 id="sidebar-title">CATEGORIES</h3>
+            <ul class="speed-list" id="category-list">
+                </ul>
         </aside>
 
-        <section class="leaderboard-section">
-            <h2>SPEEDRUN - WORLD RECORDS</h2>
-            <table class="speed-table">
-                <thead>
-                    <tr>
-                        <th>RANK</th>
-                        <th>PLAYER</th>
-                        <th>TIME</th>
-                        <th>DATE</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard-body">
-                    </tbody>
-            </table>
+        <section class="main-display">
+            <h2 id="section-title">SPEEDRUN - WORLD RECORDS</h2>
+            <div class="table-container">
+                <table class="speed-table">
+                    <thead id="table-head">
+                        </thead>
+                    <tbody id="main-body">
+                        </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
     <footer class="footer-bar">
-        <div class="scrolling-text">
-            SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN
+        <div class="marquee-container">
+            <div class="marquee-content">
+                SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;
+            </div>
+            <div class="marquee-content">
+                SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN SPEEDRUN&nbsp;
+            </div>
         </div>
     </footer>
 
