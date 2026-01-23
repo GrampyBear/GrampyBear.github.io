@@ -1,4 +1,4 @@
-/* --- ESTILO ABISAL BASE --- */
+/* --- ABYSSAL THEME --- */
 
 * {
     margin: 0;
@@ -6,58 +6,38 @@
     box-sizing: border-box;
 }
 
-body {
-    /* Fondo negro profundo con un resplandor central muy sutil del verde oscuro */
-    background: radial-gradient(circle, #0d1a0c 0%, #000000 70%);
-    background-color: #000000;
-    color: #32612e; /* Tu verde lima oscuro */
-    font-family: 'Courier New', monospace;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body, html {
+    width: 100%;
+    height: 100%;
+    background-color: #000000; /* Negro absoluto */
     overflow-x: hidden;
 }
 
-.abyssal-wrapper {
-    width: 100%;
-    max-width: 1000px;
-    padding: 40px;
+body {
+    /* El resplandor verde lima oscuro en el centro del fondo */
+    background-image: radial-gradient(
+        circle at center, 
+        #132b12 0%, 
+        #000000 75%
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #32612e; /* Verde lima oscuro base */
+    font-family: 'Courier New', monospace;
+}
+
+.abyssal-container {
     text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    z-index: 1;
 }
 
-.abyssal-header h1 {
-    font-size: 3rem;
-    letter-spacing: 15px;
-    color: #32612e;
-    text-shadow: 0 0 20px rgba(50, 97, 46, 0.3);
-    margin-bottom: 10px;
-}
-
-.warning-text {
-    font-size: 0.8rem;
-    opacity: 0.5;
-    letter-spacing: 2px;
-    margin-bottom: 50px;
-}
-
-.empty-depth {
-    margin: 100px 0;
-    font-style: italic;
-    opacity: 0.3;
-}
-
-/* Enlace para volver */
-.back-link {
-    color: #32612e;
-    text-decoration: none;
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    transition: opacity 0.3s;
-}
-
-.back-link:hover {
-    opacity: 1;
-    color: #3dfc89; /* Verde brillante al pasar el mouse */
+.depth-marker {
+    opacity: 0.2;
+    letter-spacing: 10px;
+    font-size: 1.5rem;
+    pointer-events: none;
+    user-select: none;
 }
