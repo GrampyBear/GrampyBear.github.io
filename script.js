@@ -152,3 +152,31 @@ function initCommissions() {
 
 // Asegúrate de que el DOM esté listo
 document.addEventListener('DOMContentLoaded', initCommissions);
+
+// Función para abrir la imagen en grande
+function openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    
+    if (lightbox && lightboxImg) {
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
+        // Bloquear scroll del body al estar abierto
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Función para cerrar el Lightbox
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        // Devolver scroll al body
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Cerrar con la tecla Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") closeLightbox();
+});
