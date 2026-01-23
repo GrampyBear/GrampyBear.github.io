@@ -287,3 +287,110 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
+
+/* --- COMMISSIONS LAYOUT --- */
+.commissions-container {
+    margin-top: 60px;
+    width: 100%;
+    max-width: 850px;
+    text-align: center;
+}
+
+.status-wrapper {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.status-open { color: #2ecc71; text-shadow: 0 0 10px rgba(46,204,113,0.3); }
+.status-closed { color: #e74c3c; text-shadow: 0 0 10px rgba(231,76,60,0.3); }
+
+.commission-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.comm-card {
+    display: flex;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    height: 160px;
+    overflow: hidden;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.comm-card:hover {
+    transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- CAROUSEL & PREVIEW --- */
+.comm-preview-container {
+    width: 220px;
+    min-width: 220px;
+    position: relative;
+    background: #000;
+}
+
+.carousel-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar { display: none; }
+
+.preview-img {
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    scroll-snap-align: start;
+    cursor: zoom-in;
+}
+
+.carousel-hint {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6rem;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 8px;
+    border-radius: 4px;
+    color: #fff;
+    pointer-events: none;
+}
+
+.comm-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+.comm-info h4 { font-size: 1.3rem; margin-bottom: 5px; }
+.comm-info .price { color: #aaa; font-weight: bold; margin-bottom: 10px; }
+.comm-info .details { font-size: 0.85rem; opacity: 0.6; }
+
+/* --- LIGHTBOX --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    justify-content: center; align-items: center;
+}
+
+#lightbox-img { max-width: 90%; max-height: 90%; border: 1px solid #444; }
+.close-btn { position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
+
+@media (max-width: 600px) {
+    .comm-card { flex-direction: column; height: auto; }
+    .comm-preview-container { width: 100%; height: 200px; }
+}
