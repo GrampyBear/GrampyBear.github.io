@@ -528,52 +528,71 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 }
 
 
-/* --- BLOQUE DE NOTA TOS PERSONALIZADO --- */
-.important-note-block {
-    width: 90%;
-    max-width: 600px; /* Más angosto que las tarjetas */
-    margin: 40px auto;
-    background: rgba(0, 0, 0, 0.7); /* Negro al 70% */
-    border: 1px solid rgba(255, 94, 77, 0.4); /* Rojo suave */
-    border-radius: 15px;
+/* --- ESTILOS PARA LA SECCIÓN DE NOTAS Y TOS --- */
+
+.note-card {
+    display: flex;
+    flex-direction: column;
+    background: rgba(45, 50, 55, 0.95); /* Gris oscuro sólido */
+    border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    text-align: left;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
 }
 
-.note-header-title {
-    color: #ff5e4d; /* Rojo neón suave */
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 1.4rem;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+.note-icon-side {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
     letter-spacing: 2px;
+    margin-bottom: 20px;
+    opacity: 0.8;
 }
 
-.note-bullet-list {
+.tos-header {
+    font-family: 'Courier New', monospace;
+    color: #3dfc89; /* Color verde/azul neón para resaltar */
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tos-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
-.note-bullet-list li {
-    color: #ffffff;
-    font-size: 0.9rem;
+.tos-list li {
+    color: #e0e0e0;
+    font-size: 0.95rem;
     line-height: 1.6;
     margin-bottom: 12px;
     padding-left: 20px;
     position: relative;
 }
 
-/* Viñeta roja */
-.note-bullet-list li::before {
-    content: "›";
+/* Punto de la lista (bullet point) */
+.tos-list li::before {
+    content: "•";
     position: absolute;
     left: 0;
-    color: #ff5e4d;
+    color: #3dfc89;
     font-weight: bold;
 }
 
-.note-bullet-list li strong {
-    color: #ff5e4d;
+.tos-list li strong {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Ajuste para que el contenedor "glass" no corte el contenido */
+.glass-container {
+    overflow: visible !important;
 }
