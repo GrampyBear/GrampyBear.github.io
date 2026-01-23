@@ -527,75 +527,53 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     }
 }
 
-/* --- TARJETA DE NOTAS Y TOS (ANCHO COMPLETO) --- */
-/* --- BLOQUE DE TEXTO TOS (ESTILO NOTA LARGA) --- */
-.tos-block {
-    width: 100%;
-    max-width: 800px;
+
+/* --- BLOQUE DE NOTA TOS PERSONALIZADO --- */
+.important-note-block {
+    width: 90%;
+    max-width: 600px; /* Más angosto que las tarjetas */
     margin: 40px auto;
-    background: #121416; /* Fondo oscuro sólido para legibilidad */
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.7); /* Negro al 70% */
+    border: 1px solid rgba(255, 94, 77, 0.4); /* Rojo suave */
     border-radius: 15px;
-    padding: 40px;
+    padding: 30px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    text-align: left;
 }
 
-.tos-header {
-    font-family: 'Courier New', monospace;
-    color: #3dfc89; /* Tu verde neón para el título */
+.note-header-title {
+    color: #ff5e4d; /* Rojo neón suave */
     text-align: center;
-    font-size: 1.8rem;
-    letter-spacing: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
     text-transform: uppercase;
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(61, 252, 137, 0.2);
-    padding-bottom: 15px;
+    letter-spacing: 2px;
 }
 
-.tos-content {
-    width: 100%;
-}
-
-.tos-list {
+.note-bullet-list {
     list-style: none;
     padding: 0;
-    margin: 0;
 }
 
-.tos-list li {
+.note-bullet-list li {
     color: #ffffff;
-    font-size: 1rem;
-    line-height: 1.8; /* Espaciado generoso para que no se vea apretado */
-    margin-bottom: 15px;
-    padding-left: 25px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding-left: 20px;
     position: relative;
-    text-align: left; /* El texto de la lista siempre a la izquierda para leer mejor */
 }
 
-/* Viñeta personalizada con tu color de acento */
-.tos-list li::before {
-    content: "✦";
+/* Viñeta roja */
+.note-bullet-list li::before {
+    content: "›";
     position: absolute;
     left: 0;
-    color: #3dfc89;
-    font-size: 0.9rem;
+    color: #ff5e4d;
+    font-weight: bold;
 }
 
-/* Ajuste para negritas */
-.tos-list li strong {
-    color: #3dfc89;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .tos-block {
-        padding: 25px 15px;
-        width: 95%;
-    }
-    .tos-header {
-        font-size: 1.3rem;
-    }
+.note-bullet-list li strong {
+    color: #ff5e4d;
 }
