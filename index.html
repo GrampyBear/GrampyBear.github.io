@@ -106,11 +106,14 @@
         
                         <div class="comm-card">
                             <div class="comm-preview-container">
-                                <div class="carousel-track">
+                                <div class="carousel-track" id="track-pfp">
                                     <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/cf74db60ccf22c37859e05877073ed87fc8860a4/commissions/Sakura.png" class="preview-img" onclick="openLightbox(this.src)" alt="Frame Commission Example">
-                                    <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/82d07f7f2ad698d1d7d97c233155ef666dcc1825/commissions/Festival.png" class="preview-img" onclick="openLightbox(this.src)" alt="Frame Commission Example">
+                                    <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/82d07f7f2ad698d1d7d97c233155ef666dcc1825/commissions/Festival.png" class="preview-img" onclick="openLightbox(this.src)" alt="Frame Commission Example" style="display: none;">
                                 </div>
-                                <div class="carousel-hint">Click to expand</div>
+                                <div class="carousel-controls">
+                                    <span class="prev" onclick="moveCarousel('track-pfp', -1)">&#10094;</span>
+                                    <span class="next" onclick="moveCarousel('track-pfp', 1)">&#10095;</span>
+                                </div>
                             </div>
                             <div class="comm-info">
                                 <h4>Frame commission: $40</h4>
