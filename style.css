@@ -528,52 +528,74 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 }
 
 /* --- TARJETA DE NOTAS Y TOS (ANCHO COMPLETO) --- */
-.tos-card {
-    height: auto !important; /* Permite que la tarjeta se estire hacia abajo */
-    min-height: 160px;
-    background: rgba(255, 255, 255, 0.05) !important;
-    border: 1px dashed rgba(255, 255, 255, 0.3) !important; /* Estilo nota/papel */
-    display: block !important; /* Elimina la división de imagen y texto */
+/* --- BLOQUE DE TEXTO TOS (ESTILO NOTA LARGA) --- */
+.tos-block {
     width: 100%;
-    max-width: 750px;
+    max-width: 800px;
+    margin: 40px auto;
+    background: #121416; /* Fondo oscuro sólido para legibilidad */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.tos-card .comm-info {
+.tos-header {
+    font-family: 'Courier New', monospace;
+    color: #3dfc89; /* Tu verde neón para el título */
+    text-align: center;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(61, 252, 137, 0.2);
+    padding-bottom: 15px;
+}
+
+.tos-content {
     width: 100%;
-    padding: 30px; /* Más espacio para lectura cómoda */
-    display: block; /* Asegura que el contenido fluya verticalmente */
 }
 
-.tos-card h4 {
-    color: var(--accent);
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 10px;
-    text-align: center; /* Título centrado para esta tarjeta especial */
+.tos-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-/* Ajuste de lista para los ToS */
-.tos-card .bullet-list li {
-    font-size: 0.95rem;
-    line-height: 1.6; /* Mayor espacio entre líneas para no cansar la vista */
-    margin-bottom: 12px;
+.tos-list li {
     color: #ffffff;
-    opacity: 0.9;
+    font-size: 1rem;
+    line-height: 1.8; /* Espaciado generoso para que no se vea apretado */
+    margin-bottom: 15px;
+    padding-left: 25px;
+    position: relative;
+    text-align: left; /* El texto de la lista siempre a la izquierda para leer mejor */
 }
 
-/* Elimina el efecto hover de movimiento si prefieres que la nota sea estática */
-.tos-card:hover {
-    transform: none; 
-    background: rgba(255, 255, 255, 0.08) !important;
+/* Viñeta personalizada con tu color de acento */
+.tos-list li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #3dfc89;
+    font-size: 0.9rem;
 }
 
-/* Responsive para la nota */
-@media (max-width: 650px) {
-    .tos-card .comm-info {
-        padding: 20px 15px;
+/* Ajuste para negritas */
+.tos-list li strong {
+    color: #3dfc89;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .tos-block {
+        padding: 25px 15px;
+        width: 95%;
     }
-    .tos-card h4 {
-        font-size: 1.2rem;
+    .tos-header {
+        font-size: 1.3rem;
     }
 }
