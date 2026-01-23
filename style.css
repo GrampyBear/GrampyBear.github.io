@@ -527,47 +527,53 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     }
 }
 
-/* Tarjeta especial para notas */
-.note-card {
-    border-left: 5px solid var(--accent) !important; /* Resalta con tu color de acento */
+/* --- TARJETA DE NOTAS Y TOS (ANCHO COMPLETO) --- */
+.tos-card {
+    height: auto !important; /* Permite que la tarjeta se estire hacia abajo */
+    min-height: 160px;
     background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px dashed rgba(255, 255, 255, 0.3) !important; /* Estilo nota/papel */
+    display: block !important; /* Elimina la división de imagen y texto */
+    width: 100%;
+    max-width: 750px;
 }
 
-.note-icon-side {
-    width: 220px;
-    min-width: 220px;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Courier New', monospace;
+.tos-card .comm-info {
+    width: 100%;
+    padding: 30px; /* Más espacio para lectura cómoda */
+    display: block; /* Asegura que el contenido fluya verticalmente */
+}
+
+.tos-card h4 {
     color: var(--accent);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    text-align: center; /* Título centrado para esta tarjeta especial */
 }
 
-.note-icon-side i {
-    font-size: 3rem;
-    margin-bottom: 10px;
+/* Ajuste de lista para los ToS */
+.tos-card .bullet-list li {
+    font-size: 0.95rem;
+    line-height: 1.6; /* Mayor espacio entre líneas para no cansar la vista */
+    margin-bottom: 12px;
+    color: #ffffff;
+    opacity: 0.9;
 }
 
-.note-icon-side span {
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-
-/* Ajuste para la lista en la tarjeta de notas */
-.note-card .bullet-list li {
-    font-size: 0.85rem;
-    line-height: 1.4;
+/* Elimina el efecto hover de movimiento si prefieres que la nota sea estática */
+.tos-card:hover {
+    transform: none; 
+    background: rgba(255, 255, 255, 0.08) !important;
 }
 
 /* Responsive para la nota */
 @media (max-width: 650px) {
-    .note-icon-side {
-        width: 100%;
-        height: 60px;
-        flex-direction: row;
-        gap: 15px;
+    .tos-card .comm-info {
+        padding: 20px 15px;
     }
-    .note-icon-side i { font-size: 1.5rem; margin-bottom: 0; }
+    .tos-card h4 {
+        font-size: 1.2rem;
+    }
 }
