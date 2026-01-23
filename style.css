@@ -528,71 +528,81 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 }
 
 
-/* --- ESTILOS PARA LA SECCIÓN DE NOTAS Y TOS --- */
+/* --- ESTILO FINAL: BORDE ROJO Y ALTURA DINÁMICA --- */
 
 .note-card {
     display: flex;
     flex-direction: column;
-    background: rgba(45, 50, 55, 0.95); /* Gris oscuro sólido */
-    border-radius: 20px;
-    padding: 30px;
-    margin-top: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 100%;
-}
-
-.note-icon-side {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #ffffff;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 20px;
-    opacity: 0.8;
+    background: #343a40; /* Color gris oscuro de fondo */
+    border-radius: 25px;
+    
+    /* Borde Rojo solicitado */
+    border: 2px solid #ff4d4d; 
+    
+    /* Altura automática para que crezca con el texto */
+    height: auto; 
+    min-height: 300px; /* Un mínimo para que no se vea vacía */
+    
+    padding: 40px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 900px;
+    
+    /* Sombra para que resalte del fondo */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .tos-header {
     font-family: 'Courier New', monospace;
-    color: #3dfc89; /* Color verde/azul neón para resaltar */
+    color: #3dfc89; /* El verde neón que te gustó */
     text-align: center;
-    font-size: 1.6rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Línea divisoria horizontal */
+.tos-header::after {
+    content: "";
+    display: block;
+    width: 80%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 15px auto;
 }
 
 .tos-list {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 10px;
 }
 
 .tos-list li {
-    color: #e0e0e0;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 12px;
-    padding-left: 20px;
+    color: #ffffff;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+    padding-left: 25px;
     position: relative;
+    text-align: left;
 }
 
-/* Punto de la lista (bullet point) */
+/* Punto de la lista en verde para combinar con el título */
 .tos-list li::before {
     content: "•";
     position: absolute;
     left: 0;
     color: #3dfc89;
     font-weight: bold;
+    font-size: 1.3rem;
 }
 
-.tos-list li strong {
-    color: #ffffff;
-    font-weight: 600;
-}
-
-/* Ajuste para que el contenedor "glass" no corte el contenido */
-.glass-container {
-    overflow: visible !important;
+/* NOTAS arriba a la izquierda */
+.note-icon-side {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    font-weight: bold;
 }
