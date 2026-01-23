@@ -127,3 +127,39 @@ if (profilePic) {
         }
     });
 }
+
+
+
+// --- CONFIGURACIÓN MANUAL DEL ARTISTA ---
+const commissionStatus = "open"; // Cambia a "closed" para cerrar comisiones
+// ---------------------------------------
+
+function initCommissions() {
+    // 1. Manejo del Status
+    const statusEl = document.getElementById('commission-status');
+    if (statusEl) {
+        if (commissionStatus === "open") {
+            statusEl.innerText = "AVAILABLE / OPEN";
+            statusEl.className = "status-open";
+        } else {
+            statusEl.innerText = "CURRENTLY CLOSED";
+            statusEl.className = "status-closed";
+        }
+    }
+}
+
+// 2. Función del Lightbox
+function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+    lbImg.src = src;
+    lb.style.display = 'flex';
+}
+
+// Cerrar con Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === "Escape") document.getElementById('lightbox').style.display = 'none';
+});
+
+// Inicializar al cargar
+window.addEventListener('DOMContentLoaded', initCommissions);
