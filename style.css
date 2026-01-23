@@ -402,19 +402,6 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     transform: scale(1.1);
 }
 
-.carousel-hint {
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.65rem;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 2px 10px;
-    border-radius: 4px;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
 /* --- INFORMACIÓN DE TEXTO --- */
 .comm-info {
     padding: 20px 30px;
@@ -481,29 +468,6 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     font-size: 50px;
     color: white;
     cursor: pointer;
-}
-
-.carousel-controls {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none; /* Para que no bloquee el click a la imagen */
-}
-
-.carousel-controls span {
-    background: rgba(0,0,0,0.5);
-    color: white;
-    padding: 5px 10px;
-    cursor: pointer;
-    pointer-events: auto; /* Reactiva el click solo en las flechas */
-    user-select: none;
-}
-
-.carousel-controls span:hover {
-    background: rgba(0,0,0,0.8);
 }
 
 /* --- RESPONSIVE --- */
