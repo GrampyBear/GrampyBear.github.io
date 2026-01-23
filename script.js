@@ -131,21 +131,24 @@ if (profilePic) {
 
 
 // --- CONFIGURACIÓN MANUAL DEL ARTISTA ---
-const commissionStatus = "open"; // Edita: "open" o "closed"
+const commissionStatus = "open"; // Cambia a "closed" cuando quieras
+// ----------------------------
 
 function initCommissions() {
     const statusEl = document.getElementById('commission-status');
     if (statusEl) {
-        statusEl.innerText = commissionStatus.toUpperCase();
-        statusEl.className = commissionStatus === "open" ? "status-open" : "status-closed";
+        // Limpiamos clases previas para evitar conflictos
+        statusEl.classList.remove('status-open', 'status-closed');
+        
+        if (commissionStatus.toLowerCase() === "open") {
+            statusEl.innerText = "OPEN";
+            statusEl.classList.add('status-open');
+        } else {
+            statusEl.innerText = "CLOSED";
+            statusEl.classList.add('status-closed');
+        }
     }
 }
 
-function openLightbox(src) {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    img.src = src;
-    lb.style.display = 'flex';
-}
-
-window.addEventListener('DOMContentLoaded', initCommissions);
+// Asegúrate de que el DOM esté listo
+document.addEventListener('DOMContentLoaded', initCommissions);
