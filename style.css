@@ -294,128 +294,97 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 
 
 /* --- COMMISSIONS LAYOUT --- */
-/* --- CONTENEDOR ESTILO GLASSMORPHISM --- */
+/* Contenedor principal centrado */
 .commissions-section {
-    background: rgba(255, 255, 255, 0.15); /* Blanco semitransparente */
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 24px;
-    padding: 50px 20px;
-    margin: 60px auto;
-    width: 95%;
-    max-width: 850px;
+    background: rgba(255, 255, 255, 0.1); /* Estilo glass */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 50px auto;
+    width: 90%;
+    max-width: 800px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centrado horizontal de hijos */
-    color: white; /* Ajusta según el color de tu fuente */
+    align-items: center;
 }
 
-/* --- LISTA Y TARJETAS --- */
 .commission-list {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    align-items: center;
+    gap: 20px;
 }
 
+/* Tarjeta Horizontal */
 .comm-card {
     display: flex;
     width: 100%;
-    max-width: 700px;
-    height: 160px;
-    background: rgba(0, 0, 0, 0.2); /* Fondo oscuro suave para contraste */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    height: 160px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s;
 }
 
-.comm-card:hover {
-    transform: translateY(-5px);
-    background: rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.4);
+.comm-card:hover { transform: scale(1.01); }
+
+/* Espacio de Imagen */
+.comm-preview-container {
+    width: 200px;
+    min-width: 200px;
+    background: #000;
 }
 
-/* --- INFO Y DETALLES --- */
+.preview-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    cursor: zoom-in;
+}
+
+/* Texto alineado según tu imagen */
 .comm-info {
-    flex: 1;
     padding: 20px 25px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     text-align: left;
 }
 
-.comm-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 5px;
-}
-
-.comm-header h4 {
-    margin: 0;
-    font-size: 1.4rem;
-    letter-spacing: 1px;
-}
-
-.price {
+.comm-info h4 {
+    font-size: 1.25rem;
+    margin: 0 0 10px 0;
     font-family: 'Courier New', monospace;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #fff;
 }
 
-.details-list {
+.bullet-list {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.details-list li {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-bottom: 4px;
+.bullet-list li {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
     position: relative;
-    padding-left: 15px;
+    padding-left: 20px;
+    opacity: 0.9;
 }
 
-.details-list li::before {
-    content: "•";
+/* La viñeta (el punto negro de tu imagen) */
+.bullet-list li::before {
+    content: "●";
     position: absolute;
     left: 0;
-    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    color: #fff;
 }
 
-/* --- PREVIEW IZQUIERDA --- */
-.comm-preview-container {
-    width: 220px;
-    background: #000;
-    overflow: hidden;
+/* Lightbox */
+.lightbox {
+    display: none; position: fixed; z-index: 999;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
 }
-
-.preview-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    cursor: zoom-in;
-    transition: opacity 0.3s;
-}
-
-.preview-img:hover { opacity: 0.8; }
-
-/* --- RESPONSIVE --- */
-@media (max-width: 700px) {
-    .comm-card {
-        flex-direction: column;
-        height: auto;
-    }
-    .comm-preview-container {
-        width: 100%;
-        height: 180px;
-    }
-}
+#lightbox-img { max-width: 90%; max-height: 90%; }
