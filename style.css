@@ -313,7 +313,27 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px; /* Aumentamos el espacio entre tarjetas */
+    align-items: center;
+}
+
+.status-wrapper {
+    margin-top: 20px; /* Salto de línea/espacio extra bajo el título */
+    margin-bottom: 40px;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 1.1rem;
+}
+
+.status-open { 
+    color: #2ecc71 !important; 
+    text-shadow: 0 0 10px rgba(46,204,113,0.5); 
+}
+
+.status-closed { 
+    color: #e74c3c !important; 
+    text-shadow: 0 0 10px rgba(231,76,60,0.5); 
 }
 
 /* Tarjeta Horizontal */
