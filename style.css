@@ -293,11 +293,11 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 
 
 
-/* --- COMMISSIONS LAYOUT --- */
-/* Contenedor principal centrado */
+/* --- SECCIÓN DE COMISIONES (CONTENEDOR ESTILO ABOUT ME) --- */
 .commissions-section {
-    background: rgba(255, 255, 255, 0.1); /* Estilo glass */
+    background: rgba(255, 255, 255, 0.1); /* Estilo glassmorphism */
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 40px;
@@ -307,17 +307,17 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: white;
 }
 
-.commission-list {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 30px; /* Aumentamos el espacio entre tarjetas */
-    align-items: center;
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
 }
 
-/* --- STATUS DE COMISIONES MEJORADO --- */
+/* --- STATUS DE COMISIONES CON CONTRASTE --- */
 .status-wrapper {
     margin-top: 25px; 
     margin-bottom: 45px;
@@ -326,79 +326,109 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     letter-spacing: 3px;
     font-size: 1.1rem;
     
-    /* Contenedor de contraste */
-    background: rgba(0, 0, 0, 0.4); /* Fondo oscuro semitransparente */
-    padding: 8px 20px;
-    border-radius: 50px; /* Forma de cápsula */
-    display: inline-block; /* Para que el fondo solo ocupe el ancho del texto */
+    /* Cápsula de contraste para legibilidad sobre el fondo */
+    background: rgba(0, 0, 0, 0.4); 
+    padding: 8px 25px;
+    border-radius: 50px; 
+    display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-/* Colores con brillo extra para legibilidad */
 .status-open { 
-    color: #3dfc89 !important; /* Un verde más brillante */
+    color: #3dfc89 !important; /* Verde Neón */
     text-shadow: 0 0 12px rgba(61, 252, 137, 0.6); 
 }
 
 .status-closed { 
-    color: #ff5e4d !important; /* Un rojo más neón */
+    color: #ff5e4d !important; /* Rojo Neón */
     text-shadow: 0 0 12px rgba(255, 94, 77, 0.6); 
 }
 
-/* Tarjeta Horizontal */
+/* --- LISTA Y TARJETAS --- */
+.commission-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* Espacio entre tarjetas */
+    align-items: center;
+}
+
 .comm-card {
     display: flex;
     width: 100%;
     max-width: 750px;
-    height: 160px; /* Altura fija para que la imagen sea consistente */
+    height: 160px; /* Altura fija para consistencia */
     background: rgba(0, 0, 0, 0.25);
     border-radius: 15px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    margin-bottom: 30px; /* Espaciado entre tarjetas solicitado */
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
-.comm-card:hover .preview-img {
-    transform: scale(1.05);
+.comm-card:hover {
+    transform: translateY(-5px);
+    background: rgba(0, 0, 0, 0.35);
 }
 
-/* Espacio de Imagen */
+/* --- PREVIEW MINIATURA (SOLUCIÓN DE RELLENO) --- */
 .comm-preview-container {
     width: 220px;
     min-width: 220px;
-    height: 160px; /* Debe coincidir con el alto de la .comm-card */
-    overflow: hidden;
+    height: 100%; /* Ocupa el alto total de la tarjeta */
     background: #000;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Ajuste vital para que la imagen toque bordes superior e inferior */
+.carousel-track {
     display: flex;
+    width: 100%;
+    height: 100%;
 }
 
 .preview-img {
     width: 100%;
-    height: 100%; /* Obliga a la imagen a tocar borde superior e inferior */
-    object-fit: cover; /* Llena el espacio sin deformar, centrando el arte */
+    height: 100%;       /* Toca bordes arriba y abajo */
+    display: block;      /* Elimina espacios de texto */
+    object-fit: cover;   /* RELLENA el recuadro sin deformar */
     object-position: center; 
     cursor: zoom-in;
-    transition: transform 0.3s ease;
+    transition: transform 0.4s ease;
 }
 
 .preview-img:hover {
-    transform: scale(1.05); /* Efecto sutil de zoom */
+    transform: scale(1.1);
 }
 
-/* Texto alineado según tu imagen */
+.carousel-hint {
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.65rem;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 2px 10px;
+    border-radius: 4px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+/* --- INFORMACIÓN DE TEXTO --- */
 .comm-info {
-    padding: 20px 25px;
+    padding: 20px 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center; /* Centra el texto verticalmente */
     text-align: left;
 }
 
 .comm-info h4 {
-    font-size: 1.25rem;
-    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    margin: 0 0 12px 0;
     font-family: 'Courier New', monospace;
+    color: white;
 }
 
 .bullet-list {
@@ -409,31 +439,28 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 
 .bullet-list li {
     font-size: 0.95rem;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     position: relative;
     padding-left: 20px;
-    opacity: 0.9;
+    opacity: 0.85;
 }
 
-/* La viñeta (el punto negro de tu imagen) */
 .bullet-list li::before {
-    content: "●";
+    content: "●"; /* Viñeta redonda */
     position: absolute;
     left: 0;
     font-size: 0.8rem;
-    color: #fff;
+    color: white;
 }
 
-/* Lightbox */
+/* --- LIGHTBOX (VISTA EN GRANDE) --- */
 .lightbox {
-    display: none; /* Oculto por defecto */
+    display: none;
     position: fixed;
-    z-index: 99999; /* Por encima de todo */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    z-index: 10000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.95);
     justify-content: center;
     align-items: center;
     cursor: zoom-out;
@@ -442,9 +469,9 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 #lightbox-img {
     max-width: 90%;
     max-height: 90%;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    user-select: none; /* Evita que se seleccione como texto */
+    object-fit: contain; /* Aquí NO se recorta, se ve completo */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
 }
 
 .close-btn {
@@ -454,4 +481,16 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     font-size: 50px;
     color: white;
     cursor: pointer;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 650px) {
+    .comm-card {
+        flex-direction: column;
+        height: auto;
+    }
+    .comm-preview-container {
+        width: 100%;
+        height: 200px;
+    }
 }
