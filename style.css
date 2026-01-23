@@ -317,23 +317,33 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     align-items: center;
 }
 
+/* --- STATUS DE COMISIONES MEJORADO --- */
 .status-wrapper {
-    margin-top: 20px; /* Salto de línea/espacio extra bajo el título */
-    margin-bottom: 40px;
+    margin-top: 25px; 
+    margin-bottom: 45px;
     font-family: 'Courier New', monospace;
     font-weight: bold;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     font-size: 1.1rem;
+    
+    /* Contenedor de contraste */
+    background: rgba(0, 0, 0, 0.4); /* Fondo oscuro semitransparente */
+    padding: 8px 20px;
+    border-radius: 50px; /* Forma de cápsula */
+    display: inline-block; /* Para que el fondo solo ocupe el ancho del texto */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
+/* Colores con brillo extra para legibilidad */
 .status-open { 
-    color: #2ecc71 !important; 
-    text-shadow: 0 0 10px rgba(46,204,113,0.5); 
+    color: #3dfc89 !important; /* Un verde más brillante */
+    text-shadow: 0 0 12px rgba(61, 252, 137, 0.6); 
 }
 
 .status-closed { 
-    color: #e74c3c !important; 
-    text-shadow: 0 0 10px rgba(231,76,60,0.5); 
+    color: #ff5e4d !important; /* Un rojo más neón */
+    text-shadow: 0 0 12px rgba(255, 94, 77, 0.6); 
 }
 
 /* Tarjeta Horizontal */
