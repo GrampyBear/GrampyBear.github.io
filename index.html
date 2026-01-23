@@ -145,8 +145,14 @@
         </section>
         
         <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-            <span class="close-btn">&times;</span>
-            <img id="lightbox-img" src="">
+            <span class="close-btn" onclick="closeLightbox()">&times;</span>
+            
+            <div class="lb-nav-container">
+                <span class="lb-arrow lb-prev" onclick="event.stopPropagation(); changeLightboxImage(-1)">&#10094;</span>
+                <span class="lb-arrow lb-next" onclick="event.stopPropagation(); changeLightboxImage(1)">&#10095;</span>
+            </div>
+        
+            <img id="lightbox-img" src="" onclick="event.stopPropagation()">
         </div>
 
         <section id="about" class="page full-center">
