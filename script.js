@@ -205,3 +205,40 @@ function moveCarousel(trackId, step) {
     images[nextIndex].style.height = '100%';
     images[nextIndex].style.objectFit = 'cover';
 }
+
+let allImages = [];
+let currentIndex = 0;
+
+// Escanea todas las imágenes de la página al cargar
+function initGallery() {
+    const images = document.querySelectorAll('.preview-img');
+    allImages = Array.from(images).map(img => img.src);
+}
+
+function openLightbox(src) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    
+    currentIndex = allImages.indexOf(src); // Sincroniza el índice
+    img.src = src;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function changeLightboxImage(direction) {
+    currentIndex += direction;
+    
+    // Ciclo infinito
+    if (currentIndex >= allImages.length) currentIndex = 0;
+    if (currentIndex < 0) currentIndex = allImages.length - 1;
+    
+    document.getElementById('lightbox-img').src = allImages[currentIndex];
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+// Inicializar
+document.addEventListener('DOMContentLoaded', initGallery);
