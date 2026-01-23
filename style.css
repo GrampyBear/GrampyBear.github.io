@@ -288,109 +288,134 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
+
+
+
+
+
 /* --- COMMISSIONS LAYOUT --- */
-.commissions-container {
-    margin-top: 60px;
-    width: 100%;
+/* --- CONTENEDOR ESTILO GLASSMORPHISM --- */
+.commissions-section {
+    background: rgba(255, 255, 255, 0.15); /* Blanco semitransparente */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 24px;
+    padding: 50px 20px;
+    margin: 60px auto;
+    width: 95%;
     max-width: 850px;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrado horizontal de hijos */
+    color: white; /* Ajusta según el color de tu fuente */
 }
 
-.status-wrapper {
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    margin-bottom: 30px;
-    letter-spacing: 2px;
-}
-
-.status-open { color: #2ecc71; text-shadow: 0 0 10px rgba(46,204,113,0.3); }
-.status-closed { color: #e74c3c; text-shadow: 0 0 10px rgba(231,76,60,0.3); }
-
+/* --- LISTA Y TARJETAS --- */
 .commission-list {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 25px;
+    align-items: center;
 }
 
 .comm-card {
     display: flex;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
     height: 160px;
+    background: rgba(0, 0, 0, 0.2); /* Fondo oscuro suave para contraste */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
     overflow: hidden;
-    transition: transform 0.3s ease, background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .comm-card:hover {
-    transform: scale(1.02);
-    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* --- CAROUSEL & PREVIEW --- */
-.comm-preview-container {
-    width: 220px;
-    min-width: 220px;
-    position: relative;
-    background: #000;
-}
-
-.carousel-track {
-    display: flex;
-    height: 100%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-}
-
-.carousel-track::-webkit-scrollbar { display: none; }
-
-.preview-img {
-    min-width: 100%;
-    height: 100%;
-    object-fit: cover;
-    scroll-snap-align: start;
-    cursor: zoom-in;
-}
-
-.carousel-hint {
-    position: absolute;
-    bottom: 8px; left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.6rem;
-    background: rgba(0,0,0,0.7);
-    padding: 2px 8px;
-    border-radius: 4px;
-    color: #fff;
-    pointer-events: none;
-}
-
+/* --- INFO Y DETALLES --- */
 .comm-info {
-    padding: 20px;
+    flex: 1;
+    padding: 20px 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
 }
 
-.comm-info h4 { font-size: 1.3rem; margin-bottom: 5px; }
-.comm-info .price { color: #aaa; font-weight: bold; margin-bottom: 10px; }
-.comm-info .details { font-size: 0.85rem; opacity: 0.6; }
-
-/* --- LIGHTBOX --- */
-.lightbox {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.9);
-    justify-content: center; align-items: center;
+.comm-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
 }
 
-#lightbox-img { max-width: 90%; max-height: 90%; border: 1px solid #444; }
-.close-btn { position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
+.comm-header h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
 
-@media (max-width: 600px) {
-    .comm-card { flex-direction: column; height: auto; }
-    .comm-preview-container { width: 100%; height: 200px; }
+.price {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 4px;
+    position: relative;
+    padding-left: 15px;
+}
+
+.details-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* --- PREVIEW IZQUIERDA --- */
+.comm-preview-container {
+    width: 220px;
+    background: #000;
+    overflow: hidden;
+}
+
+.preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: zoom-in;
+    transition: opacity 0.3s;
+}
+
+.preview-img:hover { opacity: 0.8; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 700px) {
+    .comm-card {
+        flex-direction: column;
+        height: auto;
+    }
+    .comm-preview-container {
+        width: 100%;
+        height: 180px;
+    }
 }
