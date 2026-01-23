@@ -483,6 +483,29 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     cursor: pointer;
 }
 
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    pointer-events: none; /* Para que no bloquee el click a la imagen */
+}
+
+.carousel-controls span {
+    background: rgba(0,0,0,0.5);
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    pointer-events: auto; /* Reactiva el click solo en las flechas */
+    user-select: none;
+}
+
+.carousel-controls span:hover {
+    background: rgba(0,0,0,0.8);
+}
+
 /* --- RESPONSIVE --- */
 @media (max-width: 650px) {
     .comm-card {
