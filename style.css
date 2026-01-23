@@ -528,81 +528,68 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
 }
 
 
-/* --- ESTILO FINAL: BORDE ROJO Y ALTURA DINÁMICA --- */
+/* --- ESTILO FINAL CON LETRA REDUCIDA --- */
 
 .note-card {
     display: flex;
     flex-direction: column;
-    background: #343a40; /* Color gris oscuro de fondo */
+    background: #343a40; 
     border-radius: 25px;
-    
-    /* Borde Rojo solicitado */
-    border: 2px solid #ff4d4d; 
-    
-    /* Altura automática para que crezca con el texto */
+    border: 2px solid #ff4d4d; /* Borde rojo */
     height: auto; 
-    min-height: 300px; /* Un mínimo para que no se vea vacía */
-    
-    padding: 40px;
+    min-height: 250px;
+    padding: 30px 40px; /* Un poco menos de padding vertical */
     margin: 20px auto;
     width: 90%;
     max-width: 900px;
-    
-    /* Sombra para que resalte del fondo */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.note-icon-side {
+    color: rgba(255, 255, 255, 0.6);
+    font-family: sans-serif;
+    font-size: 0.75rem; /* Letra de "NOTAS" más pequeña */
+    margin-bottom: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .tos-header {
     font-family: 'Courier New', monospace;
-    color: #3dfc89; /* El verde neón que te gustó */
+    color: #3dfc89; 
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 1.4rem; /* Reducido de 2rem */
+    margin-bottom: 5px;
     text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Línea divisoria horizontal */
-.tos-header::after {
-    content: "";
-    display: block;
-    width: 80%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 15px auto;
+    letter-spacing: 1.5px;
 }
 
 .tos-list {
     list-style: none;
     padding: 0;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .tos-list li {
     color: #ffffff;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 15px;
-    padding-left: 25px;
+    font-size: 0.88rem; /* Tamaño más pequeño y legible (estándar de notas) */
+    line-height: 1.5;   /* Interlineado cómodo */
+    margin-bottom: 10px;
+    padding-left: 20px;
     position: relative;
     text-align: left;
 }
 
-/* Punto de la lista en verde para combinar con el título */
 .tos-list li::before {
     content: "•";
     position: absolute;
     left: 0;
     color: #3dfc89;
     font-weight: bold;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
 }
 
-/* NOTAS arriba a la izquierda */
-.note-icon-side {
-    color: rgba(255, 255, 255, 0.7);
-    font-family: sans-serif;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    font-weight: bold;
+.tos-list li strong {
+    color: #ffffff;
+    font-weight: 700;
 }
