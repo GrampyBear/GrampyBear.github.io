@@ -2,31 +2,60 @@
  * KUMOJIISANKO - OFFICIAL SITE SCRIPT 2026
  */
 
+// --- 1. CONFIGURACIÓN Y DATOS ---
 const titles = ["Kumojiisanko", "くもじいさんこ"];
 const welcomePhrases = [
-    "Welcome to my winter corner.",
-    "Enjoy the visit!",
-    "It's snowing a lot, bundle up!",
-    "Beautiful weather, isn't it?",
-    "Make yourself at home in this cold season.",
-    "Thanks for stopping by!",
-    "ようこそ",
-    "モノクロームのキャンバス？",
-    "愛は残酷だ",
-    "Winter is beautiful",
-    "Watch out, the ink is still wet.",
-    "A fat dragon and a fat bear",
-    "Love is Cruel",
-    "物語の始まり",
-    "Im Fat hehe"
+    "Welcome to my winter corner.", "Enjoy the visit!", "It's snowing a lot, bundle up!",
+    "Beautiful weather, isn't it?", "Make yourself at home in this cold season.",
+    "Thanks for stopping by!", "ようこそ", "モノクロームのキャンバス？",
+    "愛は残酷だ", "Winter is beautiful", "Watch out, the ink is still wet.",
+    "A fat dragon and a fat bear", "Love is Cruel", "物語의 시작", "Im Fat hehe"
 ];
 
-//64x64
 const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Snowflake.png",
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Cloud.png"
 ];
 
+const commissionStatus = "open"; 
+
+// Variables globales para la galería
+let currentGallery = []; 
+let currentIndex = 0;
+
+// --- 2. NAVEGACIÓN ENTRE PÁGINAS (HASH ROUTING) ---
+const handleRoute = () => {
+    const hash = window.location.hash || '#home';
+    const targetId = hash.substring(1);
+    const currentPage = document.querySelector('.page.active');
+    const nextPage = document.getElementById(targetId);
+
+    if (!nextPage) {
+        window.location.hash = '#home';
+        return;
+    }
+
+    if (currentPage && currentPage !== nextPage) {
+        currentPage.classList.add('fading-out');
+        setTimeout(() => executePageSwitch(currentPage, nextPage), 500);
+    } else {
+        executePageSwitch(null, nextPage);
+    }
+};
+
+const executePageSwitch = (oldPage, newPage) => {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => {
+        p.classList.remove('active', 'fading-out');
+        p.style.display = 'none';
+    });
+    newPage.style.display = 'block';
+    setTimeout(() => newPage.classList.add('active'), 20);
+    applyRandomElements();
+    window.scrollTo(0, 0);
+};
+
+// --- 3. EFECTOS VISUALES Y ALEATORIEDAD ---
 const createSnow = () => {
     const container = document.getElementById('snow-container');
     if (!container) return;
@@ -46,41 +75,6 @@ const createSnow = () => {
     }
 };
 
-const handleRoute = () => {
-    const hash = window.location.hash || '#home';
-    const targetId = hash.substring(1);
-    const currentPage = document.querySelector('.page.active');
-    const nextPage = document.getElementById(targetId);
-
-    if (!nextPage) {
-        window.location.hash = '#home';
-        return;
-    }
-
-    if (currentPage && currentPage !== nextPage) {
-        currentPage.classList.add('fading-out');
-        setTimeout(() => {
-            executePageSwitch(currentPage, nextPage);
-        }, 500);
-    } else {
-        executePageSwitch(null, nextPage);
-    }
-};
-
-const executePageSwitch = (oldPage, newPage) => {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(p => {
-        p.classList.remove('active', 'fading-out');
-        p.style.display = 'none';
-    });
-    newPage.style.display = 'block';
-    setTimeout(() => {
-        newPage.classList.add('active');
-    }, 20);
-    applyRandomElements();
-    window.scrollTo(0, 0);
-};
-
 const applyRandomElements = () => {
     const titleElem = document.getElementById('main-title');
     if (titleElem) titleElem.innerText = titles[Math.floor(Math.random() * titles.length)];
@@ -92,6 +86,73 @@ const applyRandomElements = () => {
     if (favElem) favElem.href = favicons[Math.floor(Math.random() * favicons.length)];
 };
 
+// --- 4. SISTEMA DE COMISIONES (STATUS Y CARRUSEL) ---
+function initCommissions() {
+    const statusEl = document.getElementById('commission-status');
+    if (statusEl) {
+        statusEl.classList.remove('status-open', 'status-closed');
+        if (commissionStatus.toLowerCase() === "open") {
+            statusEl.innerText = "OPEN";
+            statusEl.classList.add('status-open');
+        } else {
+            statusEl.innerText = "CLOSED";
+            statusEl.classList.add('status-closed');
+        }
+    }
+}
+
+function moveCarousel(trackId, step) {
+    const track = document.getElementById(trackId);
+    if (!track) return;
+    const images = track.getElementsByClassName('preview-img');
+    let idx = 0;
+
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].style.display !== 'none') {
+            idx = i;
+            images[i].style.display = 'none';
+            break;
+        }
+    }
+
+    let nextIndex = (idx + step + images.length) % images.length;
+    images[nextIndex].style.display = 'block';
+    images[nextIndex].style.width = '100%';
+    images[nextIndex].style.height = '100%';
+    images[nextIndex].style.objectFit = 'cover';
+}
+
+// --- 5. LIGHTBOX Y GALERÍA FILTRADA ---
+function openLightbox(src, typeClass) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    if (!lb || !img) return;
+
+    // Filtrar galería por tipo (sketch, frame, etc.)
+    const imagesOfType = document.querySelectorAll('.' + typeClass);
+    currentGallery = Array.from(imagesOfType).map(i => i.src);
+    currentIndex = currentGallery.indexOf(src);
+
+    img.src = src;
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function changeLightboxImage(direction) {
+    if (currentGallery.length <= 1) return;
+    currentIndex = (currentIndex + direction + currentGallery.length) % currentGallery.length;
+    document.getElementById('lightbox-img').src = currentGallery[currentIndex];
+}
+
+function closeLightbox() {
+    const lb = document.getElementById('lightbox');
+    if (lb) {
+        lb.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// --- 6. EVENTOS Y LISTENERS ---
 window.addEventListener('hashchange', handleRoute);
 window.addEventListener('load', () => {
     createSnow();
@@ -104,141 +165,30 @@ window.addEventListener('resize', () => {
     resizeTimer = setTimeout(createSnow, 250);
 });
 
-// --- SISTEMA DE SECRETO (5 CLICKS) ---
+document.addEventListener('DOMContentLoaded', initCommissions);
+
+document.addEventListener('keydown', (e) => {
+    const lb = document.getElementById('lightbox');
+    if (lb && lb.style.display === 'flex') {
+        if (e.key === "ArrowLeft") changeLightboxImage(-1);
+        if (e.key === "ArrowRight") changeLightboxImage(1);
+        if (e.key === "Escape") closeLightbox();
+    }
+});
+
+// --- 7. SECRETO (5 CLICKS) ---
 let clickCount = 0;
 let clickTimer;
-
 const profilePic = document.getElementById('secret-trigger');
 
 if (profilePic) {
     profilePic.addEventListener('click', () => {
         clickCount++;
-        
-        // Reinicia el contador si el usuario tarda mucho entre clics
         clearTimeout(clickTimer);
-        clickTimer = setTimeout(() => {
-            clickCount = 0;
-        }, 1000); 
+        clickTimer = setTimeout(() => { clickCount = 0; }, 1000); 
 
-        // Al llegar a 5 clics...
         if (clickCount === 5) {
-            // Cambia 'secreto.html' por el nombre exacto de tu archivo
             window.location.href = 'secret.html'; 
         }
     });
 }
-
-
-
-// --- CONFIGURACIÓN MANUAL DEL ARTISTA ---
-const commissionStatus = "open"; // Cambia a "closed" cuando quieras
-// ----------------------------
-
-function initCommissions() {
-    const statusEl = document.getElementById('commission-status');
-    if (statusEl) {
-        // Limpiamos clases previas para evitar conflictos
-        statusEl.classList.remove('status-open', 'status-closed');
-        
-        if (commissionStatus.toLowerCase() === "open") {
-            statusEl.innerText = "OPEN";
-            statusEl.classList.add('status-open');
-        } else {
-            statusEl.innerText = "CLOSED";
-            statusEl.classList.add('status-closed');
-        }
-    }
-}
-
-// Asegúrate de que el DOM esté listo
-document.addEventListener('DOMContentLoaded', initCommissions);
-
-// Función para abrir la imagen en grande
-function openLightbox(src) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    
-    if (lightbox && lightboxImg) {
-        lightboxImg.src = src;
-        lightbox.style.display = 'flex';
-        // Bloquear scroll del body al estar abierto
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Función para cerrar el Lightbox
-function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    if (lightbox) {
-        lightbox.style.display = 'none';
-        // Devolver scroll al body
-        document.body.style.overflow = 'auto';
-    }
-}
-
-// Cerrar con la tecla Escape
-document.addEventListener('keydown', (e) => {
-    if (e.key === "Escape") closeLightbox();
-});
-
-function moveCarousel(trackId, step) {
-    const track = document.getElementById(trackId);
-    const images = track.getElementsByClassName('preview-img');
-    let currentIndex = 0;
-
-    // Encontrar cuál imagen se está mostrando actualmente
-    for (let i = 0; i < images.length; i++) {
-        if (images[i].style.display !== 'none') {
-            currentIndex = i;
-            images[i].style.display = 'none';
-            break;
-        }
-    }
-
-    // Calcular el siguiente índice (infinito)
-    let nextIndex = (currentIndex + step + images.length) % images.length;
-    
-    // Mostrar la nueva imagen
-    images[nextIndex].style.display = 'block';
-    // Asegurar que mantenga el ajuste de bordes
-    images[nextIndex].style.width = '100%';
-    images[nextIndex].style.height = '100%';
-    images[nextIndex].style.objectFit = 'cover';
-}
-
-let allImages = [];
-let currentIndex = 0;
-
-// Escanea todas las imágenes de la página al cargar
-function initGallery() {
-    const images = document.querySelectorAll('.preview-img');
-    allImages = Array.from(images).map(img => img.src);
-}
-
-function openLightbox(src) {
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    
-    currentIndex = allImages.indexOf(src); // Sincroniza el índice
-    img.src = src;
-    lb.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
-
-function changeLightboxImage(direction) {
-    currentIndex += direction;
-    
-    // Ciclo infinito
-    if (currentIndex >= allImages.length) currentIndex = 0;
-    if (currentIndex < 0) currentIndex = allImages.length - 1;
-    
-    document.getElementById('lightbox-img').src = allImages[currentIndex];
-}
-
-function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = 'auto';
-}
-
-// Inicializar
-document.addEventListener('DOMContentLoaded', initGallery);
