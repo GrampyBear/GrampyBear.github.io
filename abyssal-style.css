@@ -1,4 +1,4 @@
-/* --- ABYSSAL THEME --- */
+/* --- ABYSSAL THEME - LINEAR & SLIMY --- */
 
 * {
     margin: 0;
@@ -9,35 +9,63 @@
 body, html {
     width: 100%;
     height: 100%;
-    background-color: #000000; /* Negro absoluto */
-    overflow-x: hidden;
+    background-color: #000000;
 }
 
 body {
-    /* El resplandor verde lima oscuro en el centro del fondo */
-    background-image: radial-gradient(
-        circle at center, 
-        #132b12 0%, 
-        #000000 75%
+    /* Degradado lineal y vertical: Negro -> Verde Lima Oscuro -> Negro */
+    background: linear-gradient(
+        180deg, 
+        #000000 0%, 
+        #1a3d18 50%, 
+        #000000 100%
     );
+    background-attachment: fixed; /* Mantiene el degradado estático al hacer scroll */
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #32612e; /* Verde lima oscuro base */
+    color: #4a8a44; /* Verde lima un poco más claro para legibilidad */
     font-family: 'Courier New', monospace;
 }
 
 .abyssal-container {
     text-align: center;
-    width: 100%;
-    max-width: 1200px;
-    z-index: 1;
+    padding: 20px;
+}
+
+/* Efecto baboso / abandonado */
+.slime-title {
+    font-size: 4rem;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+    color: #3dfc89; /* Color base brillante */
+    
+    /* Sombras que crean el efecto de goteo/humedad */
+    text-shadow: 
+        0 0 10px #1a3d18,
+        2px 5px 15px rgba(61, 252, 137, 0.4),
+        0 10px 20px rgba(26, 61, 24, 0.8);
+    
+    margin-bottom: 10px;
+    animation: pulse-glow 4s infinite ease-in-out;
+}
+
+.abyssal-subtitle {
+    font-size: 1.1rem;
+    color: #32612e; /* Verde más oscuro */
+    letter-spacing: 2px;
+    font-style: italic;
+    opacity: 0.8;
 }
 
 .depth-marker {
-    opacity: 0.2;
-    letter-spacing: 10px;
-    font-size: 1.5rem;
-    pointer-events: none;
-    user-select: none;
+    margin-top: 50px;
+    opacity: 0.3;
+    letter-spacing: 15px;
+}
+
+/* Animación sutil de respiración para el título */
+@keyframes pulse-glow {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.02); opacity: 1; text-shadow: 0 0 25px #1a3d18; }
 }
