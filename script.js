@@ -180,3 +180,28 @@ function closeLightbox() {
 document.addEventListener('keydown', (e) => {
     if (e.key === "Escape") closeLightbox();
 });
+
+function moveCarousel(trackId, step) {
+    const track = document.getElementById(trackId);
+    const images = track.getElementsByClassName('preview-img');
+    let currentIndex = 0;
+
+    // Encontrar cuál imagen se está mostrando actualmente
+    for (let i = 0; i < images.length; i++) {
+        if (images[i].style.display !== 'none') {
+            currentIndex = i;
+            images[i].style.display = 'none';
+            break;
+        }
+    }
+
+    // Calcular el siguiente índice (infinito)
+    let nextIndex = (currentIndex + step + images.length) % images.length;
+    
+    // Mostrar la nueva imagen
+    images[nextIndex].style.display = 'block';
+    // Asegurar que mantenga el ajuste de bordes
+    images[nextIndex].style.width = '100%';
+    images[nextIndex].style.height = '100%';
+    images[nextIndex].style.objectFit = 'cover';
+}
