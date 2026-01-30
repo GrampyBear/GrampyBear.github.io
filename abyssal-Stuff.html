@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/246950cd3678c025ac950d6dc4fa85eac9041536/alien.png">
     <title>Abyssal Stuff</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/246950cd3678c025ac950d6dc4fa85eac9041536/alien.png">
     <link rel="stylesheet" href="abyssal-style.css">
 </head>
 <body>
@@ -21,11 +21,11 @@
                 
                 <div class="comm-preview-container">
                     <div class="carousel-track" id="track-abyssal">
-                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20sheet.png" class="preview-img abyssal-img" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
-                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
-                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page%20again.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
-                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%201.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
-                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/PFP.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20sheet.png" class="preview-img abyssal-img" onclick="openLightbox(this.src)" alt="Sketch Sheet">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Sketch Comic">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page%20again.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Sketch Comic 2">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%201.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Sketch 1">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/PFP.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="PFP">
                     </div>
                 </div>
 
@@ -45,9 +45,11 @@
         </footer>
     </div>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <span class="close-btn">&times;</span>
+    <div id="lightbox" class="lightbox">
+        <span class="close-btn" onclick="closeLightbox()">&times;</span>
+        <span class="nav-btn prev" onclick="changeLightboxImg(-1)">&#10094;</span>
         <img class="lightbox-content" id="lightbox-img">
+        <span class="nav-btn next" onclick="changeLightboxImg(1)">&#10095;</span>
     </div>
 
     <script src="abyssal-script.js"></script>
