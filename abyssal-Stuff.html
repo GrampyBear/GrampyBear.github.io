@@ -1,37 +1,54 @@
-<main class="abyssal-content">
-    <div class="abyssal-card">
-        <div class="card-tag">ABYSSAL</div>
-        
-        <div class="comm-preview-container">
-            <div class="carousel-track" id="track-abyssal">
-                <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/f739628d2079f858b0fa213f4b57a4c5afc17721/commissions/Thygor%20and%20Bernar%20Sketchs.png" 
-                     class="preview-img abyssal-prev-img" 
-                     onclick="openLightbox(this.src, 'abyssal-prev-img')" 
-                     alt="Abyssal Sketch Example">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abyssal Stuff</title>
+    <link rel="stylesheet" href="abyssal-style.css">
+</head>
+<body>
+
+    <div class="abyssal-wrapper">
+        <header class="abyssal-header">
+            <h1 class="slime-title">Abyssal Stuff</h1>
+            <p class="abyssal-subtitle">Did you find what you were looking for?</p>
+        </header>
+
+        <main class="abyssal-content">
+            <div class="abyssal-card">
+                <div class="card-tag">ABYSSAL</div>
                 
-                <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/f739628d2079f858b0fa213f4b57a4c5afc17721/commissions/TF%20sketch.png" 
-                     class="preview-img abyssal-prev-img" 
-                     loading="lazy" 
-                     onclick="openLightbox(this.src, 'abyssal-prev-img')" 
-                     alt="Abyssal Sketch Example" 
-                     style="display: none;">
+                <div class="comm-preview-container">
+                    <div class="carousel-track" id="track-abyssal">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20sheet.png" class="preview-img abyssal-img" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%20Comic%20Page%20again.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/Sketch%201.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                        <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/e17f0fd90f5a0fefbd625d7233b495212e8bc206/abyssal/PFP.png" class="preview-img abyssal-img" style="display:none" onclick="openLightbox(this.src)" alt="Abyssal Sketch">
+                    </div>
+                </div>
 
-                <img src="https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/f739628d2079f858b0fa213f4b57a4c5afc17721/commissions/Sketch%20pig.png" 
-                     class="preview-img abyssal-prev-img" 
-                     loading="lazy" 
-                     onclick="openLightbox(this.src, 'abyssal-prev-img')" 
-                     alt="Abyssal Sketch Example" 
-                     style="display: none;">
+                <div class="comm-info">
+                    <h2 class="comm-title">Abyssal Commission Sketch</h2>
+                    <ul class="comm-details">
+                        <li><strong>Sketch:</strong> 1$</li>
+                        <li><strong>Sequence:</strong> 2$ per sheet</li>
+                        <li><strong>Comic:</strong> 5$</li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        </main>
 
-        <div class="comm-info">
-            <h2 class="comm-title">Abyssal Commission Sketch</h2>
-            <ul class="comm-details">
-                <li><strong>Sketch:</strong> 1$</li>
-                <li><strong>Sequence:</strong> 2$ per sheet</li>
-                <li><strong>Comic:</strong> 5$</li>
-            </ul>
-        </div>
+        <footer>
+            <a href="index.html" class="back-link">← Return to the surface</a>
+        </footer>
     </div>
-</main>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+
+    <script src="abyssal-script.js"></script>
+</body>
+</html>
