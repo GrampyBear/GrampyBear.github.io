@@ -22,7 +22,6 @@ body {
     max-width: 1200px;
 }
 
-/* Título Baboso */
 .slime-title {
     font-size: 4.5rem;
     letter-spacing: 10px;
@@ -39,9 +38,9 @@ body {
     margin-bottom: 40px;
 }
 
-/* Tarjeta */
+/* Tarjeta Abisal */
 .abyssal-card {
-    background: rgba(10, 10, 10, 0.9);
+    background: rgba(10, 10, 10, 0.95);
     border: 2px solid #1a3d18;
     border-radius: 20px;
     padding: 25px;
@@ -62,7 +61,7 @@ body {
     border-radius: 5px;
 }
 
-/* Contenedor Imágenes */
+/* Contenedor del Carrusel - Corrección de fondo negro */
 .comm-preview-container {
     width: 100%;
     height: 300px;
@@ -76,8 +75,9 @@ body {
 .preview-img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Evita espacios negros estirando la imagen al contenedor */
     cursor: pointer;
+    display: block;
 }
 
 .comm-title {
@@ -100,7 +100,7 @@ body {
 
 .comm-details li strong { color: #3dfc89; }
 
-/* Lightbox */
+/* Lightbox Mejorado */
 .lightbox {
     display: none;
     position: fixed;
@@ -113,10 +113,34 @@ body {
 }
 
 .lightbox-content {
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 85%;
+    max-height: 85%;
     border: 2px solid #3dfc89;
+    box-shadow: 0 0 30px rgba(61, 252, 137, 0.2);
 }
+
+.close-btn {
+    position: absolute;
+    top: 20px; right: 30px;
+    color: #fff; font-size: 40px; cursor: pointer;
+}
+
+/* Flechas Navegación */
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 3.5rem;
+    color: #3dfc89;
+    cursor: pointer;
+    padding: 20px;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.nav-btn:hover { color: #fff; text-shadow: 0 0 10px #3dfc89; }
+.prev { left: 30px; }
+.next { right: 30px; }
 
 .back-link {
     display: block;
@@ -124,4 +148,7 @@ body {
     color: #32612e;
     text-decoration: none;
     font-size: 0.8rem;
+    transition: 0.3s;
 }
+
+.back-link:hover { color: #3dfc89; }
