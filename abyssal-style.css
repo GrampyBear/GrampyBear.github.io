@@ -65,17 +65,24 @@ body {
 .comm-preview-container {
     width: 100%;
     height: 300px;
-    background: #000;
+    background: #000; /* Puedes cambiar esto a transparent si prefieres */
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 20px;
     border: 1px solid #1a3d18;
+    /* Asegura que el contenedor sea un bloque flexible para centrar */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
 }
 
 .preview-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Evita espacios negros estirando la imagen al contenedor */
+    /* 'cover' es clave: recorta los bordes para llenar TODO el espacio */
+    object-fit: cover; 
+    /* 'object-position' centra el recorte en la parte importante */
+    object-position: center; 
     cursor: pointer;
     display: block;
 }
