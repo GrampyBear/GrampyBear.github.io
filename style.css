@@ -627,3 +627,45 @@ h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
     transform: translateY(-2px);
     background-color: #050505;
 }
+
+
+/* --- BOTÓN DE CONTACTO PÁGINA PRINCIPAL --- */
+
+.main-contact-container {
+    text-align: center;
+    margin: 40px auto;
+    width: 90%;
+    max-width: 900px;
+}
+
+.main-contact-btn {
+    display: inline-block;
+    background-color: #1a1a1a; /* Negro suave */
+    color: #ffffff;
+    padding: 18px 50px;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    border: 2px solid #333; /* Borde discreto inicial */
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-transform: uppercase;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.main-contact-btn:hover {
+    color: #ffffff;
+    border-color: #ff4d4d; /* Rojo de tus TOS */
+    background-color: #1a1a1a;
+    box-shadow: 0 0 25px rgba(255, 77, 77, 0.4);
+    transform: translateY(-3px);
+    letter-spacing: 5px; /* Se expande ligeramente */
+}
+
+/* Efecto activo al hacer clic */
+.main-contact-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
+}
