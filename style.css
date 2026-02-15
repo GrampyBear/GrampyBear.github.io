@@ -1,7 +1,4 @@
-/* * KUMOJIISANKO - OFFICIAL SITE STYLES 2026 
- * Restored & Updated: Patreon Tiers Integration
- */
-
+/* --- CONFIGURACIÓN Y VARIABLES --- */
 :root {
     --winter-gradient: linear-gradient(to bottom, #455a64 0%, #90a4ae 50%, #eceff1 100%);
     --accent: #5c9ead;
@@ -17,7 +14,7 @@ body, html {
     color: var(--text-main);
 }
 
-/* --- ELEMENTOS DE FONDO (CRÍTICOS) --- */
+/* --- ELEMENTOS DE FONDO --- */
 .winter-background {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -88,7 +85,7 @@ body, html {
 
 .nav-menu button:hover { background: var(--accent); }
 
-/* --- SISTEMA DE PÁGINAS Y TRANSICIONES (NO TOCAR) --- */
+/* --- SISTEMA DE PÁGINAS Y TRANSICIONES --- */
 main { width: 100%; padding-top: 80px; }
 
 .page {
@@ -109,6 +106,15 @@ main { width: 100%; padding-top: 80px; }
     opacity: 0;
 }
 
+.centered-content {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 { font-size: 2.5rem; margin-bottom: 25px; font-weight: 600; color: #000; }
+
 /* --- ABOUT ME --- */
 .about-container {
     display: flex;
@@ -125,6 +131,7 @@ main { width: 100%; padding-top: 80px; }
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.about-image-side { flex: 0 0 300px; }
 .profile-pic { 
     width: 100%; 
     aspect-ratio: 1 / 1; 
@@ -132,59 +139,37 @@ main { width: 100%; padding-top: 80px; }
     border-radius: 20px; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.1); 
 }
+.about-text-side { flex: 1; }
+.bio-paragraphs p { margin-bottom: 12px; font-size: 1.1rem; line-height: 1.5; color: #000; }
 
-/* --- PATREON TIERS (EXTENSIÓN) --- */
-.tier-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 25px;
-    justify-content: center;
-    margin-top: 30px;
-    width: 100%;
+#welcome-phrase {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: #000000;
+    display: inline-block;
 }
 
-.tier-card {
-    width: 320px;
-    border-radius: 24px;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-    transition: 0.3s;
-    cursor: pointer;
-    backdrop-filter: blur(15px);
-    display: flex;
-    flex-direction: column;
+#welcome-phrase::before {
+    content: '“';
+    font-size: 1.5rem;
+    color: #000000;
+    opacity: 0.5;
+    font-family: serif;
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
-.tier-card:hover { transform: translateY(-10px); }
-
-/* Degradados Personalizados */
-.tier-1-grad {
-    background: linear-gradient(to bottom, rgba(178, 235, 242, 0.5), rgba(165, 214, 167, 0.5));
-    border: 2px solid #80deea;
+#welcome-phrase::after {
+    content: '”';
+    font-size: 1.5rem;
+    color: #000000;
+    opacity: 0.5;
+    font-family: serif;
+    margin-left: 8px;
+    vertical-align: middle;
 }
 
-.tier-2-grad {
-    background: linear-gradient(to bottom, rgba(41, 128, 185, 0.5), rgba(109, 213, 250, 0.5));
-    border: 2px solid #6dd5fa;
-}
-
-.tier-3-grad {
-    background: linear-gradient(to bottom, rgba(43, 8, 82, 0.6), rgba(138, 43, 226, 0.5));
-    border: 2px solid #8a2be2;
-}
-
-.tier-content {
-    padding: 30px;
-    color: #ffffff;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.price { font-size: 2.2rem; font-weight: 700; color: #fff; }
-
-/* --- SECCIÓN DE COMISIONES (RESTORED) --- */
+/* --- SECCIÓN DE COMISIONES --- */
 .commissions-section {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
@@ -194,19 +179,42 @@ main { width: 100%; padding-top: 80px; }
     margin: 50px auto;
     width: 90%;
     max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
 }
 
 .status-wrapper {
+    margin-top: 25px; 
+    margin-bottom: 45px;
     background: rgba(0, 0, 0, 0.4); 
     padding: 8px 25px;
     border-radius: 50px; 
     display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.status-open { color: #3dfc89 !important; }
-.status-closed { color: #ff5e4d !important; }
+.status-open { color: #3dfc89 !important; text-shadow: 0 0 12px rgba(61, 252, 137, 0.6); }
+.status-closed { color: #ff5e4d !important; text-shadow: 0 0 12px rgba(255, 94, 77, 0.6); }
 
-/* --- LIGHTBOX (CRÍTICO PARA JS) --- */
+.comm-card {
+    display: flex;
+    width: 100%;
+    max-width: 750px;
+    height: 160px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
+}
+
+.comm-preview-container { width: 220px; min-width: 220px; height: 100%; background: #000; overflow: hidden; }
+.preview-img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: 0.4s; }
+.preview-img:hover { transform: scale(1.1); }
+
+/* --- LIGHTBOX --- */
 .lightbox {
     display: none;
     position: fixed;
@@ -218,8 +226,127 @@ main { width: 100%; padding-top: 80px; }
 
 #lightbox-img { max-width: 90%; max-height: 90%; object-fit: contain; }
 
+.lb-nav-container {
+    position: absolute;
+    top: 50%; width: 100%;
+    display: flex; justify-content: space-between;
+    padding: 0 30px; transform: translateY(-50%);
+    pointer-events: none; z-index: 100001;
+}
+
+.lb-arrow {
+    font-size: 60px; color: rgba(255, 255, 255, 0.4);
+    cursor: pointer; pointer-events: auto;
+    transition: 0.3s;
+}
+
+.lb-arrow:hover { color: #3dfc89; text-shadow: 0 0 15px rgba(61, 252, 137, 0.6); }
+
+/* --- BOTONES GENERALES --- */
+.main-contact-btn {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 18px 50px;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: 2px solid #333;
+    border-radius: 12px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.main-contact-btn:hover { border-color: #ff4d4d; box-shadow: 0 0 25px rgba(255, 77, 77, 0.4); transform: translateY(-3px); }
+
+/* --- NUEVA SECCIÓN PATREON (AÑADIDA) --- */
+.patreon-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.patreon-card {
+    width: 380px;
+    min-height: 480px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+}
+
+.patreon-card:hover { transform: translateY(-12px); filter: brightness(1.1); }
+
+/* TIER 1: Celeste y Verde Suave */
+.tier-patreon-1 {
+    background: linear-gradient(to bottom, rgba(178, 235, 242, 0.4), rgba(165, 214, 167, 0.4));
+    border: 2px solid #80deea;
+    box-shadow: 0 0 20px rgba(128, 222, 234, 0.3);
+}
+
+/* TIER 2: Cielo Nocturno Claro */
+.tier-patreon-2 {
+    background: linear-gradient(to bottom, rgba(41, 128, 185, 0.4), rgba(109, 213, 250, 0.4));
+    border: 2px solid #6dd5fa;
+    box-shadow: 0 0 20px rgba(109, 213, 250, 0.3);
+}
+
+/* TIER 3: Universo Morado */
+.tier-patreon-3 {
+    background: linear-gradient(to bottom, rgba(43, 8, 82, 0.5), rgba(138, 43, 226, 0.4), rgba(75, 0, 130, 0.5));
+    border: 2px solid #8a2be2;
+    box-shadow: 0 0 25px rgba(138, 43, 226, 0.4);
+}
+
+.patreon-content {
+    padding: 35px 30px;
+    color: #ffffff;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.patreon-content h3 { font-size: 1.5rem; margin-bottom: 10px; text-shadow: 1px 1px 4px rgba(0,0,0,0.4); }
+
+.patreon-price { font-size: 2.8rem; font-weight: 700; color: #ffffff; margin-bottom: 10px; }
+.patreon-price span { font-size: 1rem; opacity: 0.9; margin-left: 5px; }
+
+.patreon-desc { color: #ffffff; font-size: 0.95rem; margin-bottom: 25px; font-style: italic; }
+
+.patreon-benefits { 
+    list-style: none; font-size: 0.9rem; 
+    border-top: 1px solid rgba(255,255,255,0.3); padding-top: 20px; 
+}
+
+.patreon-benefits li { margin-bottom: 12px; position: relative; padding-left: 25px; }
+.patreon-benefits li::before { content: "✦"; position: absolute; left: 0; color: #fff; }
+
+/* --- ABYSSAL BUTTON --- */
+.abyssal-container { text-align: center; margin-top: 25px; padding-top: 15px; }
+.abyssal-button {
+    display: inline-block; background-color: #000; color: #32612e;
+    padding: 10px 30px; text-decoration: none; font-family: 'Courier New', monospace;
+    font-size: 0.9rem; font-weight: bold; text-transform: uppercase;
+    letter-spacing: 4px; border: 1px solid #1a2e18; border-radius: 5px; transition: 0.3s;
+}
+.abyssal-button:hover { color: #3dfc89; box-shadow: 0 0 15px rgba(61, 252, 137, 0.2); transform: translateY(-2px); }
+
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-    .tier-card { width: 100%; max-width: 350px; }
     .about-container { flex-direction: column; text-align: center; }
+    .about-image-side { flex: 0 0 auto; max-width: 180px; }
+    .patreon-card { width: 100%; max-width: 350px; min-height: auto; }
+    .comm-card { flex-direction: column; height: auto; }
+    .comm-preview-container { width: 100%; height: 200px; }
 }
