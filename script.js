@@ -17,7 +17,7 @@ const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Cloud.png"
 ];
 
-const commissionStatus = "open"; 
+const commissionStatus = "closed"; 
 
 // Variables globales para la galería
 let currentGallery = []; 
