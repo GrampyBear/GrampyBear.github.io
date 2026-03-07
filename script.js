@@ -9,7 +9,7 @@ const welcomePhrases = [
     "Beautiful weather, isn't it?", "Make yourself at home in this cold season.",
     "Thanks for stopping by!", "ようこそ", "モノクロームのキャンバス？",
     "愛は残酷だ", "Winter is beautiful", "Watch out, the ink is still wet.",
-    "A fat dragon and a fat bear", "Love is Cruel", "物語의 시작", "Im Fat hehe"
+    "A fat dragon, a fat bear, a fat ram", "Love is Cruel", "物語의 시작", "Im Fat hehe"
 ];
 
 const favicons = [
@@ -17,7 +17,7 @@ const favicons = [
     "https://raw.githubusercontent.com/GrampyBear/GrampyBear.github.io/8d9dcff52f43b28b0fc3a6139f9a305339bc1e51/Cloud.png"
 ];
 
-const commissionStatus = "closed"; 
+const commissionStatus = "open"; 
 
 // Variables globales para la galería
 let currentGallery = []; 
