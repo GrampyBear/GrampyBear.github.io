@@ -1,5 +1,3 @@
-// --- CONFIGURACIÓN DE COLORES ---
-// Cada fase define los 3 colores (Arriba, Medio, Abajo)
 const dayCycle = [
     { time: 0,    name: "Midnight",  colors: ["#010105", "#0a0a2a", "#000000"] },
     { time: 300,  name: "Dawn",      colors: ["#2c3e50", "#fd746c", "#ff9068"] },
@@ -7,36 +5,30 @@ const dayCycle = [
     { time: 720,  name: "Midday",    colors: ["#1c92d2", "#f2fcfe", "#1c92d2"] },
     { time: 960,  name: "Afternoon", colors: ["#4facfe", "#00f2fe", "#fdfbfb"] },
     { time: 1080, name: "Sunset",    colors: ["#e65245", "#e43a15", "#f093fb"] },
-    { time: 1200, name: "Dusk",      colors: ["#201936", "#4352a5", "#1c0c22"] }, // Dusk más profundo
+    { time: 1200, name: "Dusk",      colors: ["#201936", "#4352a5", "#1c0c22"] },
     { time: 1350, name: "Night",     colors: ["#050505", "#0b1026", "#1c1c1c"] },
     { time: 1440, name: "Midnight",  colors: ["#010105", "#0a0a2a", "#000000"] } 
 ];
 
-// Función optimizada para mezclar colores RGB
 function lerpColor(c1, c2, f) {
     const r1 = parseInt(c1.substring(1, 3), 16);
     const g1 = parseInt(c1.substring(3, 5), 16);
     const b1 = parseInt(c1.substring(5, 7), 16);
-
     const r2 = parseInt(c2.substring(1, 3), 16);
     const g2 = parseInt(c2.substring(3, 5), 16);
     const b2 = parseInt(c2.substring(5, 7), 16);
-
     const r = Math.round(r1 + (r2 - r1) * f);
     const g = Math.round(g1 + (g2 - g1) * f);
     const b = Math.round(b1 + (b2 - b1) * f);
-
     return `rgb(${r}, ${g}, ${b})`;
 }
 
 function updateSky() {
     const now = new Date();
-    // Cálculo preciso: horas + minutos + (segundos / 60)
     const preciseMinutes = (now.getHours() * 60) + now.getMinutes() + (now.getSeconds() / 60);
 
-    document.getElementById('clock').innerText = now.toLocaleTimeString();
+    document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
 
-    // Encontrar segmento actual
     let start = dayCycle[0];
     let end = dayCycle[1];
 
@@ -48,29 +40,22 @@ function updateSky() {
         }
     }
 
-    // Factor de mezcla (0 a 1) entre el inicio y fin de la fase actual
     const factor = (preciseMinutes - start.time) / (end.time - start.time);
-
-    // Interpolar los 3 puntos del degradado
     const cTop = lerpColor(start.colors[0], end.colors[0], factor);
     const cMid = lerpColor(start.colors[1], end.colors[1], factor);
     const cBot = lerpColor(start.colors[2], end.colors[2], factor);
 
-    const skyLayer = document.getElementById('sky-layer');
-    skyLayer.style.background = `linear-gradient(180deg, ${cTop} 0%, ${cMid} 50%, ${cBot} 100%)`;
-
+    document.getElementById('sky-layer').style.background = `linear-gradient(180deg, ${cTop} 0%, ${cMid} 50%, ${cBot} 100%)`;
     document.getElementById('phase-tag').innerText = start.name;
 
-    // Control de visibilidad de estrellas (entre 8 PM y 6 AM)
     const hour = now.getHours();
     const isDark = (hour >= 20 || hour <= 6);
     document.getElementById('stars-container').style.opacity = isDark ? "0.6" : "0";
 }
 
-// Generación de estrellas
 function createStars() {
     const container = document.getElementById('stars-container');
-    container.innerHTML = ''; // Limpiar para evitar duplicados
+    container.innerHTML = '';
     for (let i = 0; i < 150; i++) {
         const star = document.createElement('div');
         star.className = 'star';
@@ -83,7 +68,6 @@ function createStars() {
     }
 }
 
-// Generación de hojas/nieve con viento
 function createLeaf() {
     const container = document.getElementById('leaf-container');
     const leaf = document.createElement('div');
@@ -92,19 +76,22 @@ function createLeaf() {
     const month = new Date().getMonth();
     let color, season;
 
-    // Definición estacional
     if (month >= 2 && month <= 4) { color = "#a8e6cf"; season = "SPRING"; }
     else if (month >= 5 && month <= 7) { color = "#32a852"; season = "SUMMER"; }
     else if (month >= 8 && month <= 10) { color = "#d97a1a"; season = "AUTUMN"; }
-    else { color = "#ffffff"; season = "WINTER"; } // Invierno
+    else { color = "#ffffff"; season = "WINTER"; }
 
     document.getElementById('season-tag').innerText = season;
 
+    const size = Math.random() * 6 + 4;
+    leaf.style.width = `${size}px`;
+    leaf.style.height = `${size}px`;
     leaf.style.background = color;
     leaf.style.left = Math.random() * 100 + "vw";
+    leaf.style.transform = `rotate(${Math.random() * 360}deg)`;
     
     const wind = (Math.random() - 0.5) * 600; 
-    const duration = 10 + Math.random() * 10;
+    const duration = 8 + Math.random() * 7;
     
     leaf.style.setProperty('--w', `${wind}px`);
     leaf.style.animationDuration = `${duration}s`;
@@ -116,7 +103,11 @@ function createLeaf() {
 // Inicialización
 createStars();
 updateSky();
-setInterval(updateSky, 1000); // Actualiza el color cada segundo de forma fluida
-setInterval(createLeaf, 700);
+setInterval(updateSky, 1000);
+setInterval(createLeaf, 600);
 
-document.getElementById('exit-btn').onclick = () => window.location.href = "index.html";
+document.getElementById('exit-btn').onclick = () => {
+    document.body.style.opacity = "0";
+    document.body.style.transition = "opacity 0.5s";
+    setTimeout(() => window.location.href = "index.html", 500);
+};
