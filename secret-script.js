@@ -1,12 +1,38 @@
 const dayCycle = [
+    // --- MADRUGADA PROFUNDA ---
     { time: 0,    name: "Midnight",  colors: ["#010105", "#0a0a2a", "#000000"] },
-    { time: 300,  name: "Dawn",      colors: ["#2c3e50", "#fd746c", "#ff9068"] },
+    { time: 180,  name: "Midnight",  colors: ["#02020a", "#05051a", "#020205"] }, // Empieza a aclararse apenas
+
+    // --- DAWN (Amanecer) ---
+    { time: 300,  name: "Dawn",      colors: ["#16222a", "#3a6073", "#16222a"] }, // Pre-alba (azules fríos)
+    { time: 360,  name: "Dawn",      colors: ["#2c3e50", "#fd746c", "#ff9068"] }, // Alba clásica (naranjas)
+    { time: 420,  name: "Dawn",      colors: ["#4b6cb7", "#182848", "#ffd194"] }, // Post-alba (dorados rápidos)
+
+    // --- MORNING ---
     { time: 480,  name: "Morning",   colors: ["#2193b0", "#6dd5ed", "#e2e2e2"] },
+    { time: 600,  name: "Morning",   colors: ["#2980b9", "#ffffff", "#6dd5ed"] }, // Mañana clara y brillante
+
+    // --- MIDDAY (Cénit) ---
     { time: 720,  name: "Midday",    colors: ["#1c92d2", "#f2fcfe", "#1c92d2"] },
+    { time: 840,  name: "Midday",    colors: ["#4ca1af", "#c4e0e5", "#4ca1af"] }, // El sol empieza a bajar
+
+    // --- AFTERNOON ---
     { time: 960,  name: "Afternoon", colors: ["#4facfe", "#00f2fe", "#fdfbfb"] },
-    { time: 1080, name: "Sunset",    colors: ["#e65245", "#e43a15", "#f093fb"] },
+    { time: 1020, name: "Afternoon", colors: ["#5f2c82", "#49a09d", "#ffffff"] }, // Tarde suave, tonos turquesa/violeta
+
+    // --- SUNSET (Atardecer) ---
+    { time: 1080, name: "Sunset",    colors: ["#e65245", "#e43a15", "#f093fb"] }, // Fuego
+    { time: 1120, name: "Sunset",    colors: ["#8e2de2", "#4a00e0", "#ff512f"] }, // Atardecer eléctrico (púrpuras)
+    { time: 1160, name: "Sunset",    colors: ["#2c3e50", "#3498db", "#e74c3c"] }, // Últimos rayos rojos
+
+    // --- DUSK (Crepúsculo) ---
     { time: 1200, name: "Dusk",      colors: ["#201936", "#4352a5", "#1c0c22"] },
+    { time: 1260, name: "Dusk",      colors: ["#141e30", "#243b55", "#000000"] }, // Azul naval profundo
+    { time: 1300, name: "Dusk",      colors: ["#0f0c29", "#302b63", "#24243e"] }, // El cielo se vuelve cósmico
+
+    // --- NIGHT ---
     { time: 1350, name: "Night",     colors: ["#050505", "#0b1026", "#1c1c1c"] },
+    { time: 1400, name: "Night",     colors: ["#000000", "#020205", "#000000"] }, // Oscuridad total
     { time: 1440, name: "Midnight",  colors: ["#010105", "#0a0a2a", "#000000"] } 
 ];
 
