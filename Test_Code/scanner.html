@@ -2,78 +2,110 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>NASA API Capability Scanner</title>
+    <title>NASA Data Structure Scanner</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #0a0a0c; color: #94a3b8; font-family: monospace; }
-        .status-ok { color: #22c55e; }
-        .status-error { color: #ef4444; }
-        .status-pending { color: #eab308; }
-        pre { font-size: 0.7rem; background: #111; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        body { background: #02040a; color: #71717a; font-family: 'Courier New', Courier, monospace; }
+        .success-glow { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); border-color: #22c55e; }
+        .data-tree { font-size: 0.75rem; color: #4ade80; background: #09090b; padding: 10px; border-radius: 4px; margin-top: 10px; }
     </style>
 </head>
-<body class="p-8">
-    <div class="max-w-4xl mx-auto">
-        <h1 class="text-2xl font-bold text-white mb-2">SISTEMA DE ESCANEO DE CAPACIDADES NASA</h1>
-        <p class="text-xs mb-8 border-b border-slate-800 pb-4 text-slate-500 underline">ESCANEO DE ENDPOINTS DISPONIBLES V1.0</p>
+<body class="p-6">
+    <div class="max-w-5xl mx-auto">
+        <header class="mb-10 border-b border-zinc-800 pb-4 text-center">
+            <h1 class="text-2xl font-bold text-zinc-100 uppercase tracking-widest">NASA_DATA_AUTO_DETECTOR</h1>
+            <p class="text-[10px] text-zinc-500 mt-1">Sonda de inspección de arquitectura de datos</p>
+        </header>
 
-        <div class="mb-6 flex gap-4">
-            <input id="api-key" type="password" placeholder="PEGA TU API KEY AQUÍ" 
-                   class="bg-slate-900 border border-slate-700 p-2 rounded w-full text-white outline-none focus:border-blue-500">
-            <button onclick="startScan()" class="bg-blue-600 text-white px-6 py-2 rounded font-bold hover:bg-blue-700">INICIAR ESCANEO</button>
+        <div class="flex gap-3 mb-8">
+            <input id="api-key" type="password" placeholder="INGRESA TU API KEY" 
+                   class="bg-zinc-900 border border-zinc-700 p-3 rounded w-full text-zinc-100 outline-none focus:success-glow transition-all">
+            <button onclick="probeAll()" class="bg-zinc-100 text-black px-8 py-3 rounded font-black hover:bg-zinc-300 transition-colors">INICIAR_SONDEO</button>
         </div>
 
-        <div id="results" class="space-y-4">
+        <div id="results-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
             </div>
     </div>
 
     <script>
-        const ENDPOINTS = [
-            { name: "APOD", url: "https://api.nasa.gov/planetary/apod" },
-            { name: "NEOWS (Asteroides)", url: "https://api.nasa.gov/neo/rest/v1/feed?start_date=2026-04-01&end_date=2026-04-01" },
-            { name: "MARS ROVER (Curiosity)", url: "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1" },
-            { name: "EPIC (Tierra)", url: "https://api.nasa.gov/EPIC/api/natural" },
-            { name: "DONKI (Clima Espacial)", url: "https://api.nasa.gov/DONKI/CME?startDate=2026-01-01" },
-            { name: "EONET (Desastres)", url: "https://eonet.gsfc.nasa.gov/api/v3/events" }, // No requiere siempre Key, pero es bueno testear
-            { name: "TECHPORT", url: "https://api.nasa.gov/techport/api/projects" },
-            { name: "INSIGHT (Clima Marte)", url: "https://api.nasa.gov/insight_weather/?feedtype=json&ver=1.0" }
+        // Lista completa según tu imagen para verificar qué hay dentro de cada una
+        const NASA_ENDPOINTS = [
+            { id: 'apod', name: 'APOD', url: 'https://api.nasa.gov/planetary/apod' },
+            { id: 'neows', name: 'Asteroids NeoWs', url: 'https://api.nasa.gov/neo/rest/v1/feed?start_date=2026-04-01&end_date=2026-04-01' },
+            { id: 'donki', name: 'DONKI', url: 'https://api.nasa.gov/DONKI/notifications?startDate=2026-01-01' },
+            { id: 'epic', name: 'EPIC', url: 'https://api.nasa.gov/EPIC/api/natural' },
+            { id: 'exoplanet', name: 'Exoplanet', url: 'https://api.nasa.gov/exoplanetadmc/api/query?table=exoplanets&format=json' },
+            { id: 'insight', name: 'InSight', url: 'https://api.nasa.gov/insight_weather/?feedtype=json&ver=1.0' },
+            { id: 'techport', name: 'Techport', url: 'https://api.nasa.gov/techport/api/projects' },
+            { id: 'tle', name: 'TLE API', url: 'https://api.nasa.gov/tle/api/stations/25544' },
+            { id: 'mars_rover', name: 'Mars Rover Photos', url: 'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1' }
         ];
 
-        async function startScan() {
+        async function probeAll() {
             const key = document.getElementById('api-key').value;
-            const container = document.getElementById('results');
-            
-            if(!key) return alert("Por favor, ingresa tu API Key");
-            container.innerHTML = ""; // Limpiar
+            const grid = document.getElementById('results-grid');
+            if(!key) return alert("API Key requerida.");
+            grid.innerHTML = "";
 
-            for (const ep of ENDPOINTS) {
+            for (const ep of NASA_ENDPOINTS) {
                 const card = document.createElement('div');
-                card.className = "bg-slate-900 border border-slate-800 p-4 rounded-lg";
-                card.innerHTML = `<h2 class="font-bold text-white">${ep.name}</h2><p class="status-pending text-xs">Testeando...</p>`;
-                container.appendChild(card);
+                card.className = "bg-zinc-900/50 border border-zinc-800 p-5 rounded-lg transition-all duration-500";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="text-zinc-200 font-bold">${ep.name}</h3>
+                        <span class="status-tag text-[10px] px-2 py-0.5 rounded bg-zinc-800 uppercase">Esperando...</span>
+                    </div>
+                    <div class="inspector-content"></div>
+                `;
+                grid.appendChild(card);
 
                 try {
-                    const separator = ep.url.includes('?') ? '&' : '?';
-                    const response = await fetch(`${ep.url}${separator}api_key=${key}`);
+                    const connector = ep.url.includes('?') ? '&' : '?';
+                    const response = await fetch(`${ep.url}${connector}api_key=${key}`);
                     const data = await response.json();
 
                     if (response.ok) {
-                        card.querySelector('p').className = "status-ok text-xs font-bold";
-                        card.querySelector('p').innerText = "✓ ACCESO CONCEDIDO";
+                        card.classList.add('success-glow', 'bg-zinc-900');
+                        card.querySelector('.status-tag').innerText = "ONLINE";
+                        card.querySelector('.status-tag').className = "status-tag text-[10px] px-2 py-0.5 rounded bg-green-900 text-green-300 font-bold";
                         
-                        // Detectar qué hay dentro automáticamente
-                        const keysFound = Object.keys(Array.isArray(data) ? data[0] || {} : data).slice(0, 8);
-                        const info = document.createElement('pre');
-                        info.innerText = `Campos detectados: ${keysFound.join(', ')}...\n\nData de ejemplo: ${JSON.stringify(data, null, 2).substring(0, 200)}...`;
-                        card.appendChild(info);
+                        // AUTO-DETECCIÓN DE ESTRUCTURA
+                        const inspector = card.querySelector('.inspector-content');
+                        const keys = extractKeys(data);
+                        
+                        inspector.innerHTML = `
+                            <p class="text-[11px] text-zinc-500 mb-2 italic underline text-blue-400 cursor-pointer" onclick="this.nextSibling.classList.toggle('hidden')">Ver mapa de llaves JSON ▼</p>
+                            <div class="data-tree font-mono text-[10px] leading-relaxed">
+                                <strong>ESQUEMA DETECTADO:</strong><br>
+                                ${keys.join(' | ')}
+                            </div>
+                            <div class="mt-3 text-[9px] text-zinc-600">
+                                <strong>Muestra (Raw):</strong> ${JSON.stringify(data).substring(0, 80)}...
+                            </div>
+                        `;
                     } else {
-                        throw new Error(data.error?.message || "Error desconocido");
+                        throw new Error("Acceso denegado");
                     }
                 } catch (err) {
-                    card.querySelector('p').className = "status-error text-xs font-bold";
-                    card.querySelector('p').innerText = `✕ FALLIDO: ${err.message}`;
+                    card.querySelector('.status-tag').innerText = "FAILED / NO_DATA";
+                    card.querySelector('.status-tag').className = "status-tag text-[10px] px-2 py-0.5 rounded bg-red-900/30 text-red-400 font-bold";
                 }
             }
+        }
+
+        // Función mágica para detectar qué información hay dentro sin saberlo de antemano
+        function extractKeys(obj) {
+            let sample = obj;
+            // Si es un array o tiene una propiedad principal que es array, vamos al primer hijo
+            if (Array.isArray(obj)) sample = obj[0];
+            else if (obj.photos) sample = obj.photos[0]; // Caso Marte
+            else if (obj.near_earth_objects) sample = Object.values(obj.near_earth_objects)[0][0]; // Caso Asteroides
+            else if (obj.projects) sample = obj.projects[0]; // Caso Techport
+
+            if (typeof sample === 'object' && sample !== null) {
+                return Object.keys(sample);
+            }
+            return ["Dato simple detectado"];
         }
     </script>
 </body>
