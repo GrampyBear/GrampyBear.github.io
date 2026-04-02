@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +25,7 @@
     <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-end border-b border-cyan-900/30 pb-4">
         <div>
             <h1 class="text-2xl font-black text-cyan-400 tracking-tighter">DSMS // DEEP_SPACE_MONITOR_V3</h1>
-            <p class="text-[10px] text-slate-500 font-bold">ESTADO: <span class="text-green-500 animate-pulse">ONLINE</span> | SOURCE: NASA_DATA_HUB</p>
+            <p class="text-[10px] text-slate-500 font-bold">STATUS: <span class="text-green-500 animate-pulse">ONLINE</span> | SOURCE: NASA_DATA_HUB</p>
         </div>
         <div class="text-right mt-4 md:mt-0">
             <p id="system-clock" class="text-sm font-bold text-cyan-800"></p>
@@ -42,7 +42,7 @@
                     <span id="apod-date-label" class="text-[10px] text-slate-600 font-bold"></span>
                 </div>
                 <div id="main-display" class="w-full bg-black rounded border border-cyan-900/20 flex items-center justify-center min-h-[400px]">
-                    <div class="text-cyan-950 animate-pulse text-xs">RECOLECTANDO_FOTONES...</div>
+                    <div class="text-cyan-950 animate-pulse text-xs">COLLECTING_PHOTONS...</div>
                 </div>
                 <div class="mt-4">
                     <h2 id="display-title" class="text-lg font-bold text-cyan-100 uppercase tracking-tight"></h2>
@@ -53,7 +53,7 @@
             <div class="monitor-border rounded-lg p-4">
                 <span class="data-label text-indigo-400">QUERY_ENGINE: NASA_LIBRARY</span>
                 <div class="flex gap-2 mt-2">
-                    <input id="search-input" type="text" placeholder="ENTRADA DE DATOS: GALAXY, NEBULA..." class="bg-black/50 border border-indigo-900/50 p-3 w-full text-xs text-indigo-300 focus:outline-none focus:border-indigo-500 uppercase tracking-widest">
+                    <input id="search-input" type="text" placeholder="INPUT DATA: GALAXY, NEBULA..." class="bg-black/50 border border-indigo-900/50 p-3 w-full text-xs text-indigo-300 focus:outline-none focus:border-indigo-500 uppercase tracking-widest">
                     <button onclick="searchArchive()" class="bg-indigo-950 border border-indigo-500 text-indigo-400 px-6 py-1 text-xs font-bold hover:bg-indigo-500 hover:text-white transition-all">SCAN</button>
                 </div>
                 <div id="search-grid" class="grid grid-cols-4 gap-3 mt-4"></div>
@@ -63,9 +63,9 @@
         <aside class="lg:col-span-4 space-y-6">
             
             <div class="monitor-border rounded-lg p-4 border-l-2 border-red-900/50">
-                <span class="data-label text-red-500 italic">ALERTA_SOLAR: DONKI_STREAM</span>
+                <span class="data-label text-red-500 italic">SOLAR_FLARE_ALERT: DONKI_STREAM</span>
                 <div id="donki-log" class="mt-3 space-y-3 text-[10px] h-32 overflow-y-auto pr-2">
-                    <p class="text-slate-600 italic">Sincronizando clima solar...</p>
+                    <p class="text-slate-600 italic">Syncing solar weather...</p>
                 </div>
             </div>
 
@@ -75,14 +75,14 @@
             </div>
 
             <div class="monitor-border rounded-lg p-4 border-t-2 border-orange-900/50">
-                <span class="data-label text-orange-600">TELEMETRÍA: INSIGHT_MARS</span>
+                <span class="data-label text-orange-600">TELEMETRY: INSIGHT_MARS</span>
                 <div id="insight-data" class="mt-2 text-[10px] font-bold text-orange-300">
-                    <p class="animate-pulse">RECUPERANDO SOL_KEYS...</p>
+                    <p class="animate-pulse">RETRIEVING SOL_KEYS...</p>
                 </div>
             </div>
 
             <div class="monitor-border rounded-lg p-4 h-40 flex flex-col bg-black/40">
-                <span class="data-label text-green-700">KERNEL_LOG_EVENTOS</span>
+                <span class="data-label text-green-700">KERNEL_EVENT_LOG</span>
                 <div id="system-log" class="mt-2 text-[9px] text-green-900 font-mono overflow-y-auto flex-grow lowercase">
                     > init_boot_sequence...<br>
                     > connect_nasa_gateways...<br>
@@ -90,6 +90,10 @@
             </div>
         </aside>
     </main>
+
+    <footer class="max-w-7xl mx-auto mt-8 text-center text-[10px] text-slate-700 border-t border-slate-900 pt-4">
+        NASA_DATA_STREAM // RESTRICTED_ACCESS_V.2026 // DSMS_TERMINAL
+    </footer>
 
     <script>
         const API_KEY = 'e2oiz3ndkMnUe1IsKmGbvKduWADLjXkB8DMTDlRI';
@@ -101,7 +105,7 @@
         }
 
         setInterval(() => {
-            document.getElementById('system-clock').innerText = new Date().toLocaleString();
+            document.getElementById('system-clock').innerText = new Date().toLocaleString('en-US');
         }, 1000);
 
         // 1. APOD
@@ -121,7 +125,7 @@
             } catch (err) { log("error: apod_gateway_fail."); }
         }
 
-        // 2. DONKI (Clima Espacial)
+        // 2. DONKI
         async function loadDONKI() {
             log("request: space_weather_alerts...");
             try {
@@ -139,7 +143,7 @@
             } catch (e) { log("error: donki_timeout."); }
         }
 
-        // 3. NEOWS (Asteroides)
+        // 3. NEOWS
         async function loadAsteroids() {
             const today = new Date().toISOString().split('T')[0];
             log(`scan: neows_radar_date: ${today}...`);
@@ -157,10 +161,10 @@
                 });
                 document.getElementById('asteroid-log').innerHTML = html;
                 log("sync: radar_neows_updated.");
-            } catch (err) { log("error: radar_distruption."); }
+            } catch (err) { log("error: radar_disruption."); }
         }
 
-        // 4. INSIGHT (Marte)
+        // 4. INSIGHT
         async function loadInSight() {
             log("ping: insight_lander...");
             try {
@@ -170,7 +174,7 @@
                 document.getElementById('insight-data').innerHTML = `
                     <div class="flex justify-between"><span>SOL_CURRENT:</span><span class="text-orange-500">${lastSol}</span></div>
                     <div class="flex justify-between"><span>STATUS:</span><span class="text-green-700">OPERATIONAL</span></div>
-                    <div class="text-[8px] text-slate-600 mt-2 uppercase tracking-tighter">Sensores activos: ATMO, WIND, SEIS</div>
+                    <div class="text-[8px] text-slate-600 mt-2 uppercase tracking-tighter">Active Sensors: ATMO, WIND, SEIS</div>
                 `;
                 log("sync: insight_telemetry_ok.");
             } catch (e) { log("error: insight_connection_lost."); }
