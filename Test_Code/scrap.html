@@ -3,103 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NASA Dashboard Web</title>
+    <title>NASA Deep Space Command</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #020617; color: #e2e8f0; }
+        .glass { background: rgba(30, 41, 59, 0.5); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); }
+        .neon-border-blue { border-left: 4px solid #3b82f6; }
+        .neon-border-purple { border-left: 4px solid #a855f7; }
+        .neon-border-orange { border-left: 4px solid #f97316; }
+    </style>
 </head>
-<body class="bg-slate-900 text-white font-sans">
+<body class="min-h-screen font-sans">
 
-    <header class="p-6 border-b border-slate-700 text-center">
-        <h1 class="text-3xl font-bold tracking-widest text-blue-400">NASA EXPLORER</h1>
-        <p class="text-slate-400">Datos en tiempo real desde el espacio</p>
+    <header class="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+        <div>
+            <h1 class="text-2xl font-black tracking-tighter text-blue-400">NASA_OS_INTEL</h1>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-slate-500">Deep Space Monitoring System</p>
+        </div>
+        <div id="status-light" class="flex items-center gap-2 text-[10px] text-green-400 font-mono">
+            <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            </span>
+            CONECTADO_API
+        </div>
     </header>
 
-    <main class="p-4 md:p-10 space-y-12">
-
-        <section id="apod-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
-            <h2 class="text-xl font-semibold mb-4 border-l-4 border-blue-500 pl-2">Imagen Astronómica del Día</h2>
-            <div id="apod-content" class="space-y-4">
-                <p class="animate-pulse">Cargando maravilla espacial...</p>
-            </div>
-        </section>
-
-        <section id="neo-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
-            <h2 class="text-xl font-semibold mb-4 border-l-4 border-red-500 pl-2">Asteroides Cercanos (Hoy)</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left">
-                    <thead>
-                        <tr class="text-slate-400 border-b border-slate-700">
-                            <th class="py-2">Nombre</th>
-                            <th>Diámetro (m)</th>
-                            <th>¿Peligroso?</th>
-                        </tr>
-                    </thead>
-                    <tbody id="neo-table-body">
-                        </tbody>
-                </table>
-            </div>
-        </section>
-
-        <section id="mars-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
-            <h2 class="text-xl font-semibold mb-4 border-l-4 border-orange-500 pl-2">Fotos de Marte (Curiosity)</h2>
-            <div id="mars-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <main class="max-w-7xl mx-auto p-4 lg:p-8 grid grid-cols-1 lg:grid-cols-4 gap-6">
+        
+        <div class="lg:col-span-3 space-y-6">
+            
+            <section class="glass p-6 rounded-2xl">
+                <div class="flex justify-between items-end mb-4">
+                    <h2 class="text-xl font-bold text-slate-100 italic">01. Objeto del Día (APOD)</h2>
+                    <span id="apod-date" class="text-xs font-mono text-slate-500"></span>
                 </div>
-        </section>
+                <div id="apod-visual" class="rounded-xl overflow-hidden mb-4 bg-slate-800 min-h-[300px]">
+                    </div>
+                <h3 id="apod-title" class="text-lg font-bold text-blue-300"></h3>
+                <p id="apod-desc" class="mt-2 text-sm text-slate-400 leading-relaxed"></p>
+            </section>
 
+            <section class="glass p-6 rounded-2xl">
+                <h2 class="text-xl font-bold text-slate-100 mb-4 italic">02. Archivo de Cielo Profundo</h2>
+                <div class="flex gap-2 mb-6">
+                    <input id="search-query" type="text" placeholder="Nebula, Black Hole, Pulsar..." 
+                           class="bg-slate-950 border border-slate-700 p-3 rounded-lg w-full text-blue-400 font-mono">
+                    <button onclick="searchNASA()" class="bg-blue-600 hover:bg-blue-500 px-6 py-2 rounded-lg font-bold transition-all">SCAN</button>
+                </div>
+                <div id="search-results" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    </div>
+            </section>
+        </div>
+
+        <div class="space-y-6">
+            
+            <section class="glass p-5 rounded-2xl neon-border-purple">
+                <h2 class="text-xs font-black uppercase tracking-widest text-purple-400 mb-3">Mundos Extrasolares</h2>
+                <div id="exoplanet-box" class="space-y-2">
+                    </div>
+                <button onclick="renderExoplanet()" class="mt-4 text-[10px] text-purple-300 border border-purple-500/30 px-2 py-1 rounded hover:bg-purple-500/20 w-full transition-all">ROTAR OBJETIVO</button>
+            </section>
+
+            <section class="glass p-5 rounded-2xl neon-border-orange">
+                <h2 class="text-xs font-black uppercase tracking-widest text-orange-400 mb-3">Telemetry: MARS ROVER</h2>
+                <div id="mars-grid" class="grid grid-cols-2 gap-2">
+                    </div>
+                <p class="text-[9px] mt-2 text-slate-500 font-mono italic text-center">SOL: 1000 | CAM: HAZCAM</p>
+            </section>
+
+            <section class="glass p-5 rounded-2xl neon-border-blue">
+                <h2 class="text-xs font-black uppercase tracking-widest text-blue-400 mb-3">Radar Neows (Cercanos)</h2>
+                <div id="asteroid-list" class="space-y-3">
+                    </div>
+            </section>
+
+        </div>
     </main>
 
     <script>
-        const API_KEY = 'e2oiz3ndkMnUe1IsKmGbvKduWADLjXkB8DMTDlRI'; // <--- PEGA TU CLAVE AQUÍ
+        // CONFIGURACIÓN
+        const API_KEY = 'TU_API_KEY_AQUI'; // <--- PEGA TU CLAVE AQUÍ
 
-        // 1. Fetch APOD
-        async function getAPOD() {
+        // 1. CARGAR APOD (CON MANEJO DE VIDEO)
+        async function fetchAPOD() {
             const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
             const data = await res.json();
-            document.getElementById('apod-content').innerHTML = `
-                <img src="${data.url}" class="w-full rounded-lg shadow-md" alt="${data.title}">
-                <h3 class="text-lg font-bold text-blue-300">${data.title}</h3>
-                <p class="text-sm text-slate-300 leading-relaxed">${data.explanation}</p>
+            
+            const visual = document.getElementById('apod-visual');
+            if(data.media_type === 'video') {
+                visual.innerHTML = `<iframe src="${data.url}" class="w-full h-[400px] rounded-lg"></iframe>`;
+            } else {
+                visual.innerHTML = `<img src="${data.url}" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-700">`;
+            }
+            
+            document.getElementById('apod-title').innerText = data.title;
+            document.getElementById('apod-desc').innerText = data.explanation.substring(0, 250) + "...";
+            document.getElementById('apod-date').innerText = data.date;
+        }
+
+        // 2. BUSCADOR DE IMÁGENES (NASA LIBRARY)
+        async function searchNASA() {
+            const q = document.getElementById('search-query').value || 'Galaxy';
+            const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
+            const data = await res.json();
+            const items = data.collection.items.slice(0, 4);
+            
+            let html = '';
+            items.forEach(item => {
+                html += `
+                    <div class="bg-slate-900 rounded-lg overflow-hidden border border-slate-800">
+                        <img src="${item.links[0].href}" class="w-full h-24 object-cover">
+                        <p class="p-2 text-[9px] font-mono truncate text-slate-400">${item.data[0].title}</p>
+                    </div>
+                `;
+            });
+            document.getElementById('search-results').innerHTML = html;
+        }
+
+        // 3. EXOPLANETAS (Lógica de Datos)
+        function renderExoplanet() {
+            const catalog = [
+                { id: "HD 189733 b", feat: "Lluvia de cristal", dist: "64.5 ly", color: "text-blue-400" },
+                { id: "55 Cancri e", feat: "Núcleo de Diamante", dist: "41 ly", color: "text-yellow-200" },
+                { id: "WASP-121b", feat: "Nubes de Hierro", dist: "850 ly", color: "text-red-400" },
+                { id: "Gliese 581g", feat: "Zona Habitable", dist: "20 ly", color: "text-green-400" }
+            ];
+            const p = catalog[Math.floor(Math.random() * catalog.length)];
+            document.getElementById('exoplanet-box').innerHTML = `
+                <div class="font-mono">
+                    <p class="text-lg font-bold ${p.color}">${p.id}</p>
+                    <p class="text-[10px] text-slate-300">Anomalía: ${p.feat}</p>
+                    <p class="text-[10px] text-slate-500">Distancia: ${p.dist}</p>
+                </div>
             `;
         }
 
-        // 2. Fetch Asteroides (NeoWs)
-        async function getAsteroids() {
+        // 4. MARTE (FOTOS REALES DEL CURIOSITY)
+        async function fetchMars() {
+            const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=${API_KEY}`);
+            const data = await res.json();
+            const photos = data.photos.slice(0, 4);
+            let html = '';
+            photos.forEach(p => {
+                html += `<img src="${p.img_src}" class="w-full h-20 object-cover rounded shadow-inner filter sepia-[.3] hover:sepia-0 transition-all">`;
+            });
+            document.getElementById('mars-grid').innerHTML = html;
+        }
+
+        // 5. RADAR DE ASTEROIDES (NEOWS)
+        async function fetchAsteroids() {
             const today = new Date().toISOString().split('T')[0];
             const res = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=${API_KEY}`);
             const data = await res.json();
-            const asteroids = data.near_earth_objects[today];
+            const list = data.near_earth_objects[today].slice(0, 3);
             
             let html = '';
-            asteroids.slice(0, 5).forEach(ast => {
-                const danger = ast.is_potentially_hazardous_asteroid ? '⚠️ SÍ' : 'Seguro';
+            list.forEach(ast => {
+                const isDanger = ast.is_potentially_hazardous_asteroid;
                 html += `
-                    <tr class="border-b border-slate-700">
-                        <td class="py-3 font-mono text-sm">${ast.name}</td>
-                        <td>${Math.round(ast.estimated_diameter.meters.estimated_diameter_max)}m</td>
-                        <td class="${ast.is_potentially_hazardous_asteroid ? 'text-red-400' : 'text-green-400'}">${danger}</td>
-                    </tr>
+                    <div class="p-2 rounded bg-slate-950/50 border border-slate-800 flex justify-between items-center">
+                        <div>
+                            <p class="text-[10px] font-bold ${isDanger ? 'text-red-400' : 'text-blue-300'}">${ast.name.replace('(','').replace(')','')}</p>
+                            <p class="text-[8px] text-slate-500">${Math.round(ast.estimated_diameter.meters.estimated_diameter_max)} metros de diámetro</p>
+                        </div>
+                        <div class="text-[10px] font-mono text-slate-400">${Math.round(ast.close_approach_data[0].relative_velocity.kilometers_per_hour)} km/h</div>
+                    </div>
                 `;
             });
-            document.getElementById('neo-table-body').innerHTML = html;
+            document.getElementById('asteroid-list').innerHTML = html;
         }
 
-        // 3. Fetch Mars Photos
-        async function getMarsPhotos() {
-            // Buscamos fotos del Sol 1000 del Curiosity
-            const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=${API_KEY}`);
-            const data = await res.json();
-            const photos = data.photos.slice(0, 6);
-            
-            let html = '';
-            photos.forEach(p => {
-                html += `<img src="${p.img_src}" class="h-40 w-full object-cover rounded-lg hover:scale-105 transition-transform cursor-pointer">`;
-            });
-            document.getElementById('mars-gallery').innerHTML = html;
-        }
-
-        // Ejecutar todo al cargar
-        getAPOD();
-        getAsteroids();
-        getMarsPhotos();
+        // INICIALIZACIÓN
+        window.onload = () => {
+            fetchAPOD();
+            searchNASA();
+            renderExoplanet();
+            fetchMars();
+            fetchAsteroids();
+        };
     </script>
 </body>
 </html>
