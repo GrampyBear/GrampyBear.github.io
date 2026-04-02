@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS // DEEP_SPACE_MONITOR_V3</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500;700&display=swap');
+        body { background-color: #020617; font-family: 'Fira Code', monospace; color: #94a3b8; }
+        .monitor-border { border: 1px solid #1e293b; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); }
+        .scanline {
+            width: 100%; height: 2px; background: rgba(34, 211, 238, 0.05);
+            position: absolute; animation: scan 8s linear infinite; pointer-events: none;
+        }
+        @keyframes scan { from { top: 0; } to { top: 100%; } }
+        .data-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.2em; font-weight: 700; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+    </style>
+</head>
+<body class="p-4 lg:p-8 overflow-x-hidden">
+    <div class="scanline"></div>
+
+    <header class="max-w-7xl mx-auto mb-8 flex flex-col md:flex-row justify-between items-end border-b border-cyan-900/30 pb-4">
+        <div>
+            <h1 class="text-2xl font-black text-cyan-400 tracking-tighter">DSMS // DEEP_SPACE_MONITOR_V3</h1>
+            <p class="text-[10px] text-slate-500 font-bold">ESTADO: <span class="text-green-500 animate-pulse">ONLINE</span> | SOURCE: NASA_DATA_HUB</p>
+        </div>
+        <div class="text-right mt-4 md:mt-0">
+            <p id="system-clock" class="text-sm font-bold text-cyan-800"></p>
+            <p class="text-[9px] text-slate-600 uppercase tracking-widest">Global Terminal Access</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <section class="lg:col-span-8 space-y-6">
+            <div class="monitor-border rounded-lg p-4 relative overflow-hidden shadow-2xl shadow-cyan-900/10">
+                <div class="flex justify-between items-center mb-3">
+                    <span class="data-label text-cyan-500">CAM_01: DEEP_SPACE_OBSERVATORY</span>
+                    <span id="apod-date-label" class="text-[10px] text-slate-600 font-bold"></span>
+                </div>
+                <div id="main-display" class="w-full bg-black rounded border border-cyan-900/20 flex items-center justify-center min-h-[400px]">
+                    <div class="text-cyan-950 animate-pulse text-xs">RECOLECTANDO_FOTONES...</div>
+                </div>
+                <div class="mt-4">
+                    <h2 id="display-title" class="text-lg font-bold text-cyan-100 uppercase tracking-tight"></h2>
+                    <p id="display-desc" class="text-[11px] text-slate-500 mt-2 leading-relaxed h-20 overflow-y-auto pr-4"></p>
+                </div>
+            </div>
+
+            <div class="monitor-border rounded-lg p-4">
+                <span class="data-label text-indigo-400">QUERY_ENGINE: NASA_LIBRARY</span>
+                <div class="flex gap-2 mt-2">
+                    <input id="search-input" type="text" placeholder="ENTRADA DE DATOS: GALAXY, NEBULA..." class="bg-black/50 border border-indigo-900/50 p-3 w-full text-xs text-indigo-300 focus:outline-none focus:border-indigo-500 uppercase tracking-widest">
+                    <button onclick="searchArchive()" class="bg-indigo-950 border border-indigo-500 text-indigo-400 px-6 py-1 text-xs font-bold hover:bg-indigo-500 hover:text-white transition-all">SCAN</button>
+                </div>
+                <div id="search-grid" class="grid grid-cols-4 gap-3 mt-4"></div>
+            </div>
+        </section>
+
+        <aside class="lg:col-span-4 space-y-6">
+            
+            <div class="monitor-border rounded-lg p-4 border-l-2 border-red-900/50">
+                <span class="data-label text-red-500 italic">ALERTA_SOLAR: DONKI_STREAM</span>
+                <div id="donki-log" class="mt-3 space-y-3 text-[10px] h-32 overflow-y-auto pr-2">
+                    <p class="text-slate-600 italic">Sincronizando clima solar...</p>
+                </div>
+            </div>
+
+            <div class="monitor-border rounded-lg p-4">
+                <span class="data-label text-cyan-600">RADAR_NEOWS: TRACKING_OBJECTS</span>
+                <div id="asteroid-log" class="mt-3 space-y-2 text-[10px]"></div>
+            </div>
+
+            <div class="monitor-border rounded-lg p-4 border-t-2 border-orange-900/50">
+                <span class="data-label text-orange-600">TELEMETRÍA: INSIGHT_MARS</span>
+                <div id="insight-data" class="mt-2 text-[10px] font-bold text-orange-300">
+                    <p class="animate-pulse">RECUPERANDO SOL_KEYS...</p>
+                </div>
+            </div>
+
+            <div class="monitor-border rounded-lg p-4 h-40 flex flex-col bg-black/40">
+                <span class="data-label text-green-700">KERNEL_LOG_EVENTOS</span>
+                <div id="system-log" class="mt-2 text-[9px] text-green-900 font-mono overflow-y-auto flex-grow lowercase">
+                    > init_boot_sequence...<br>
+                    > connect_nasa_gateways...<br>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <script>
+        const API_KEY = 'e2oiz3ndkMnUe1IsKmGbvKduWADLjXkB8DMTDlRI';
+
+        function log(msg) {
+            const logElement = document.getElementById('system-log');
+            logElement.innerHTML += `> ${msg}<br>`;
+            logElement.scrollTop = logElement.scrollHeight;
+        }
+
+        setInterval(() => {
+            document.getElementById('system-clock').innerText = new Date().toLocaleString();
+        }, 1000);
+
+        // 1. APOD
+        async function loadAPOD() {
+            log("connect: planetary_apod...");
+            try {
+                const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+                const data = await res.json();
+                const display = document.getElementById('main-display');
+                display.innerHTML = data.media_type === 'video' 
+                    ? `<iframe src="${data.url}" class="w-full h-full min-h-[400px] border-0"></iframe>` 
+                    : `<img src="${data.url}" class="max-h-[500px] w-auto rounded object-contain">`;
+                document.getElementById('display-title').innerText = data.title;
+                document.getElementById('display-desc').innerText = data.explanation;
+                document.getElementById('apod-date-label').innerText = `TS: ${data.date}`;
+                log("sync: apod_success.");
+            } catch (err) { log("error: apod_gateway_fail."); }
+        }
+
+        // 2. DONKI (Clima Espacial)
+        async function loadDONKI() {
+            log("request: space_weather_alerts...");
+            try {
+                const res = await fetch(`https://api.nasa.gov/DONKI/notifications?startDate=2026-01-01&api_key=${API_KEY}`);
+                const data = await res.json();
+                let html = '';
+                data.slice(0, 3).forEach(msg => {
+                    html += `<div class="border-b border-red-900/20 pb-2">
+                        <span class="text-red-400 font-bold">[${msg.messageType}]</span>
+                        <p class="text-slate-500 leading-tight mt-1">${msg.messageBody.substring(0, 100)}...</p>
+                    </div>`;
+                });
+                document.getElementById('donki-log').innerHTML = html;
+                log("sync: donki_stream_active.");
+            } catch (e) { log("error: donki_timeout."); }
+        }
+
+        // 3. NEOWS (Asteroides)
+        async function loadAsteroids() {
+            const today = new Date().toISOString().split('T')[0];
+            log(`scan: neows_radar_date: ${today}...`);
+            try {
+                const res = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=${API_KEY}`);
+                const data = await res.json();
+                const list = data.near_earth_objects[today].slice(0, 4);
+                let html = '';
+                list.forEach(ast => {
+                    const danger = ast.is_potentially_hazardous_asteroid ? '<span class="text-red-600">[!]</span>' : '';
+                    html += `<div class="border-b border-cyan-900/30 pb-1">
+                        <span class="text-cyan-200 font-bold">${ast.name.replace(/[()]/g, '')}</span> ${danger}<br>
+                        <span class="text-slate-600 text-[8px]">DIA: ${Math.round(ast.estimated_diameter.meters.estimated_diameter_max)}M | VEL: ${Math.round(ast.close_approach_data[0].relative_velocity.kilometers_per_hour)}KM/H</span>
+                    </div>`;
+                });
+                document.getElementById('asteroid-log').innerHTML = html;
+                log("sync: radar_neows_updated.");
+            } catch (err) { log("error: radar_distruption."); }
+        }
+
+        // 4. INSIGHT (Marte)
+        async function loadInSight() {
+            log("ping: insight_lander...");
+            try {
+                const res = await fetch(`https://api.nasa.gov/insight_weather/?feedtype=json&ver=1.0&api_key=${API_KEY}`);
+                const data = await res.json();
+                const lastSol = data.sol_keys[data.sol_keys.length - 1] || 'N/A';
+                document.getElementById('insight-data').innerHTML = `
+                    <div class="flex justify-between"><span>SOL_CURRENT:</span><span class="text-orange-500">${lastSol}</span></div>
+                    <div class="flex justify-between"><span>STATUS:</span><span class="text-green-700">OPERATIONAL</span></div>
+                    <div class="text-[8px] text-slate-600 mt-2 uppercase tracking-tighter">Sensores activos: ATMO, WIND, SEIS</div>
+                `;
+                log("sync: insight_telemetry_ok.");
+            } catch (e) { log("error: insight_connection_lost."); }
+        }
+
+        // 5. SEARCH ARCHIVE
+        async function searchArchive() {
+            const q = document.getElementById('search-input').value || 'Nebula';
+            log(`query: nasa_library_search: ${q}...`);
+            try {
+                const res = await fetch(`https://images-api.nasa.gov/search?q=${q}&media_type=image`);
+                const data = await res.json();
+                const items = data.collection.items.slice(0, 4);
+                let html = '';
+                items.forEach(item => {
+                    html += `<img src="${item.links[0].href}" class="h-20 w-full object-cover rounded border border-indigo-900/30 grayscale hover:grayscale-0 transition-all cursor-crosshair shadow-lg shadow-black">`;
+                });
+                document.getElementById('search-grid').innerHTML = html;
+                log("status: search_results_rendered.");
+            } catch (err) { log("error: search_api_fail."); }
+        }
+
+        window.onload = () => {
+            loadAPOD();
+            loadDONKI();
+            loadAsteroids();
+            loadInSight();
+            searchArchive();
+            log("system: all_modules_operational.");
+        };
+    </script>
+</body>
+</html>
