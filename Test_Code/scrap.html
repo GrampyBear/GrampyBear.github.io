@@ -1,1 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA Dashboard Web</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-900 text-white font-sans">
 
+    <header class="p-6 border-b border-slate-700 text-center">
+        <h1 class="text-3xl font-bold tracking-widest text-blue-400">NASA EXPLORER</h1>
+        <p class="text-slate-400">Datos en tiempo real desde el espacio</p>
+    </header>
+
+    <main class="p-4 md:p-10 space-y-12">
+
+        <section id="apod-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 border-l-4 border-blue-500 pl-2">Imagen Astronómica del Día</h2>
+            <div id="apod-content" class="space-y-4">
+                <p class="animate-pulse">Cargando maravilla espacial...</p>
+            </div>
+        </section>
+
+        <section id="neo-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 border-l-4 border-red-500 pl-2">Asteroides Cercanos (Hoy)</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead>
+                        <tr class="text-slate-400 border-b border-slate-700">
+                            <th class="py-2">Nombre</th>
+                            <th>Diámetro (m)</th>
+                            <th>¿Peligroso?</th>
+                        </tr>
+                    </thead>
+                    <tbody id="neo-table-body">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="mars-section" class="max-w-4xl mx-auto bg-slate-800 p-6 rounded-xl shadow-lg">
+            <h2 class="text-xl font-semibold mb-4 border-l-4 border-orange-500 pl-2">Fotos de Marte (Curiosity)</h2>
+            <div id="mars-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                </div>
+        </section>
+
+    </main>
+
+    <script>
+        const API_KEY = 'TU_API_KEY_AQUI'; // <--- PEGA TU CLAVE AQUÍ
+
+        // 1. Fetch APOD
+        async function getAPOD() {
+            const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
+            const data = await res.json();
+            document.getElementById('apod-content').innerHTML = `
+                <img src="${data.url}" class="w-full rounded-lg shadow-md" alt="${data.title}">
+                <h3 class="text-lg font-bold text-blue-300">${data.title}</h3>
+                <p class="text-sm text-slate-300 leading-relaxed">${data.explanation}</p>
+            `;
+        }
+
+        // 2. Fetch Asteroides (NeoWs)
+        async function getAsteroids() {
+            const today = new Date().toISOString().split('T')[0];
+            const res = await fetch(`https://api.nasa.gov/neo/rest/v1/feed?start_date=${today}&end_date=${today}&api_key=${API_KEY}`);
+            const data = await res.json();
+            const asteroids = data.near_earth_objects[today];
+            
+            let html = '';
+            asteroids.slice(0, 5).forEach(ast => {
+                const danger = ast.is_potentially_hazardous_asteroid ? '⚠️ SÍ' : 'Seguro';
+                html += `
+                    <tr class="border-b border-slate-700">
+                        <td class="py-3 font-mono text-sm">${ast.name}</td>
+                        <td>${Math.round(ast.estimated_diameter.meters.estimated_diameter_max)}m</td>
+                        <td class="${ast.is_potentially_hazardous_asteroid ? 'text-red-400' : 'text-green-400'}">${danger}</td>
+                    </tr>
+                `;
+            });
+            document.getElementById('neo-table-body').innerHTML = html;
+        }
+
+        // 3. Fetch Mars Photos
+        async function getMarsPhotos() {
+            // Buscamos fotos del Sol 1000 del Curiosity
+            const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=1&api_key=${API_KEY}`);
+            const data = await res.json();
+            const photos = data.photos.slice(0, 6);
+            
+            let html = '';
+            photos.forEach(p => {
+                html += `<img src="${p.img_src}" class="h-40 w-full object-cover rounded-lg hover:scale-105 transition-transform cursor-pointer">`;
+            });
+            document.getElementById('mars-gallery').innerHTML = html;
+        }
+
+        // Ejecutar todo al cargar
+        getAPOD();
+        getAsteroids();
+        getMarsPhotos();
+    </script>
+</body>
+</html>
