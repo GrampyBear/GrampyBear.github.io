@@ -3,29 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocolo de Expansión | VN</title>
+    <title>EL PESO DEL LINAJE: SATURACIÓN</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="game-wrapper">
-        <header id="stats-bar">
-            <div class="stat">Sujeto: <span id="subject-name">-</span></div>
-            <div class="stat">Masa: <span id="stat-weight">0</span> kg</div>
-            <div class="stat">Capacidad: <span id="stat-capacity">0</span>%</div>
-            <div class="stat">Vínculo: <span id="stat-bond">0</span>%</div>
-        </header>
+    <div id="game-container">
+        <aside id="sidebar">
+            <h2>ESTADO FÍSICO</h2>
+            <div class="stat-box">SUJETO: <span id="stat-role">PADRE</span></div>
+            <div class="stat-box">PESO: <span id="stat-weight">95</span> kg</div>
+            <div class="stat-box">CINTURA: <span id="stat-waist">90</span> cm</div>
+            <div class="stat-box">MOVILIDAD: <span id="stat-mobility">100</span>%</div>
+            <div class="stat-box">TENSIÓN ROPA: <span id="stat-tension">BAJA</span></div>
+            <div class="stat-box">VÍNCULO: <span id="stat-bond">0</span>%</div>
+            <hr>
+            <div id="log">--- Registro de Ceba ---</div>
+        </aside>
 
-        <main id="main-display">
-            <div id="visual-fx"></div>
-            <div id="narrative-container">
-                <p id="scene-description"></p>
-                <p id="scene-text"></p>
-            </div>
+        <main id="story-viewport">
+            <div id="chapter-title">CAPÍTULO 1: LA CENA DE LA SUMISIÓN</div>
+            <div id="scene-desc"></div>
+            <div id="scene-text"></div>
+            <div id="choices-container"></div>
         </main>
-
-        <footer id="interaction-pane">
-            <div id="choices-grid"></div>
-        </footer>
     </div>
     <script src="script.js"></script>
 </body>
