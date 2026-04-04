@@ -1,101 +1,88 @@
 :root {
-    --bg: #050505;
-    --panel: #121214;
-    --accent: #b8860b;
-    --text: #d1d1d1;
-    --danger: #8b0000;
+    --gold: #d4af37;
+    --dark: #0a0a0a;
+    --panel: #161618;
+    --text: #e0e0e0;
 }
 
 body {
-    background-color: var(--bg);
+    background: var(--dark);
     color: var(--text);
-    font-family: 'Merriweather', serif;
+    font-family: 'Constantia', serif;
     margin: 0;
     overflow: hidden;
 }
 
-#game-wrapper {
+#game-container {
     display: flex;
-    flex-direction: column;
     height: 100vh;
 }
 
-#stats-bar {
+#sidebar {
+    width: 280px;
     background: var(--panel);
-    display: flex;
-    justify-content: space-around;
-    padding: 15px;
-    border-bottom: 2px solid var(--accent);
-    font-family: monospace;
-    font-size: 1.1rem;
-}
-
-#main-display {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
     padding: 20px;
+    border-right: 2px solid var(--gold);
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
 }
 
-#narrative-container {
-    max-width: 700px;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 30px;
-    border-radius: 5px;
-    box-shadow: 0 0 20px rgba(0,0,0,1);
-    z-index: 2;
+.stat-box {
+    margin: 10px 0;
+    font-size: 1.1em;
+    color: var(--gold);
 }
 
-#scene-description {
-    color: var(--accent);
-    font-style: italic;
-    margin-bottom: 15px;
+#story-viewport {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+#chapter-title {
+    font-size: 0.9em;
+    letter-spacing: 4px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    text-transform: uppercase;
 }
 
 #scene-text {
-    line-height: 1.7;
-    font-size: 1.2rem;
-}
-
-#interaction-pane {
-    background: var(--panel);
-    padding: 20px;
-    border-top: 1px solid #333;
-}
-
-#choices-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-    max-width: 900px;
-    margin: 0 auto;
+    font-size: 1.3em;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    text-align: justify;
 }
 
 .choice-btn {
-    background: #1a1a1a;
-    border: 1px solid var(--accent);
-    color: white;
+    display: block;
+    width: 100%;
     padding: 15px;
+    margin-bottom: 10px;
+    background: transparent;
+    border: 1px solid #444;
+    color: var(--text);
+    text-align: left;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 1rem;
 }
 
 .choice-btn:hover {
-    background: var(--accent);
-    color: black;
+    border-color: var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+    padding-left: 25px;
 }
 
-/* Efecto de pesadez visual */
-.heavy-mode {
-    filter: contrast(1.2) saturate(1.2);
-    animation: shake 0.5s infinite linear;
+/* Efecto de Engorde Extremo */
+.bloat-fx {
+    animation: bloat 4s infinite ease-in-out;
 }
 
-@keyframes shake {
-    0% { transform: translate(0,0); }
-    50% { transform: translate(1px, 1px); }
-    100% { transform: translate(0,0); }
+@keyframes bloat {
+    0% { filter: contrast(1); }
+    50% { filter: contrast(1.2) saturate(1.3); transform: scale(1.005); }
+    100% { filter: contrast(1); }
 }
