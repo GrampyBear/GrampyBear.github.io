@@ -1,143 +1,109 @@
 const state = {
-    role: "", 
-    weight: 90,
+    role: "Padre",
+    weight: 95,
+    waist: 92,
     mobility: 100,
     bond: 0,
-    chapter: 0,
-    scene: "inicio"
+    stage: 1,
+    history: []
 };
 
-const story = {
-    // --- SELECCIÓN INICIAL ---
-    "inicio": {
-        desc: "El umbral de una transformación irreversible.",
-        text: "La casa está en un silencio sepulcral, solo roto por el sonido de los cubiertos chocando contra la porcelana. El aire huele a mantequilla, azúcar tostada y una tensión familiar que ha cruzado la línea de lo aceptable. Al final de la mesa, el destino aguarda.",
+const storyData = {
+    // ETAPA 1: EL DESPERTAR DEL APETITO
+    stage1: {
+        title: "Capítulo I: El Patriarca Quebrado",
+        text: "Eres un hombre de 45 años, de hombros anchos y una autoridad que solía ser incuestionable. Pero hoy, mientras Morgan (tu hijo) desliza una bandeja de costillas glaseadas frente a ti, sientes que esa autoridad se disuelve. La camisa de tu oficina, una talla L que ya te queda pequeña, tira de tus hombros. Morgan apoya sus manos en el respaldo de tu silla. 'Papá, estás demasiado flaco. Necesitas volumen para imponer respeto'. Sus dedos rozan tu nuca mientras empiezas a comer.",
         choices: [
-            { text: "Encarnar al Padre (El Patriarca que cede)", next: "padre_cap1_intro" },
-            { text: "Encarnar al Hijo (El Arquitecto del exceso)", next: "hijo_cap1_intro" }
+            { text: "Comer con desesperación hasta que el cinturón duela", weight: 4, waist: 3, bond: 10, next: "cena_progresion" },
+            { text: "Pedirle a Morgan que te ayude con el postre", weight: 2, bond: 25, next: "postre_intimidad" }
         ]
     },
 
-    // ==========================================
-    // RUTA DEL PADRE: LA SATURACIÓN DEL PATRIARCA
-    // ==========================================
-    
-    "padre_cap1_intro": {
-        update: () => { state.role = "Padre"; state.weight = 95; },
-        desc: "Capítulo 1: El Peso de la Autoridad.",
-        text: "Siempre fui un hombre de orden. Un contador, un pilar. Pero mis camisas de talla XL ya no engañan a nadie. Mi hijo, Morgan, me mira desde el otro lado de la mesa. Ha preparado una cena que parece diseñada para un batallón. 'Papá, estás trabajando demasiado, necesitas recuperar fuerzas', dice con una sonrisa que oculta algo más oscuro.",
+    "cena_progresion": {
+        title: "La Expansión Inicial",
+        text: "La grasa brilla en tus labios. Sientes tu abdomen expandirse contra la mesa de madera. Un pequeño 'pop' resuena: el primer ojal de tu camisa ha cedido bajo la presión de tu vientre creciente. Morgan suelta una carcajada oscura y te sirve un batido de chocolate espeso, cargado de nata y aceites. 'No te detengas, papá. Quiero ver cuánto puedes crecer antes de que la ropa se rinda'.",
         choices: [
-            { text: "Devorar la porción triple con orgullo", weight: 3, bond: 10, next: "padre_cap1_postre" },
-            { text: "Dudar, sintiendo la presión de tu cinturón", weight: 1, bond: 5, next: "padre_cap1_duda" }
+            { text: "Beber el batido de un solo trago", weight: 6, waist: 4, next: "stage2_intro" },
+            { text: "Dejar que Morgan amase tu barriga expuesta", bond: 40, weight: 1, next: "stage2_intro" }
         ]
     },
 
-    "padre_cap1_postre": {
-        desc: "La primera grieta en la armadura.",
-        text: "El tercer plato de estofado ha desaparecido. Siento mi abdomen empujar la mesa con una fuerza física que me asusta y me excita a la vez. Morgan se levanta y, sin decir palabra, se coloca detrás de mí. Siento sus manos en mis hombros... y luego bajando hacia mi vientre tenso. 'Te queda mucha capacidad, papá. No te detengas ahora'.",
+    // ETAPA 2: LA PÉRDIDA DE LA MOVILIDAD (Horas de contenido aquí)
+    stage2: {
+        title: "Capítulo II: Las Costuras Rotas",
+        text: "Han pasado tres meses. Tu peso ha escalado a los 145kg. La movilidad es ahora un desafío doloroso y excitante. Tu cintura ha devorado tus pantalones de vestir; ahora solo vistes batas de seda que Morgan te compró. Cada vez que intentas levantarte, tus muslos masivos rozan entre sí, generando un calor abrasador. Morgan es ahora tu sombra. Él prepara 'bombas calóricas' de 8.000 calorías diarias.",
         choices: [
-            { text: "Permitir que te desabroche el pantalón", weight: 2, bond: 25, next: "padre_cap2_crecimiento" },
-            { text: "Pedirle que traiga el pastel de chocolate", weight: 5, bond: 15, next: "padre_cap2_crecimiento" }
+            { text: "Ruta Feederism: Comer desde su regazo", weight: 10, bond: 50, next: "feeder_intimo" },
+            { text: "Ruta Gainer: Hacer ejercicios de expansión estomacal", weight: 15, waist: 10, next: "gainer_tecnico" }
         ]
     },
 
-    "padre_cap2_crecimiento": {
-        update: () => { state.chapter = 2; state.mobility -= 20; },
-        desc: "Capítulo 2: La Pérdida de la Forma.",
-        text: "Ha pasado un mes. El mundo exterior ya no existe para mí. Mi peso ha escalado a los 135kg. Mis muslos rozan entre sí con cada paso agónico hacia el comedor. Morgan ha dejado de ser solo mi hijo; ahora es mi guardián. Él decide el menú, las horas de ingesta y el tamaño de mis túnicas. Hoy, me ha traído un batido de 4.000 calorías. Mi cuerpo lo desea con una desesperación animal.",
+    // SISTEMA DE GENERACIÓN DE EVENTOS (Para alargar la duración)
+    "gainer_tecnico": {
+        title: "Ingeniería de la Carne",
+        text: "Te has obsesionado con los números. Morgan mide tu cintura cada mañana. Hoy, la cinta métrica marca 130cm. Eres una montaña de suavidad. Morgan te obliga a comer mientras estás recostado, para que la gravedad ayude a que la comida baje más rápido. Sientes que tu corazón late con fuerza, cada latido es un tributo a la masa que has ganado por amor a tu hijo.",
         choices: [
-            { text: "Beber hasta que el estómago duela", weight: 8, mobility: -15, next: "padre_cap3_inmovilidad" },
-            { text: "Rogar por un masaje en tu piel estirada", weight: 2, bond: 40, next: "padre_cap3_intimidad" }
+            { text: "Aceptar el uso de un embudo (Saturación)", weight: 25, mobility: -30, next: "stage3_intro" },
+            { text: "Pedirle que desgarre tu última prenda", bond: 70, next: "stage3_intro" }
         ]
     },
 
-    "padre_cap3_inmovilidad": {
-        update: () => { state.chapter = 3; state.mobility = 10; state.weight += 30; },
-        desc: "Capítulo 3: El Altar de Carne.",
-        text: "Peso 180kg. El sofá es ahora mi trono y mi prisión. No puedo levantarme sin que Morgan tire de mis brazos. Siento cómo mi autoridad de padre se ha disuelto en capas de grasa suave y caliente. Él se deleita en mi impotencia, alimentándome mientras me susurra lo hermoso que me veo siendo tan inmenso, tan dependiente, tan suyo.",
+    // ETAPA 3: DEATH GAINERISM / INMOVILIDAD TOTAL
+    stage3: {
+        title: "Capítulo III: El Altar de la Inmovilidad",
+        text: "Peso: 210kg. Tu cuerpo ha conquistado la habitación. Ya no puedes salir de la cama. Eres un monumento vivo de grasa, pliegues y deseo prohibido. Morgan vive para servirte, para limpiar los rincones de tu inmensidad y para asegurarse de que tu boca nunca esté vacía. Eres su padre, pero también eres su creación perfecta. El 'Death Gainerism' ya no es un miedo, es una meta.",
         choices: [
-            { text: "Ruta Death Gainer: 'No pares de alimentarme'", weight: 50, mobility: -10, next: "final_death_gainer" },
-            { text: "Ruta Amorosa: 'Soy tu gran cerdito, hijo'", weight: 20, bond: 100, next: "final_devocion" }
+            { text: "Saturación Final: 'No dejes de alimentarme'", weight: 100, next: "final_extremo" },
+            { text: "Devoción Absoluta: Ser su mascota inmensa", bond: 100, next: "final_amor" }
         ]
     },
 
-    // ==========================================
-    // RUTA DEL HIJO: EL ARTE DE LA CEBA
-    // ==========================================
-
-    "hijo_cap1_intro": {
-        update: () => { state.role = "Hijo"; state.weight = 75; },
-        desc: "Capítulo 1: El Control del Flujo.",
-        text: "Ver a mi padre, el hombre que siempre me dio órdenes, sentarse a comer lo que YO preparé es un triunfo silencioso. He cargado su comida con grasas trans y azúcares ocultos. Quiero ver cuánto puede expandirse ese cuerpo de patriarca antes de que se rinda. 'Come más, papá. Te ves tan... imponente cuando te llenas'.",
-        choices: [
-            { text: "Obligarlo a limpiar el plato", bond: 15, next: "hijo_cap2_obsesion" },
-            { text: "Acariciar su vientre mientras mastica", bond: 30, next: "hijo_cap2_obsesion" }
-        ]
-    },
-
-    "hijo_cap2_obsesion": {
-        update: () => { state.chapter = 2; state.bond += 20; },
-        desc: "Capítulo 2: La Transformación del Ídolo.",
-        text: "Papá ya no puede ocultar su barriga bajo la ropa normal. Ahora usa batas abiertas. Me encanta verlo jadear solo por masticar. Le he prohibido pesarse; solo yo tengo el control de sus números. El incesto ya no es un tabú, es la recompensa por su obediencia calórica.",
-        choices: [
-            { text: "Instalar un sistema de alimentación por sonda", bond: 50, next: "hijo_cap3_dios_carne" },
-            { text: "Llevarlo a la cama para 'descansar' su peso", bond: 60, next: "hijo_cap3_dios_carne" }
-        ]
-    },
-
-    // ==========================================
-    // FINALES (Múltiples desenlaces)
-    // ==========================================
-
-    "final_death_gainer": {
-        desc: "FINAL: El Punto de No Retorno.",
-        text: "Has alcanzado los 300kg. Tu corazón lucha, pero tu mente está en éxtasis. Te has convertido en una montaña de carne que ya no puede hablar, solo recibir. Tu hijo te mira como a una deidad de la glotonería. Has ganado... o has desaparecido bajo tu propio peso.",
-        choices: [{ text: "Volver a empezar", action: () => location.reload() }]
-    },
-
-    "final_devocion": {
-        desc: "FINAL: El Vínculo Perfecto.",
-        text: "La movilidad es nula, pero el amor es absoluto. Eres el padre más grande del mundo, y tu hijo es tu devoto servidor. En esta casa, el exceso es la única ley y tu cuerpo es el testamento de un deseo compartido sin límites.",
-        choices: [{ text: "Volver a empezar", action: () => location.reload() }]
+    "final_extremo": {
+        title: "FINAL: EL AGUJERO NEGRO DE LA CARNE",
+        text: "Has alcanzado un peso incalculable. La luz del sol apenas entra en la habitación, pero no importa. Tu existencia se reduce al placer de la distensión extrema y al tacto de tu hijo alimentándote. Tu corazón da un último suspiro de gloria, hundiéndose bajo 400kg de pura devoción. Eres eterno en tu exceso.",
+        choices: [{ text: "REINICIAR EL CICLO", action: () => location.reload() }]
     }
 };
 
-function render() {
-    const scene = story[state.scene];
-    if (scene.update) scene.update();
-
-    // Actualizar UI
-    document.getElementById('subject-name').innerText = state.role || "---";
-    document.getElementById('stat-weight').innerText = state.weight;
-    document.getElementById('stat-capacity').innerText = state.mobility + "%";
-    document.getElementById('stat-bond').innerText = state.bond + "%";
+function updateUI() {
+    const scene = storyData[state.scene] || storyData["stage" + state.stage];
     
-    document.getElementById('scene-description').innerText = scene.desc;
+    // Stats update
+    document.getElementById('stat-weight').innerText = state.weight;
+    document.getElementById('stat-waist').innerText = Math.round(state.waist);
+    document.getElementById('stat-mobility').innerText = state.mobility;
+    document.getElementById('stat-bond').innerText = state.bond;
+    document.getElementById('stat-tension').innerText = state.waist > 120 ? "CRÍTICA" : "ALTA";
+
+    document.getElementById('chapter-title').innerText = scene.title;
     document.getElementById('scene-text').innerText = scene.text;
 
-    const grid = document.getElementById('choices-grid');
-    grid.innerHTML = "";
+    const container = document.getElementById('choices-container');
+    container.innerHTML = "";
 
     scene.choices.forEach(c => {
         const btn = document.createElement('button');
         btn.className = "choice-btn";
         btn.innerText = c.text;
         btn.onclick = () => {
-            if (c.action) {
-                c.action();
-            } else {
-                if(c.weight) state.weight += c.weight;
-                if(c.mobility) state.mobility += c.mobility;
-                if(c.bond) state.bond += c.bond;
-                state.scene = c.next;
-                render();
-            }
+            if (c.action) return c.action();
+            state.weight += (c.weight || 0);
+            state.waist += (c.waist || (c.weight * 0.7 || 0));
+            state.mobility += (c.mobility || 0);
+            state.bond += (c.bond || 0);
+            state.scene = c.next;
+            
+            // Lógica de avance de etapa
+            if (state.weight > 130 && state.stage === 1) state.stage = 2;
+            if (state.weight > 200 && state.stage === 2) state.stage = 3;
+            
+            if (state.weight > 150) document.body.classList.add('bloat-fx');
+            
+            updateUI();
         };
-        grid.appendChild(btn);
+        container.appendChild(btn);
     });
-
-    // Efecto visual de "Gordura" en la pantalla
-    if (state.weight > 150) document.body.style.transform = "scale(1.02)";
 }
 
-window.onload = render;
+state.scene = "stage1";
+window.onload = updateUI;
