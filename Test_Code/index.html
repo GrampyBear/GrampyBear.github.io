@@ -2,29 +2,25 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EL PESO DEL LINAJE: SATURACIÓN</title>
+    <title>EL PESO DEL LINAJE: CRÓNICAS DE SATURACIÓN</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="game-container">
-        <aside id="sidebar">
-            <h2>ESTADO FÍSICO</h2>
-            <div class="stat-box">SUJETO: <span id="stat-role">PADRE</span></div>
-            <div class="stat-box">PESO: <span id="stat-weight">95</span> kg</div>
-            <div class="stat-box">CINTURA: <span id="stat-waist">90</span> cm</div>
-            <div class="stat-box">MOVILIDAD: <span id="stat-mobility">100</span>%</div>
-            <div class="stat-box">TENSIÓN ROPA: <span id="stat-tension">BAJA</span></div>
-            <div class="stat-box">VÍNCULO: <span id="stat-bond">0</span>%</div>
-            <hr>
-            <div id="log">--- Registro de Ceba ---</div>
-        </aside>
+        <header id="stats-hud">
+            <div class="stat">SUJETO: <span id="role">PADRE</span></div>
+            <div class="stat">PESO: <span id="weight">95</span>kg</div>
+            <div class="stat">INTEGRIDAD: <span id="integrity">ALTA</span></div>
+        </header>
+        
+        <div id="visual-overlay"></div>
 
-        <main id="story-viewport">
-            <div id="chapter-title">CAPÍTULO 1: LA CENA DE LA SUMISIÓN</div>
-            <div id="scene-desc"></div>
-            <div id="scene-text"></div>
-            <div id="choices-container"></div>
+        <main id="scene-viewport">
+            <h2 id="chapter-name">PROLOGO</h2>
+            <div id="dialogue-box">
+                <p id="narrative-text"></p>
+            </div>
+            <div id="options-stack"></div>
         </main>
     </div>
     <script src="script.js"></script>
