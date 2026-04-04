@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSMS V6 // MULTI_SOURCE_OS</title>
+    <title>DSMS V7 // OPEN_SPACE_MONITOR</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="dsms.css">
 </head>
@@ -12,53 +12,50 @@
 
     <header class="max-w-7xl mx-auto mb-6 flex justify-between items-end border-b border-cyan-900/30 pb-2">
         <div>
-            <h1 class="text-xl font-black text-cyan-400 tracking-tighter italic">DSMS_V6 // DEEP_SPACE_MONITOR</h1>
-            <p class="text-[9px] text-slate-500 font-bold uppercase">Uplink: Active // Source: Solar_System_OpenData & NASA</p>
+            <h1 class="text-xl font-black text-cyan-400 tracking-tighter italic uppercase">DSMS_V7 // DEEP_SPACE</h1>
+            <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest">Protocol: Independent // Data_Source: Solar_System_OpenData</p>
         </div>
-        <div id="sys-clock" class="text-cyan-800 text-xs font-mono font-bold"></div>
+        <div id="clock" class="text-cyan-800 text-xs font-mono font-bold"></div>
     </header>
 
     <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
         
-        <section class="lg:col-span-8 space-y-6">
+        <section class="lg:col-span-8 space-y-4">
             <div class="monitor-border rounded p-4 relative overflow-hidden">
                 <div class="flex justify-between items-center mb-2">
-                    <span id="module-label" class="data-label text-cyan-600">UNIT_01 // VISUAL_PROBE</span>
-                    <span id="data-id" class="text-[9px] text-slate-600 font-bold"></span>
+                    <span id="module-status" class="data-label text-cyan-600">UNIT_01 // CELESTIAL_SCAN</span>
+                    <span id="body-id" class="text-[9px] text-slate-600 font-bold"></span>
                 </div>
                 
-                <div id="main-view" class="w-full bg-black rounded border border-cyan-900/20 flex items-center justify-center min-h-[450px] relative">
-                    <div class="text-cyan-950 animate-pulse text-[10px] tracking-widest">CONNECTING_TO_STATION...</div>
+                <div id="object-display" class="w-full bg-black rounded border border-cyan-900/20 flex flex-col items-center justify-center min-h-[400px] p-8 text-center">
+                    <h2 id="obj-name" class="text-6xl font-black text-cyan-500 mb-4 opacity-20">AWAITING_INPUT</h2>
+                    <div id="obj-specs" class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full mt-8 opacity-0 transition-opacity duration-500">
+                        </div>
                 </div>
 
                 <div class="mt-4 border-t border-slate-900 pt-4">
-                    <h2 id="main-title" class="text-md font-bold text-cyan-200 uppercase italic tracking-widest"></h2>
-                    <div id="main-desc" class="text-[10px] text-slate-500 mt-2 h-20 overflow-y-auto leading-relaxed pr-4"></div>
+                    <h2 id="obj-title" class="text-md font-bold text-cyan-200 uppercase tracking-widest">System_Ready</h2>
+                    <p id="obj-desc" class="text-[10px] text-slate-500 mt-2 h-16 leading-relaxed">Select a celestial body from the registry to initiate deep telemetry analysis.</p>
                 </div>
             </div>
         </section>
 
-        <aside class="lg:col-span-4 space-y-6">
+        <aside class="lg:col-span-4 space-y-4">
             <div class="monitor-border rounded p-4 border-l-2 border-cyan-500/40">
-                <span class="data-label text-cyan-500">Celestial_Body_Metrics</span>
-                <div id="celestial-feed" class="mt-3 space-y-2 h-48 overflow-y-auto pr-2 text-[10px]">
-                    <p class="text-slate-700 animate-pulse">Syncing planetary orbits...</p>
+                <span class="data-label text-cyan-500">Celestial_Registry</span>
+                <div class="flex gap-2 mb-3">
+                    <button onclick="DSMS.filter('planet')" class="cmd-btn text-[8px]">Planets</button>
+                    <button onclick="DSMS.filter('moon')" class="cmd-btn text-[8px]">Moons</button>
+                    <button onclick="DSMS.filter('asteroid')" class="cmd-btn text-[8px]">Others</button>
+                </div>
+                <div id="registry-list" class="mt-2 space-y-1 h-64 overflow-y-auto pr-2 text-[10px]">
+                    <p class="text-slate-800 animate-pulse">Initializing registry...</p>
                 </div>
             </div>
 
-            <div id="object-details" class="monitor-border rounded p-4 border-t-2 border-indigo-900/50 bg-indigo-950/5">
-                <span class="data-label text-indigo-400">Object_Analysis</span>
-                <div class="mt-2 grid grid-cols-2 gap-2 text-[9px] text-indigo-200">
-                    <div>GRAVITY: <span id="val-grav" class="text-cyan-500">--</span></div>
-                    <div>DENSITY: <span id="val-dens" class="text-cyan-500">--</span></div>
-                    <div>MOONS: <span id="val-moons" class="text-cyan-500">--</span></div>
-                    <div>TEMP: <span id="val-temp" class="text-cyan-500">--</span></div>
-                </div>
-            </div>
-
-            <div class="monitor-border rounded p-3 h-32 flex flex-col bg-black/40">
-                <span class="data-label text-green-800 text-[8px]">Kernel_Log</span>
-                <div id="log-out" class="mt-2 text-[9px] text-green-950 font-mono overflow-y-auto flex-grow lowercase"></div>
+            <div class="monitor-border rounded p-3 h-40 flex flex-col bg-black/40 border-t-2 border-green-900/30">
+                <span class="data-label text-green-800 text-[8px]">System_Log</span>
+                <div id="kernel-log" class="mt-2 text-[9px] text-green-950 font-mono overflow-y-auto flex-grow lowercase"></div>
             </div>
         </aside>
     </main>
