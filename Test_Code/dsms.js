@@ -1,7 +1,7 @@
 // dsms.js
 const NASA_API = (function() {
     // Reemplaza 'DEMO_KEY' con tu API Key de api.nasa.gov
-    const API_KEY = 'DEMO_KEY'; 
+    const API_KEY = 'e2oiz3ndkMnUe1IsKmGbvKduWADLjXkB8DMTDlRI'; 
     const BASE_URL = 'https://api.nasa.gov';
 
     // --- UTILS ---
