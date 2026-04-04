@@ -1,109 +1,96 @@
-const state = {
-    role: "Padre",
-    weight: 95,
-    waist: 92,
-    mobility: 100,
+const gameState = {
+    weight: 95.0,
+    tension: 0,
     bond: 0,
-    stage: 1,
-    history: []
+    currentNode: "inicio"
 };
 
-const storyData = {
-    // ETAPA 1: EL DESPERTAR DEL APETITO
-    stage1: {
-        title: "Capítulo I: El Patriarca Quebrado",
-        text: "Eres un hombre de 45 años, de hombros anchos y una autoridad que solía ser incuestionable. Pero hoy, mientras Morgan (tu hijo) desliza una bandeja de costillas glaseadas frente a ti, sientes que esa autoridad se disuelve. La camisa de tu oficina, una talla L que ya te queda pequeña, tira de tus hombros. Morgan apoya sus manos en el respaldo de tu silla. 'Papá, estás demasiado flaco. Necesitas volumen para imponer respeto'. Sus dedos rozan tu nuca mientras empiezas a comer.",
-        choices: [
-            { text: "Comer con desesperación hasta que el cinturón duela", weight: 4, waist: 3, bond: 10, next: "cena_progresion" },
-            { text: "Pedirle a Morgan que te ayude con el postre", weight: 2, bond: 25, next: "postre_intimidad" }
+const storyNodes = {
+    // --- NODO INICIAL ---
+    "inicio": {
+        chapter: "PRÓLOGO: EL ÚLTIMO CINTURÓN",
+        text: "La cena transcurre en un silencio sepulcral. Tu hijo, Morgan, ha preparado un estofado de buey con una densidad casi cremosa. Sientes que tu abdomen presiona la mesa de madera con una insistencia nueva. Morgan te observa, su mirada se detiene en tu cuello, donde el botón de la camisa parece sufrir para contener tu respiración.",
+        options: [
+            { text: "Elogiar la comida y pedir una segunda ración", next: "ruta_comida_aceptada" },
+            { text: "Intentar levantarte de la mesa para dar un paseo", next: "ruta_resistencia_fisica" },
+            { text: "Aflojarte el cinturón frente a él", next: "ruta_intimidad_abierta" }
         ]
     },
 
-    "cena_progresion": {
-        title: "La Expansión Inicial",
-        text: "La grasa brilla en tus labios. Sientes tu abdomen expandirse contra la mesa de madera. Un pequeño 'pop' resuena: el primer ojal de tu camisa ha cedido bajo la presión de tu vientre creciente. Morgan suelta una carcajada oscura y te sirve un batido de chocolate espeso, cargado de nata y aceites. 'No te detengas, papá. Quiero ver cuánto puedes crecer antes de que la ropa se rinda'.",
-        choices: [
-            { text: "Beber el batido de un solo trago", weight: 6, waist: 4, next: "stage2_intro" },
-            { text: "Dejar que Morgan amase tu barriga expuesta", bond: 40, weight: 1, next: "stage2_intro" }
+    // --- RUTA A: ACEPTACIÓN ---
+    "ruta_comida_aceptada": {
+        chapter: "CAPÍTULO 1: LA RENDICIÓN",
+        text: "Morgan sonríe. Es una sonrisa que no habías visto en él: cargada de una extraña posesividad. Trae una fuente rebosante y, para tu sorpresa, se coloca a tu lado. Empieza a alimentarte él mismo, llevando la cuchara a tu boca. Sientes que tu estómago se expande, estirando la piel de tu vientre hasta que la tela de tu camisa blanca se vuelve traslúcida.",
+        update: () => { gameState.weight += 3.5; gameState.bond += 15; },
+        options: [
+            { text: "Dejar que Morgan desabroche tu camisa para 'darte aire'", next: "escena_torso_expuesto" },
+            { text: "Seguir comiendo hasta que no puedas hablar", next: "escena_saturacion_temprana" }
         ]
     },
 
-    // ETAPA 2: LA PÉRDIDA DE LA MOVILIDAD (Horas de contenido aquí)
-    stage2: {
-        title: "Capítulo II: Las Costuras Rotas",
-        text: "Han pasado tres meses. Tu peso ha escalado a los 145kg. La movilidad es ahora un desafío doloroso y excitante. Tu cintura ha devorado tus pantalones de vestir; ahora solo vistes batas de seda que Morgan te compró. Cada vez que intentas levantarte, tus muslos masivos rozan entre sí, generando un calor abrasador. Morgan es ahora tu sombra. Él prepara 'bombas calóricas' de 8.000 calorías diarias.",
-        choices: [
-            { text: "Ruta Feederism: Comer desde su regazo", weight: 10, bond: 50, next: "feeder_intimo" },
-            { text: "Ruta Gainer: Hacer ejercicios de expansión estomacal", weight: 15, waist: 10, next: "gainer_tecnico" }
+    // --- RUTA B: RESISTENCIA ---
+    "ruta_resistencia_fisica": {
+        chapter: "CAPÍTULO 1: EL PESO DE LA EDAD",
+        text: "Empujas la silla hacia atrás para levantarte, pero un gemido de la madera te detiene. Tus muslos, ahora mucho más anchos de lo que recordabas, se han encajado entre los brazos de la silla. Morgan no se mueve para ayudarte. Se cruza de brazos, disfrutando de tu lucha contra tu propia masa.",
+        update: () => { gameState.tension += 20; },
+        options: [
+            { text: "Pedirle ayuda a Morgan para salir de la silla", next: "escena_ayuda_humillante" },
+            { text: "Hacer un esfuerzo supremo por liberarte", next: "escena_costuras_rotas" }
         ]
     },
 
-    // SISTEMA DE GENERACIÓN DE EVENTOS (Para alargar la duración)
-    "gainer_tecnico": {
-        title: "Ingeniería de la Carne",
-        text: "Te has obsesionado con los números. Morgan mide tu cintura cada mañana. Hoy, la cinta métrica marca 130cm. Eres una montaña de suavidad. Morgan te obliga a comer mientras estás recostado, para que la gravedad ayude a que la comida baje más rápido. Sientes que tu corazón late con fuerza, cada latido es un tributo a la masa que has ganado por amor a tu hijo.",
-        choices: [
-            { text: "Aceptar el uso de un embudo (Saturación)", weight: 25, mobility: -30, next: "stage3_intro" },
-            { text: "Pedirle que desgarre tu última prenda", bond: 70, next: "stage3_intro" }
+    // --- ESCENAS DE DESARROLLO (Ejemplos de hacia dónde va la historia) ---
+    "escena_costuras_rotas": {
+        chapter: "EL MOMENTO DE LA RUPTURA",
+        text: "Haces fuerza. Un sonido violento de tela desgarrándose llena la habitación. La costura trasera de tu pantalón de vestir ha cedido por completo, liberando la presión de tus glúteos masivos. Te quedas congelado, sintiendo el aire frío en tu piel expuesta. Morgan se levanta lentamente. 'Ya no hay ropa que te aguante, papá. ¿Por qué sigues luchando?'.",
+        update: () => { gameState.weight += 1.0; gameState.bond += 10; },
+        options: [
+            { text: "Aceptar que Morgan te compre ropa 'especial' (Túnicas)", next: "ruta_tunicas" },
+            { text: "Refugiarte en tu habitación avergonzado", next: "ruta_aislamiento" }
         ]
     },
 
-    // ETAPA 3: DEATH GAINERISM / INMOVILIDAD TOTAL
-    stage3: {
-        title: "Capítulo III: El Altar de la Inmovilidad",
-        text: "Peso: 210kg. Tu cuerpo ha conquistado la habitación. Ya no puedes salir de la cama. Eres un monumento vivo de grasa, pliegues y deseo prohibido. Morgan vive para servirte, para limpiar los rincones de tu inmensidad y para asegurarse de que tu boca nunca esté vacía. Eres su padre, pero también eres su creación perfecta. El 'Death Gainerism' ya no es un miedo, es una meta.",
-        choices: [
-            { text: "Saturación Final: 'No dejes de alimentarme'", weight: 100, next: "final_extremo" },
-            { text: "Devoción Absoluta: Ser su mascota inmensa", bond: 100, next: "final_amor" }
+    "escena_torso_expuesto": {
+        chapter: "LA PIEL DEL PATRIARCA",
+        text: "Morgan desabrocha los botones uno a uno. Tu abdomen se derrama hacia adelante, liberado de su prisión de nácar. Es una masa pálida, trémula, que sube y baja con tu respiración agitada. Morgan apoya sus manos calientes sobre tus costados, hundiendo los dedos en tu carne blanda. 'Eres tan grande, papá. Y vas a serlo mucho más'.",
+        update: () => { gameState.weight += 2.0; gameState.bond += 30; },
+        options: [
+            { text: "Pedir el postre (Un batido de crema espesa)", next: "ruta_gainer_activo" },
+            { text: "Acariciar la mano de tu hijo con gratitud oscura", next: "ruta_incesto_afectivo" }
         ]
-    },
-
-    "final_extremo": {
-        title: "FINAL: EL AGUJERO NEGRO DE LA CARNE",
-        text: "Has alcanzado un peso incalculable. La luz del sol apenas entra en la habitación, pero no importa. Tu existencia se reduce al placer de la distensión extrema y al tacto de tu hijo alimentándote. Tu corazón da un último suspiro de gloria, hundiéndose bajo 400kg de pura devoción. Eres eterno en tu exceso.",
-        choices: [{ text: "REINICIAR EL CICLO", action: () => location.reload() }]
     }
+    
+    // Aquí se expandirían los nodos hasta llegar a 50+ escenas diferentes...
 };
 
-function updateUI() {
-    const scene = storyData[state.scene] || storyData["stage" + state.stage];
+function render() {
+    const node = storyNodes[gameState.currentNode];
     
-    // Stats update
-    document.getElementById('stat-weight').innerText = state.weight;
-    document.getElementById('stat-waist').innerText = Math.round(state.waist);
-    document.getElementById('stat-mobility').innerText = state.mobility;
-    document.getElementById('stat-bond').innerText = state.bond;
-    document.getElementById('stat-tension').innerText = state.waist > 120 ? "CRÍTICA" : "ALTA";
+    // Actualizar HUD
+    document.getElementById('weight').innerText = gameState.weight.toFixed(1);
+    document.getElementById('chapter-name').innerText = node.chapter;
+    document.getElementById('narrative-text').innerText = node.text;
+    
+    if (node.update) node.update();
 
-    document.getElementById('chapter-title').innerText = scene.title;
-    document.getElementById('scene-text').innerText = scene.text;
+    const optionsBox = document.getElementById('options-stack');
+    optionsBox.innerHTML = "";
 
-    const container = document.getElementById('choices-container');
-    container.innerHTML = "";
-
-    scene.choices.forEach(c => {
+    node.options.forEach(opt => {
         const btn = document.createElement('button');
         btn.className = "choice-btn";
-        btn.innerText = c.text;
+        btn.innerText = opt.text;
         btn.onclick = () => {
-            if (c.action) return c.action();
-            state.weight += (c.weight || 0);
-            state.waist += (c.waist || (c.weight * 0.7 || 0));
-            state.mobility += (c.mobility || 0);
-            state.bond += (c.bond || 0);
-            state.scene = c.next;
-            
-            // Lógica de avance de etapa
-            if (state.weight > 130 && state.stage === 1) state.stage = 2;
-            if (state.weight > 200 && state.stage === 2) state.stage = 3;
-            
-            if (state.weight > 150) document.body.classList.add('bloat-fx');
-            
-            updateUI();
+            gameState.currentNode = opt.next;
+            render();
         };
-        container.appendChild(btn);
+        optionsBox.appendChild(btn);
     });
+
+    // Efecto visual: Si el peso es muy alto, la pantalla se oscurece
+    if (gameState.weight > 150) {
+        document.getElementById('visual-overlay').style.backgroundColor = "rgba(139, 0, 0, 0.1)";
+    }
 }
 
-state.scene = "stage1";
-window.onload = updateUI;
+window.onload = render;
