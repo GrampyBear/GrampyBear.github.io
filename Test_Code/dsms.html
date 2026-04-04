@@ -1,1 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSMS V5.0 // NASA_INTEGRATED_OS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="dsms.css">
+</head>
+<body class="p-4 lg:p-6">
+    <div class="scanline"></div>
 
+    <header class="max-w-7xl mx-auto mb-6 flex flex-col md:flex-row justify-between items-end border-b border-cyan-900/30 pb-2">
+        <div>
+            <h1 class="text-xl font-black text-cyan-400 tracking-tighter">DSMS_V5.0 // COMMAND_CENTER</h1>
+            <p class="text-[9px] text-slate-500 font-bold">UPLINK: SECURE // DATABASES: ALL_ACCESS</p>
+        </div>
+        <div class="flex gap-2 flex-wrap justify-end mt-2 md:mt-0" id="nav-buttons">
+            <button onclick="NASA_API.executeCommand('APOD')" class="cmd-btn">Deep_Space</button>
+            <button onclick="NASA_API.executeCommand('EPIC')" class="cmd-btn">Earth_Sat</button>
+            <button onclick="NASA_API.executeCommand('TECHPORT')" class="cmd-btn">Tech_R&D</button>
+            <button onclick="NASA_API.executeCommand('LIBRARY')" class="cmd-btn">Media_DB</button>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <section class="lg:col-span-8 space-y-6">
+            <div class="monitor-border rounded p-4 relative overflow-hidden shadow-2xl">
+                <div class="flex justify-between items-center mb-2">
+                    <span id="sys-module-name" class="data-label text-cyan-600">UNIT_01 // STBY</span>
+                    <span id="sys-timestamp" class="text-[9px] text-slate-600 font-bold"></span>
+                </div>
+                
+                <div id="sys-display" class="w-full bg-black rounded border border-cyan-900/20 flex items-center justify-center min-h-[460px] relative overflow-hidden">
+                    <div class="text-cyan-900 animate-pulse text-[10px]">AWAITING_INITIALIZATION...</div>
+                </div>
+
+                <div class="mt-4 flex flex-col md:flex-row gap-4 border-t border-slate-900 pt-4">
+                    <div class="flex-grow">
+                        <h2 id="sys-title" class="text-md font-bold text-cyan-200 uppercase tracking-tight"></h2>
+                        <div id="sys-desc" class="text-[10px] text-slate-500 mt-2 h-24 overflow-y-auto leading-relaxed pr-4"></div>
+                    </div>
+                    <div id="sys-telemetry" class="min-w-[180px] bg-cyan-950/10 p-2 text-[9px] font-mono text-cyan-700 border-l border-cyan-900/30 overflow-y-auto h-32">
+                        <p class="text-slate-600 mb-1 border-b border-slate-900 pb-1 uppercase font-bold">Live_Telemetry</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="lg:col-span-4 space-y-6">
+            <div class="monitor-border rounded p-4 border-l-2 border-red-900/40">
+                <span class="data-label text-red-500">THREAT_ALERTS // DONKI + EONET</span>
+                <div id="threat-feed" class="mt-3 space-y-2 h-24 overflow-y-auto pr-2 text-[9px]"></div>
+            </div>
+
+            <div class="monitor-border rounded p-4 border-l-2 border-cyan-900/40">
+                <span class="data-label text-cyan-600">NEOWS // PROXIMITY_RADAR</span>
+                <div id="neo-feed" class="mt-3 space-y-2 h-32 overflow-y-auto pr-2 text-[10px]"></div>
+            </div>
+
+            <div class="monitor-border rounded p-3 bg-black/20">
+                <span class="data-label text-orange-600">InSight // MARS_SURFACE</span>
+                <div id="mars-data" class="mt-2 text-[10px] grid grid-cols-2 gap-2 text-orange-200">
+                    <div class="p-1 border border-orange-950/30">SOL: <span id="mars-sol" class="font-bold">-</span></div>
+                    <div class="p-1 border border-orange-950/30">AVG: <span id="mars-temp" class="font-bold">-</span></div>
+                </div>
+            </div>
+
+            <div class="monitor-border rounded p-3 h-32 flex flex-col bg-black/40">
+                <span class="data-label text-green-800 text-[8px]">System_Kernel_Log</span>
+                <div id="kernel-log" class="mt-2 text-[9px] text-green-950 font-mono overflow-y-auto flex-grow lowercase"></div>
+            </div>
+        </aside>
+    </main>
+
+    <script src="dsms.js"></script>
+</body>
+</html>
