@@ -1,101 +1,124 @@
-/**
- * MOTOR NARRATIVO: "EL PESO DEL LINAJE"
- * Una experiencia de Gainerism, Feederism e Incesto Gay.
- */
-
 const state = {
     role: "", 
-    phase: 0, // 0: Inicio, 1: Crecimiento, 2: Obesidad, 3: Inmovilidad/Final
     weight: 90,
-    arousal: 0,
-    fullness: 0,
-    isStuck: false, // Si el personaje ya no puede moverse
-    history: []
+    mobility: 100,
+    bond: 0,
+    chapter: 0,
+    scene: "inicio"
 };
 
-const storyNodes = {
-    // --- RUTA: SER EL PADRE (RECIBIR) ---
-    padre: [
-        { // Fase 0: Inicio
-            desc: "La cocina huele a grasa y azúcar. Tu hijo, Morgan, te sirve un plato rebosante.",
-            text: "Soy un hombre grande, un padre que siempre impuso respeto. Pero ver a mi hijo mirándome así, mientras empuja una montaña de panqueques con sirope hacia mí, me hace sentir... dócil. Mi camisa de oficina tira peligrosamente de los botones.",
-            choices: [
-                { text: "Comer todo para demostrar que 'puedes manejarlo'", weight: 5, arousal: 10, next: 1 },
-                { text: "Dejar que él te desabroche el primer botón", weight: 2, arousal: 25, next: 1 }
-            ]
-        },
-        { // Fase 1: Crecimiento
-            desc: "Han pasado semanas. Tu vientre ahora descansa permanentemente sobre tus muslos.",
-            text: "El 'gainerism' dejó de ser un experimento. Morgan ahora cocina para mí cinco veces al día. Siento cómo mi piel se estira, caliente y sensible. Hoy, él se sienta en mis rodillas —lo cual es difícil ahora— y me obliga a beber un batido espeso. 'Papá, te estás volviendo tan suave', susurra.",
-            choices: [
-                { text: "Aceptar el batido y pedir un segundo", weight: 8, arousal: 30, next: 2 },
-                { text: "Gemir mientras él amasa tu barriga creciente", weight: 4, arousal: 50, next: 2 }
-            ]
-        },
-        { // Fase 2: Obesidad Crítica
-            desc: "Tu peso ha superado los 160kg. La movilidad es un recuerdo lejano.",
-            text: "Mis piernas apenas sostienen mi volumen. Vivo en el sofá, vistiendo solo una bata que no cierra. Mi hijo se deleita en mi incapacidad. Me alimenta con una cuchara, como si fuera un bebé gigante. El deseo entre nosotros es tan denso como la grasa que me cubre.",
-            choices: [
-                { text: "Entregarte al 'Death Gainerism' (Comer hasta el límite)", weight: 15, arousal: 60, next: 3 },
-                { text: "Pedirle que use un embudo (Feederism extremo)", weight: 20, arousal: 80, next: 3 }
-            ]
-        },
-        { // Fase 3: El Final de la Carne
-            desc: "Inamovible. Una montaña de placer y carne en el centro de la casa.",
-            text: "Ya no hay vuelta atrás. Peso más de 250kg. Soy el fetiche viviente de mi hijo. Él vive para mantenerme lleno, para limpiar los pliegues de mi cuerpo inmenso. Soy su padre, su amante y su obra de arte. Mi corazón late pesado, celebrando cada caloría.",
-            choices: [{ text: "REINICIAR LA TRANSFORMACIÓN", action: () => location.reload() }]
-        }
-    ],
+const story = {
+    // --- SELECCIÓN INICIAL ---
+    "inicio": {
+        desc: "El umbral de una transformación irreversible.",
+        text: "La casa está en un silencio sepulcral, solo roto por el sonido de los cubiertos chocando contra la porcelana. El aire huele a mantequilla, azúcar tostada y una tensión familiar que ha cruzado la línea de lo aceptable. Al final de la mesa, el destino aguarda.",
+        choices: [
+            { text: "Encarnar al Padre (El Patriarca que cede)", next: "padre_cap1_intro" },
+            { text: "Encarnar al Hijo (El Arquitecto del exceso)", next: "hijo_cap1_intro" }
+        ]
+    },
 
-    // --- RUTA: SER EL HIJO (ALIMENTAR) ---
-    hijo: [
-        { // Fase 0: El Plan
-            desc: "Ves a tu padre sentado, aún mantiene esa figura de autoridad.",
-            text: "Él no sabe lo que le espera. He estado añadiendo polvos hipercalóricos a sus comidas. Quiero ver ese abdomen de acero convertirse en una masa blanda y enorme. 'Cenemos, papá', le digo, mientras le sirvo una porción triple.",
-            choices: [
-                { text: "Elogiar su 'gran apetito'", weight: 4, arousal: 15, next: 1 },
-                { text: "Tocar su abdomen 'por accidente'", weight: 1, arousal: 30, next: 1 }
-            ]
-        },
-        { // Fase 1: La Dominación
-            desc: "Papá está ganando peso rápidamente. Sus trajes ya no le quedan.",
-            text: "Es excitante verlo jadear al subir las escaleras. Lo tengo justo donde quiero. Cada vez que come, lo hace con una culpa que me fascina. Se está convirtiendo en un 'gainer' por mi mano. Le obligo a comer postre tras postre mientras le llamo 'cerdito'.",
-            choices: [
-                { text: "Comprarle ropa tres tallas más grande", weight: 7, arousal: 40, next: 2 },
-                { text: "Hacerle comer de tu mano directamente", weight: 5, arousal: 55, next: 2 }
-            ]
-        },
-        { // Fase 2: El Dueño del Cuerpo
-            desc: "Él ya no puede salir de casa. Depende de ti para todo.",
-            text: "Mi padre es ahora una masa de carne sumisa. Su autoridad se hundió bajo capas de grasa. Me encanta verlo luchar por respirar mientras lo sigo cebando. El incesto es solo un ingrediente más en este festín de exceso físico.",
-            choices: [
-                { text: "Llevarlo al punto de no retorno (Inmovilidad)", weight: 20, arousal: 70, next: 3 },
-                { text: "Celebrar su nuevo cuerpo con caricias prohibidas", weight: 10, arousal: 90, next: 3 }
-            ]
-        },
-        { // Fase 3: La Obra Completa
-            desc: "Has creado un dios de la glotonería.",
-            text: "Mi padre es ahora una entidad puramente física que apenas puede hablar. Lo he convertido en lo que siempre deseé: un ser inmenso que solo existe para ser alimentado y adorado por mí. He ganado.",
-            choices: [{ text: "REINICIAR LA TRANSFORMACIÓN", action: () => location.reload() }]
-        }
-    ]
-};
-
-function updateUI() {
-    const currentData = storyNodes[state.role][state.phase];
+    // ==========================================
+    // RUTA DEL PADRE: LA SATURACIÓN DEL PATRIARCA
+    // ==========================================
     
-    document.getElementById('subject-name').innerText = state.role.toUpperCase();
+    "padre_cap1_intro": {
+        update: () => { state.role = "Padre"; state.weight = 95; },
+        desc: "Capítulo 1: El Peso de la Autoridad.",
+        text: "Siempre fui un hombre de orden. Un contador, un pilar. Pero mis camisas de talla XL ya no engañan a nadie. Mi hijo, Morgan, me mira desde el otro lado de la mesa. Ha preparado una cena que parece diseñada para un batallón. 'Papá, estás trabajando demasiado, necesitas recuperar fuerzas', dice con una sonrisa que oculta algo más oscuro.",
+        choices: [
+            { text: "Devorar la porción triple con orgullo", weight: 3, bond: 10, next: "padre_cap1_postre" },
+            { text: "Dudar, sintiendo la presión de tu cinturón", weight: 1, bond: 5, next: "padre_cap1_duda" }
+        ]
+    },
+
+    "padre_cap1_postre": {
+        desc: "La primera grieta en la armadura.",
+        text: "El tercer plato de estofado ha desaparecido. Siento mi abdomen empujar la mesa con una fuerza física que me asusta y me excita a la vez. Morgan se levanta y, sin decir palabra, se coloca detrás de mí. Siento sus manos en mis hombros... y luego bajando hacia mi vientre tenso. 'Te queda mucha capacidad, papá. No te detengas ahora'.",
+        choices: [
+            { text: "Permitir que te desabroche el pantalón", weight: 2, bond: 25, next: "padre_cap2_crecimiento" },
+            { text: "Pedirle que traiga el pastel de chocolate", weight: 5, bond: 15, next: "padre_cap2_crecimiento" }
+        ]
+    },
+
+    "padre_cap2_crecimiento": {
+        update: () => { state.chapter = 2; state.mobility -= 20; },
+        desc: "Capítulo 2: La Pérdida de la Forma.",
+        text: "Ha pasado un mes. El mundo exterior ya no existe para mí. Mi peso ha escalado a los 135kg. Mis muslos rozan entre sí con cada paso agónico hacia el comedor. Morgan ha dejado de ser solo mi hijo; ahora es mi guardián. Él decide el menú, las horas de ingesta y el tamaño de mis túnicas. Hoy, me ha traído un batido de 4.000 calorías. Mi cuerpo lo desea con una desesperación animal.",
+        choices: [
+            { text: "Beber hasta que el estómago duela", weight: 8, mobility: -15, next: "padre_cap3_inmovilidad" },
+            { text: "Rogar por un masaje en tu piel estirada", weight: 2, bond: 40, next: "padre_cap3_intimidad" }
+        ]
+    },
+
+    "padre_cap3_inmovilidad": {
+        update: () => { state.chapter = 3; state.mobility = 10; state.weight += 30; },
+        desc: "Capítulo 3: El Altar de Carne.",
+        text: "Peso 180kg. El sofá es ahora mi trono y mi prisión. No puedo levantarme sin que Morgan tire de mis brazos. Siento cómo mi autoridad de padre se ha disuelto en capas de grasa suave y caliente. Él se deleita en mi impotencia, alimentándome mientras me susurra lo hermoso que me veo siendo tan inmenso, tan dependiente, tan suyo.",
+        choices: [
+            { text: "Ruta Death Gainer: 'No pares de alimentarme'", weight: 50, mobility: -10, next: "final_death_gainer" },
+            { text: "Ruta Amorosa: 'Soy tu gran cerdito, hijo'", weight: 20, bond: 100, next: "final_devocion" }
+        ]
+    },
+
+    // ==========================================
+    // RUTA DEL HIJO: EL ARTE DE LA CEBA
+    // ==========================================
+
+    "hijo_cap1_intro": {
+        update: () => { state.role = "Hijo"; state.weight = 75; },
+        desc: "Capítulo 1: El Control del Flujo.",
+        text: "Ver a mi padre, el hombre que siempre me dio órdenes, sentarse a comer lo que YO preparé es un triunfo silencioso. He cargado su comida con grasas trans y azúcares ocultos. Quiero ver cuánto puede expandirse ese cuerpo de patriarca antes de que se rinda. 'Come más, papá. Te ves tan... imponente cuando te llenas'.",
+        choices: [
+            { text: "Obligarlo a limpiar el plato", bond: 15, next: "hijo_cap2_obsesion" },
+            { text: "Acariciar su vientre mientras mastica", bond: 30, next: "hijo_cap2_obsesion" }
+        ]
+    },
+
+    "hijo_cap2_obsesion": {
+        update: () => { state.chapter = 2; state.bond += 20; },
+        desc: "Capítulo 2: La Transformación del Ídolo.",
+        text: "Papá ya no puede ocultar su barriga bajo la ropa normal. Ahora usa batas abiertas. Me encanta verlo jadear solo por masticar. Le he prohibido pesarse; solo yo tengo el control de sus números. El incesto ya no es un tabú, es la recompensa por su obediencia calórica.",
+        choices: [
+            { text: "Instalar un sistema de alimentación por sonda", bond: 50, next: "hijo_cap3_dios_carne" },
+            { text: "Llevarlo a la cama para 'descansar' su peso", bond: 60, next: "hijo_cap3_dios_carne" }
+        ]
+    },
+
+    // ==========================================
+    // FINALES (Múltiples desenlaces)
+    // ==========================================
+
+    "final_death_gainer": {
+        desc: "FINAL: El Punto de No Retorno.",
+        text: "Has alcanzado los 300kg. Tu corazón lucha, pero tu mente está en éxtasis. Te has convertido en una montaña de carne que ya no puede hablar, solo recibir. Tu hijo te mira como a una deidad de la glotonería. Has ganado... o has desaparecido bajo tu propio peso.",
+        choices: [{ text: "Volver a empezar", action: () => location.reload() }]
+    },
+
+    "final_devocion": {
+        desc: "FINAL: El Vínculo Perfecto.",
+        text: "La movilidad es nula, pero el amor es absoluto. Eres el padre más grande del mundo, y tu hijo es tu devoto servidor. En esta casa, el exceso es la única ley y tu cuerpo es el testamento de un deseo compartido sin límites.",
+        choices: [{ text: "Volver a empezar", action: () => location.reload() }]
+    }
+};
+
+function render() {
+    const scene = story[state.scene];
+    if (scene.update) scene.update();
+
+    // Actualizar UI
+    document.getElementById('subject-name').innerText = state.role || "---";
     document.getElementById('stat-weight').innerText = state.weight;
-    document.getElementById('stat-capacity').innerText = state.arousal + "%";
-    document.getElementById('stat-bond').innerText = state.phase + 1; // Representa el nivel de progreso
+    document.getElementById('stat-capacity').innerText = state.mobility + "%";
+    document.getElementById('stat-bond').innerText = state.bond + "%";
+    
+    document.getElementById('scene-description').innerText = scene.desc;
+    document.getElementById('scene-text').innerText = scene.text;
 
-    document.getElementById('scene-description').innerText = currentData.desc;
-    document.getElementById('scene-text').innerText = currentData.text;
+    const grid = document.getElementById('choices-grid');
+    grid.innerHTML = "";
 
-    const container = document.getElementById('choices-grid');
-    container.innerHTML = "";
-
-    currentData.choices.forEach(c => {
+    scene.choices.forEach(c => {
         const btn = document.createElement('button');
         btn.className = "choice-btn";
         btn.innerText = c.text;
@@ -103,24 +126,18 @@ function updateUI() {
             if (c.action) {
                 c.action();
             } else {
-                state.weight += c.weight;
-                state.arousal += c.arousal;
-                state.phase = c.next;
-                if (state.weight > 140) document.body.classList.add('heavy-mode');
-                updateUI();
+                if(c.weight) state.weight += c.weight;
+                if(c.mobility) state.mobility += c.mobility;
+                if(c.bond) state.bond += c.bond;
+                state.scene = c.next;
+                render();
             }
         };
-        container.appendChild(btn);
+        grid.appendChild(btn);
     });
+
+    // Efecto visual de "Gordura" en la pantalla
+    if (state.weight > 150) document.body.style.transform = "scale(1.02)";
 }
 
-function initRole(r) {
-    state.role = r;
-    state.weight = (r === "padre") ? 92 : 75;
-    updateUI();
-}
-
-// Iniciar con la pantalla de selección del index.html original
-window.onload = () => {
-    // Si quieres que empiece directo, llama a initRole("padre") aquí.
-};
+window.onload = render;
