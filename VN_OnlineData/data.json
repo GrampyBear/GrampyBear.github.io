@@ -1,6 +1,11 @@
 {
     "server_status": "online",
     "version_extra": "1.0",
-    "msg": "¡Gracias por jugar con conexión!",
-    "special_event": false
+    "frases": [
+        "El corazón tiene razones que la razón ignora.",
+        "Morgan no es quien crees...",
+        "La lluvia que cae... me calma.",
+        "A veces, el silencio es la respuesta más ruidosa.",
+        "¿Has buscado en las sombras del pasado?"
+  ]
 }
