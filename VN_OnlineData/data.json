@@ -8,5 +8,12 @@
         "Sometimes, silence is the loudest answer.",
         "Have you searched in the shadows of the past?",
         "Go and Check 'Quantum Love Theory' by DarknessMinotaur!"
-  ]
+    ],
+    "active_codes": [
+        "Testcode1"
+    ],
+    "dev_progress": {
+        "Update1": 50,
+        "artupdate1": 0
+    }
 }
