@@ -5,10 +5,9 @@
             "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
-            ["", "", ""],
             ["SCENE", "bg_bosque", "pixellate"],
             ["MUSIC", "audio/music/misterio.ogg", ""],
-            ["Narrador", "Actualmente no hay historias disponibles en este luagr...", "preocupado"],
+            ["Narrador", "Actualmente no hay historias disponibles en este lugar...", "preocupado"],
         ]
     }
 }
