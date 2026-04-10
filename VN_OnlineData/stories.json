@@ -1,10 +1,13 @@
 {
-    "evento_especial_1": [
-        ["Lionel", "¡No puedo creer que esto funcione!"],
-        ["Morgan", "Es la magia del código online, amigo mío."],
-        ["Lionel", "Espero que los jugadores disfruten este secreto."]
-    ],
-    "nota_autor": [
-        ["Narrador", "Gracias por jugar la versión beta de Hues of Heart."]
-    ]
+    "evento_online_01": {
+        "metadata": {
+            "background": "bg_bosque",
+            "musica": "audio/music/misterio.ogg"
+        },
+        "dialogos": [
+            ["Lionel", "Este lugar se siente... diferente.", "preocupado"],
+            ["Morgan", "Es porque estamos en una frecuencia distinta, Lionel.", "normal"],
+            ["Lionel", "Mientras no sea una trampa, me vale.", "aliviado"]
+        ]
+    }
 }
