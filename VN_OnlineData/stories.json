@@ -2,7 +2,7 @@
     "evento_online_01": {
         "metadata": {
             "background": "bg_bosque",
-            "musica": "audio/music/misterio.ogg"
+            "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
             ["Lionel", "Este lugar se siente... diferente.", "preocupado"],
