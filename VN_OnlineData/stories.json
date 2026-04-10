@@ -5,9 +5,7 @@
             "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
-            ["Lionel", "Este lugar se siente... diferente.", "preocupado"],
-            ["Morgan", "Es porque estamos en una frecuencia distinta, Lionel.", "normal"],
-            ["Lionel", "Mientras no sea una trampa, me vale.", "aliviado"]
+            ["Narrador", "Actualmente no hay historias disponibles en este luagr...", "preocupado"],
         ]
     }
 }
