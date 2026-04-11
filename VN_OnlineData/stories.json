@@ -8,7 +8,7 @@
             ["SCENE", "bg_dormitorio3", "pixellate"],
             ["Narrador", "Actualmente no hay historias disponibles en este lugar...", "preocupado"],
             ["SCENE", "bg_dormitorio2", "pixellate"],
-            ["MUSIC", "PSMD_Quiet_Night", ""],
+            ["MUSIC", "Quiet_Night", ""],
             ["Narrador", "Aunque muchas gracias por probar", "preocupado"]
         ]
     }
