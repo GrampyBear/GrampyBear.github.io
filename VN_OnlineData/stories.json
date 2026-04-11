@@ -5,8 +5,8 @@
             "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
-            ["SCENE", "Modern-Dormroom3.png", "pixellate"],
-            ["SCENE", "Modern-Dormroom2.png", "pixellate"],
+            ["SCENE", "bg_Modern_Dormroom3.png", "pixellate"],
+            ["SCENE", "bg_Modern_Dormroom2.png", "pixellate"],
             ["MUSIC", "audio/music/misterio.ogg", ""],
             ["Narrador", "Actualmente no hay historias disponibles en este lugar...", "preocupado"]
         ]
