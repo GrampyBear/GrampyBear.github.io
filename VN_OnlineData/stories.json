@@ -1,7 +1,7 @@
 {
     "evento_online_01": {
         "metadata": {
-            "background": "bg_bosque",
+            "background": "black",
             "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
