@@ -5,9 +5,9 @@
             "music": "audio/music/misterio.ogg"
         },
         "dialogos": [
-            ["SCENE", "bg bg_Modern_Dormroom3.png", "pixellate"],
+            ["SCENE", "bg_dormitorio3", "pixellate"],
             ["Narrador", "Actualmente no hay historias disponibles en este lugar...", "preocupado"],
-            ["SCENE", "bg/bg_Modern_Dormroom2.png", "pixellate"],
+            ["SCENE", "bg_dormitorio2", "pixellate"],
             ["MUSIC", "audio/music/misterio.ogg", ""],
             ["Narrador", "Aunque muchas gracias por probar", "preocupado"]
         ]
