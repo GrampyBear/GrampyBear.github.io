@@ -16,7 +16,7 @@ renpy.show("leo_happy", at_list=[center])
 renpy.say("Montgomery", "Even so, thank you for testing this 'beta'.")
 renpy.say("Montgomery" "I hope you have a good day.")
 
-renpy.hide("leo_1")
+renpy.hide("leo_happy")
 renpy.with_statement(Dissolve(1.0))
 
 ocultar_interfaz()
