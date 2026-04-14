@@ -1,4 +1,6 @@
 # --- Ejemplo de contenido para historia_01.txt ---
+renpy.window_hide()
+renpy.with_statement(dissolve)
 renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
 renpy.show("bg_dormitorio3")
