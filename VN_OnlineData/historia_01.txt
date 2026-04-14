@@ -7,7 +7,7 @@ renpy.show("bg_darkdoor")
 renpy.with_statement(fade)
 
 renpy.show("leo_1", at_list=[center])
-renpy.with_statement(dissolve)
+renpy.with_statement(store.dissolve_lento)
 renpy.say("Montgomery", "Bienvenido!")
 renpy.say("Montgomery","Lamento mucho los inconvenientes pero este lugar aun esta en construccion.")
 
