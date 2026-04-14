@@ -1,6 +1,8 @@
 # --- Ejemplo de contenido para historia_01.txt ---
+renpy.say(None, None, interact=False) # Prepara el estado vacío
 renpy.window_hide()
-renpy.with_statement(dissolve)
+renpy.pause() # El juego se queda limpio hasta que el usuario cliquea
+
 renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
 renpy.show("bg_dormitorio3")
