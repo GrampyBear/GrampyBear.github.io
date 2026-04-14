@@ -7,7 +7,7 @@ renpy.show("bg_darkdoor")
 renpy.with_statement(fade)
 
 renpy.say("Montgomery", "bienvenido!")
-renpy.show("n leo 1", at_list=[center])
+renpy.show("leo_1", at_list=[center])
 
 # Puedes mover personajes si tienes los sprites definidos:
 # renpy.show("lionel", at_list=[right])
