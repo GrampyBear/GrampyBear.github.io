@@ -1,14 +1,19 @@
 # --- Ejemplo de contenido para historia_01.txt ---
 renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
-renpy.window_hide()
+
+renpy.ast.PyWindow("hide").execute()
 renpy.scene()
 renpy.show("bg_dormitorio1")
 renpy.with_statement(fade)
+
 renpy.say("Lionel", "Este lugar se siente... diferente hoy.")
+
 # Puedes mover personajes si tienes los sprites definidos:
 # renpy.show("lionel", at_list=[right])
 # renpy.with_statement(move)
+
 renpy.say("Narrador", "Sientes una presencia en el pasillo.")
 renpy.show("bg_dormitorio2")
 renpy.with_statement(dissolve)
+
 renpy.say("Morgan", "No deberías estar despierto a estas horas.")
