@@ -3,7 +3,7 @@ renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
 ocultar_interfaz()
 
-renpy.show("bg_dormitorio1")
+renpy.show("bg_dormitorio3")
 renpy.with_statement(fade)
 
 renpy.say("Lionel", "Este lugar se siente... diferente hoy.")
