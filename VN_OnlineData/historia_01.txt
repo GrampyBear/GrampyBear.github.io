@@ -2,7 +2,7 @@
 renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
 renpy.show("bg_dormitorio3")
-renpy.with_statement(pixellate)
+renpy.with_statement(dissolve)
 
 renpy.say("Lionel", "Este lugar se siente... diferente hoy.")
 
