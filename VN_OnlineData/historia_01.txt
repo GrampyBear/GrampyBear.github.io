@@ -3,17 +3,12 @@ renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
 ocultar_interfaz()
 
-renpy.show("bg_dormitorio3")
+renpy.show("bg_darkdoor")
 renpy.with_statement(fade)
 
-renpy.say("Lionel", "Este lugar se siente... diferente hoy.")
+renpy.say("Montgomery", "bienvenido!")
+renpy.show("n leo 1", at_list=[center])
 
 # Puedes mover personajes si tienes los sprites definidos:
 # renpy.show("lionel", at_list=[right])
 # renpy.with_statement(move)
-
-renpy.say("Narrador", "Sientes una presencia en el pasillo.")
-renpy.show("bg_dormitorio2")
-renpy.with_statement(dissolve)
-
-renpy.say("Morgan", "No deberías estar despierto a estas horas.")
