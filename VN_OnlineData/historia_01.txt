@@ -11,6 +11,7 @@ renpy.with_statement(Dissolve(1.0))
 renpy.say("Montgomery", "Welcome!")
 renpy.say("Montgomery","I'm very sorry for the inconvenience, but this place is still under construction.")
 
+renpy.hide("leo_1")
 renpy.show("leo_happy", at_list=[center])
 
 renpy.say("Montgomery", "Even so, thank you for testing this 'beta'.")
