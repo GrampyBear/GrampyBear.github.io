@@ -24,7 +24,7 @@ ocultar_interfaz()
 renpy.show("dark", at_list=[center])
 renpy.with_statement(Dissolve(1.0))
 
-renpy.say("Darkness" "I'll see you again soon, enjoy your time...")
+renpy.say("Darkness", "I'll see you again soon, enjoy your time...")
 
 # Puedes mover personajes si tienes los sprites definidos:
 # renpy.show("lionel", at_list=[right])
