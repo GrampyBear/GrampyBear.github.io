@@ -1,12 +1,10 @@
 # --- Ejemplo de contenido para historia_01.txt ---
 renpy.music.play(store.audio.Quiet_Night, fadein=2.0)
 
-renpy.say(None, None, interact=False) # Prepara el estado vacío
 renpy.window_hide()
-renpy.pause() # El juego se queda limpio hasta que el usuario cliquea
-
-renpy.show("bg_dormitorio3")
-renpy.with_statement(dissolve)
+renpy.scene()
+renpy.show("bg_dormitorio1")
+renpy.with_statement(fade)
 
 renpy.say("Lionel", "Este lugar se siente... diferente hoy.")
 
