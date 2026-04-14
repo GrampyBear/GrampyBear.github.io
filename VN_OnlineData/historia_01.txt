@@ -6,8 +6,12 @@ ocultar_interfaz()
 renpy.show("bg_darkdoor")
 renpy.with_statement(fade)
 
-renpy.say("Montgomery", "bienvenido!")
 renpy.show("leo_1", at_list=[center])
+renpy.say("Montgomery", "Bienvenido!")
+renpy.say("Montgomery","Lamento mucho los inconvenientes pero este lugar aun esta en construccion.")
+
+renpy.show("leo_happy", at_list=[center])
+renpy.say("Montgomery", "Aun asi gracias por estar probando esta 'beta'.")
 
 # Puedes mover personajes si tienes los sprites definidos:
 # renpy.show("lionel", at_list=[right])
