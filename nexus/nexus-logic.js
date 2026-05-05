@@ -4,13 +4,19 @@ const body = document.body;
 cards.forEach(card => {
     card.addEventListener('mouseenter', () => {
         if (card.classList.contains('my-work')) {
-            body.style.backgroundColor = "#0a121a"; // Tono frío
+            // Fondo para Hues of Heart (Verde Lima y Púrpura)
+            body.style.backgroundColor = "#07000a"; 
+            body.style.boxShadow = "inset 0 0 300px rgba(96, 0, 145, 0.5)";
         } else {
-            body.style.backgroundColor = "#1a0a0a"; // Tono cálido
+            // Fondo para Quantum Love Theory (Cian y Púrpura)
+            body.style.backgroundColor = "#00050a";
+            body.style.boxShadow = "inset 0 0 300px rgba(74, 20, 140, 0.5)";
         }
     });
 
     card.addEventListener('mouseleave', () => {
-        body.style.backgroundColor = "#0d0d0d"; // Volver al neutro
+        // Volver al estado neutro
+        body.style.backgroundColor = "#050505";
+        body.style.boxShadow = "none";
     });
 });
