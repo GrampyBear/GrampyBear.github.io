@@ -47,10 +47,19 @@ body {
 /* --- Grid de Tarjetas --- */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 40px;
+    /* Cambiamos auto-fit por un sistema que respete mejor las columnas */
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 30px; /* Separación entre tarjetas */
     width: 100%;
-    margin-top: 40px;
+    max-width: 1000px; /* Evita que se estiren infinito hacia los lados */
+    margin: 40px auto 0 auto; /* Centra el grid */
+}
+
+@media (max-width: 850px) {
+    .grid-container {
+        grid-template-columns: 1fr; /* Solo aquí se ponen una sobre otra */
+        gap: 20px;
+    }
 }
 
 /* --- Estilo de Tarjetas --- */
@@ -62,10 +71,9 @@ body {
     border-radius: 28px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    text-align: left;
     display: flex;
     flex-direction: column;
+    min-height: 450px; /* Altura mínima para que sean consistentes */
 }
 
 .card-banner {
