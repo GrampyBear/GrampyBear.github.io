@@ -1,52 +1,101 @@
 :root {
-    --bg-color: #0d0d0d;
-    --text-main: #ffffff;
-    --accent-my-work: #a5d8ff; /* Azul hielo para Hues of Heart */
-    --accent-guest: #ff9494;   /* Tono cálido para QLT */
+    --bg-dark: #050505;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --hoh-glow: #a5d8ff;
+    --qlt-glow: #ff4d4d;
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-dark);
+    color: white;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
 }
 
 #nexus-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 20px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px;
+    text-align: center;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: 1000px;
-    margin-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 60px;
 }
 
-/* Estilo de las tarjetas */
+/* Tarjetas con efecto Glassmorphism */
 .card {
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-glass);
+    border-radius: 24px;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     position: relative;
-    height: 450px;
-    border-radius: 15px;
+}
+
+.card-banner {
+    height: 200px;
     background-size: cover;
     background-position: center;
-    transition: transform 0.4s ease, filter 0.4s ease;
-    cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.1);
+    filter: brightness(0.7);
+    transition: 0.5s;
 }
 
-/* Aplicando el blur que te gusta a la tarjeta no seleccionada */
-.grid-container:hover .card:not(:hover) {
-    filter: blur(8px) grayscale(50%);
-    transform: scale(0.95);
+.card-body {
+    padding: 30px;
+    text-align: left;
 }
 
-.card:hover {
+/* Efectos Hover */
+.my-work:hover {
+    border-color: var(--hoh-glow);
+    box-shadow: 0 0 30px rgba(165, 216, 255, 0.2);
+}
+
+.guest-work:hover {
+    border-color: var(--qlt-glow);
+    box-shadow: 0 0 30px rgba(255, 77, 77, 0.2);
+}
+
+.card:hover .card-banner {
+    filter: brightness(1);
     transform: scale(1.05);
-    border-color: white;
 }
+
+/* Blur en la tarjeta no seleccionada */
+.grid-container:hover .card:not(:hover) {
+    filter: blur(4px);
+    opacity: 0.6;
+}
+
+/* Botones y Badges */
+.badge {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-itch, .btn-bsky {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-itch { background: #ff4d4d; color: white; }
+.btn-bsky { background: #0085ff; color: white; margin-left: 10px; }
