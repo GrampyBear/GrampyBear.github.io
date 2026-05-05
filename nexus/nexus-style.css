@@ -4,12 +4,12 @@
     --glass: rgba(255, 255, 255, 0.02);
     --border-glass: rgba(255, 255, 255, 0.08);
     
-    /* Paleta Hues of Heart (HoH) - Personalizada */
+    /* Paleta Hues of Heart (HoH) */
     --hoh-primary: #aaff00;   /* Lima neón */
     --hoh-secondary: #600091; /* Púrpura profundo */
     --hoh-glow: rgba(170, 255, 0, 0.3);
 
-    /* Paleta Quantum Love Theory (QLT) - Basada en imagen */
+    /* Paleta Quantum Love Theory (QLT) */
     --qlt-cyan: #00e5ff;
     --qlt-purple: #6a1b9a;
     --qlt-violet: #4a148c;
@@ -30,7 +30,7 @@ body {
     display: flex;
     justify-content: center;
     min-height: 100vh;
-    transition: background 0.8s ease, box-shadow 0.8s ease; /* Transición para el blur ambiental */
+    transition: background 0.8s ease, box-shadow 0.8s ease;
 }
 
 /* --- Contenedor Principal --- */
@@ -91,6 +91,20 @@ body {
     margin: 15px 0 10px 0;
 }
 
+/* --- Versión y Metadatos --- */
+.meta-info {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.version {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: monospace;
+}
+
 /* --- Hover Específico: Hues of Heart --- */
 .my-work:hover {
     border-color: var(--hoh-primary);
@@ -100,6 +114,13 @@ body {
 
 .my-work h2 {
     color: var(--hoh-primary);
+}
+
+.status-tag { 
+    color: var(--hoh-primary); 
+    font-weight: 500; 
+    opacity: 0.9;
+    font-size: 0.9rem;
 }
 
 /* --- Hover Específico: QLT --- */
@@ -116,46 +137,46 @@ body {
     background-clip: text;
 }
 
+/* --- Botones --- */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-itch, .btn-bsky, .btn-patreon {
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.btn-itch { background-color: var(--qlt-violet); color: white; }
+.btn-itch:hover { background-color: var(--qlt-purple); }
+
+.btn-bsky { background-color: transparent; color: var(--qlt-cyan); border: 1px solid var(--qlt-cyan); }
+.btn-bsky:hover { background-color: rgba(0, 229, 255, 0.1); }
+
+.btn-patreon { background-color: #f96854; color: #052d49; }
+.btn-patreon:hover { background-color: #ff8e7e; box-shadow: 0 5px 15px rgba(249, 104, 84, 0.3); }
+
 /* --- Efecto Global de Desenfoque Ambiental --- */
 .card:hover .card-banner {
     filter: brightness(1) grayscale(0%);
     transform: scale(1.05);
 }
 
-/* Desenfoque en la tarjeta NO seleccionada */
 .grid-container:hover .card:not(:hover) {
     filter: blur(8px);
     opacity: 0.4;
     transform: scale(0.96);
 }
 
-/* --- Botones y Badges --- */
-.badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn-group {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.btn-itch { background-color: var(--qlt-violet); color: white; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
-.btn-bsky { background-color: transparent; color: var(--qlt-cyan); border: 1px solid var(--qlt-cyan); text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
-
-.btn-itch:hover { background-color: var(--qlt-purple); }
-.btn-bsky:hover { background-color: rgba(0, 229, 255, 0.1); }
-
-.status-tag { margin-top: 20px; color: var(--hoh-primary); font-weight: 500; opacity: 0.9; }
-
-/* --- Navegación Footer (Botón Volver) --- */
+/* --- Botón Volver (Footer) --- */
 .navigation-footer {
     margin-top: 100px;
     padding-bottom: 50px;
