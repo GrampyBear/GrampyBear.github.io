@@ -4,12 +4,12 @@
     --glass: rgba(255, 255, 255, 0.02);
     --border-glass: rgba(255, 255, 255, 0.08);
     
-    /* Paleta Hues of Heart (HoH) - Personalizada */
+    /* Paleta Hues of Heart (HoH) - Identidad Visual */
     --hoh-primary: #aaff00;   /* Lima neón */
     --hoh-secondary: #600091; /* Púrpura profundo */
     --hoh-glow: rgba(170, 255, 0, 0.3);
 
-    /* Paleta Quantum Love Theory (QLT) - Basada en imagen */
+    /* Paleta Quantum Love Theory (QLT) - Identidad Visual */
     --qlt-cyan: #00e5ff;
     --qlt-purple: #6a1b9a;
     --qlt-violet: #4a148c;
@@ -33,10 +33,10 @@ body {
     transition: background 0.8s ease, box-shadow 0.8s ease;
 }
 
-/* --- Contenedor Principal --- */
+/* --- Contenedor Principal (Nexus) --- */
 #nexus-wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1200px; /* Mantener este ancho para asegurar el layout horizontal */
     padding: 60px 20px;
     text-align: center;
     display: flex;
@@ -44,25 +44,16 @@ body {
     align-items: center;
 }
 
-/* --- Grid de Tarjetas --- */
+/* --- Grid de Tarjetas (Tu estructura ganadora) --- */
 .grid-container {
     display: grid;
-    /* Cambiamos auto-fit por un sistema que respete mejor las columnas */
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 30px; /* Separación entre tarjetas */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
     width: 100%;
-    max-width: 1000px; /* Evita que se estiren infinito hacia los lados */
-    margin: 40px auto 0 auto; /* Centra el grid */
+    margin-top: 40px;
 }
 
-@media (max-width: 850px) {
-    .grid-container {
-        grid-template-columns: 1fr; /* Solo aquí se ponen una sobre otra */
-        gap: 20px;
-    }
-}
-
-/* --- Estilo de Tarjetas --- */
+/* --- Estilo Base de Tarjetas --- */
 .card {
     background: var(--glass);
     backdrop-filter: blur(15px);
@@ -71,9 +62,10 @@ body {
     border-radius: 28px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    min-height: 450px; /* Altura mínima para que sean consistentes */
 }
 
 .card-banner {
@@ -99,15 +91,22 @@ body {
     margin: 15px 0 10px 0;
 }
 
-/* --- NUEVO: Estilos de Versión --- */
-.version {
+/* --- Versión y Etiquetas de Estado --- */
+.version-info {
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.5);
     font-family: monospace;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-/* --- Hover Específico: Hues of Heart --- */
+.status-tag { 
+    color: var(--hoh-primary); 
+    font-weight: 500; 
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* --- HoH Hover --- */
 .my-work:hover {
     border-color: var(--hoh-primary);
     box-shadow: 0 15px 40px var(--hoh-glow);
@@ -118,7 +117,7 @@ body {
     color: var(--hoh-primary);
 }
 
-/* --- Hover Específico: QLT --- */
+/* --- QLT Hover --- */
 .guest-work:hover {
     border-color: var(--qlt-cyan);
     box-shadow: 0 15px 40px var(--qlt-glow);
@@ -132,7 +131,33 @@ body {
     background-clip: text;
 }
 
-/* --- Efecto Global de Desenfoque Ambiental --- */
+/* --- Botones --- */
+.btn-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.btn-itch, .btn-bsky, .btn-patreon {
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+
+.btn-itch { background-color: var(--qlt-violet); color: white; }
+.btn-itch:hover { background-color: var(--qlt-purple); }
+
+.btn-bsky { background-color: transparent; color: var(--qlt-cyan); border: 1px solid var(--qlt-cyan); }
+.btn-bsky:hover { background-color: rgba(0, 229, 255, 0.1); }
+
+.btn-patreon { background-color: #f96854; color: #052d49; }
+.btn-patreon:hover { background-color: #ff8e7e; box-shadow: 0 5px 15px rgba(249, 104, 84, 0.3); }
+
+/* --- Efectos Globales --- */
 .card:hover .card-banner {
     filter: brightness(1) grayscale(0%);
     transform: scale(1.05);
@@ -144,40 +169,13 @@ body {
     transform: scale(0.96);
 }
 
-/* --- Botones y Badges --- */
-.badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.btn-group {
-    display: flex;
-    gap: 15px;
-    margin-top: 25px;
-}
-
-.btn-itch { background-color: var(--qlt-violet); color: white; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
-.btn-bsky { background-color: transparent; color: var(--qlt-cyan); border: 1px solid var(--qlt-cyan); text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
-
-/* NUEVO: Botón Patreon */
-.btn-patreon { background-color: #f96854; color: #052d49; text-decoration: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; transition: 0.3s; }
-.btn-patreon:hover { background-color: #ff8e7e; box-shadow: 0 5px 15px rgba(249, 104, 84, 0.3); }
-
-.btn-itch:hover { background-color: var(--qlt-purple); }
-.btn-bsky:hover { background-color: rgba(0, 229, 255, 0.1); }
-
-.status-tag { margin-top: 20px; color: var(--hoh-primary); font-weight: 500; opacity: 0.9; }
-
-/* --- Navegación Footer (Botón Volver) --- */
+/* --- Footer y Botón Volver --- */
 .navigation-footer {
     margin-top: 100px;
     padding-bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .back-button {
@@ -190,7 +188,7 @@ body {
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     font-weight: 600;
-    transition: all 0.4s ease;
+    transition: 0.4s;
     backdrop-filter: blur(10px);
 }
 
