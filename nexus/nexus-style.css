@@ -4,9 +4,8 @@
     --glass: rgba(255, 255, 255, 0.02);
     --border-glass: rgba(255, 255, 255, 0.08);
     
-    /* Paleta Hues of Heart (HoH) */
-    --hoh-primary: #aaff00;   /* Lima neón */
-    --hoh-secondary: #600091; /* Púrpura profundo */
+    /* Paleta Hues of Heart (HoH) - Lima y Púrpura */
+    --hoh-primary: #aaff00;
     --hoh-glow: rgba(170, 255, 0, 0.3);
 
     /* Paleta Quantum Love Theory (QLT) */
@@ -26,7 +25,7 @@
 body {
     background-color: var(--bg-dark);
     color: white;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     min-height: 100vh;
@@ -38,13 +37,12 @@ body {
     width: 100%;
     max-width: 1200px;
     padding: 60px 20px;
-    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- Grid de Tarjetas --- */
+/* --- Grid de Tarjetas (Mantiene el orden y tamaño original) --- */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -62,19 +60,16 @@ body {
     border-radius: 28px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    position: relative;
-    text-align: left;
     display: flex;
     flex-direction: column;
+    height: 100%; /* Asegura que todas midan lo mismo */
 }
 
 .card-banner {
     height: 220px;
-    background-color: #111;
     background-size: cover;
     background-position: center;
     filter: brightness(0.5) grayscale(30%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.6s ease;
 }
 
@@ -85,45 +80,16 @@ body {
     flex-direction: column;
 }
 
-.card-body h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 15px 0 10px 0;
-}
-
-/* --- Versión y Metadatos --- */
-.meta-info {
-    margin-top: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.version {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: monospace;
-}
-
-/* --- Hover Específico: Hues of Heart --- */
+/* --- HoH Hover --- */
 .my-work:hover {
     border-color: var(--hoh-primary);
     box-shadow: 0 15px 40px var(--hoh-glow);
     transform: translateY(-5px);
 }
 
-.my-work h2 {
-    color: var(--hoh-primary);
-}
+.my-work h2 { color: var(--hoh-primary); }
 
-.status-tag { 
-    color: var(--hoh-primary); 
-    font-weight: 500; 
-    opacity: 0.9;
-    font-size: 0.9rem;
-}
-
-/* --- Hover Específico: QLT --- */
+/* --- QLT Hover --- */
 .guest-work:hover {
     border-color: var(--qlt-cyan);
     box-shadow: 0 15px 40px var(--qlt-glow);
@@ -131,74 +97,52 @@ body {
 }
 
 .guest-work h2 {
-    background: linear-gradient(90deg, var(--qlt-cyan) 0%, var(--qlt-purple) 100%);
+    background: linear-gradient(90deg, var(--qlt-cyan), var(--qlt-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 /* --- Botones --- */
 .btn-group {
     display: flex;
-    gap: 12px;
-    margin-top: 25px;
+    gap: 10px;
+    margin-top: 20px;
     flex-wrap: wrap;
 }
 
 .btn-itch, .btn-bsky, .btn-patreon {
     text-decoration: none;
-    padding: 12px 20px;
+    padding: 10px 18px;
     border-radius: 10px;
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: 0.3s;
-    text-align: center;
 }
 
-.btn-itch { background-color: var(--qlt-violet); color: white; }
-.btn-itch:hover { background-color: var(--qlt-purple); }
+.btn-itch { background: var(--qlt-violet); color: white; }
+.btn-bsky { border: 1px solid var(--qlt-cyan); color: var(--qlt-cyan); }
+.btn-patreon { background: #f96854; color: #052d49; }
 
-.btn-bsky { background-color: transparent; color: var(--qlt-cyan); border: 1px solid var(--qlt-cyan); }
-.btn-bsky:hover { background-color: rgba(0, 229, 255, 0.1); }
-
-.btn-patreon { background-color: #f96854; color: #052d49; }
-.btn-patreon:hover { background-color: #ff8e7e; box-shadow: 0 5px 15px rgba(249, 104, 84, 0.3); }
-
-/* --- Efecto Global de Desenfoque Ambiental --- */
-.card:hover .card-banner {
-    filter: brightness(1) grayscale(0%);
-    transform: scale(1.05);
-}
-
-.grid-container:hover .card:not(:hover) {
-    filter: blur(8px);
-    opacity: 0.4;
-    transform: scale(0.96);
-}
-
-/* --- Botón Volver (Footer) --- */
+/* --- Footer --- */
 .navigation-footer {
-    margin-top: 100px;
-    padding-bottom: 50px;
+    margin-top: 80px;
+    padding-bottom: 40px;
 }
 
 .back-button {
     display: inline-flex;
     align-items: center;
-    padding: 14px 35px;
+    padding: 12px 30px;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-glass);
     border-radius: 50px;
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
-    font-weight: 600;
-    transition: all 0.4s ease;
-    backdrop-filter: blur(10px);
+    transition: 0.4s;
 }
 
 .back-button:hover {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
     color: white;
+    background: rgba(255, 255, 255, 0.08);
     transform: translateY(-3px);
 }
