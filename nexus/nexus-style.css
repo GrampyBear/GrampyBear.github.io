@@ -1,15 +1,21 @@
 :root {
+    /* Fondos y UI Base */
     --bg-dark: #050505;
     --glass: rgba(255, 255, 255, 0.02);
     --border-glass: rgba(255, 255, 255, 0.08);
-    --hoh-primary: #aaff00;
+    
+    /* Paleta Hues of Heart (HoH) */
+    --hoh-primary: #aaff00;   /* Lima neón */
     --hoh-glow: rgba(170, 255, 0, 0.3);
+
+    /* Paleta Quantum Love Theory (QLT) */
     --qlt-cyan: #00e5ff;
     --qlt-purple: #6a1b9a;
     --qlt-violet: #4a148c;
     --qlt-glow: rgba(0, 229, 255, 0.3);
 }
 
+/* --- Reset General --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -19,12 +25,13 @@
 body {
     background-color: var(--bg-dark);
     color: white;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, sans-serif;
     display: flex;
     justify-content: center;
     min-height: 100vh;
 }
 
+/* --- Contenedor Principal --- */
 #nexus-wrapper {
     width: 100%;
     max-width: 1200px;
@@ -34,17 +41,19 @@ body {
     align-items: center;
 }
 
-/* --- Cambiamos Grid por Flexbox para control total lateral --- */
+/* --- El Grid Horizontal (Corregido) --- */
 .grid-container {
     display: flex;
-    flex-direction: row; /* Fuerza el orden de izquierda a derecha */
-    flex-wrap: wrap;     /* Permite bajar si la pantalla es de celular */
-    justify-content: center; 
-    gap: 30px;
+    flex-direction: row;     /* Fuerza el orden de izquierda a derecha */
+    justify-content: center; /* Centra el conjunto de tarjetas */
+    align-items: stretch;    /* OBLIGA a que todas midan lo mismo de alto */
+    gap: 40px;               /* Espacio constante entre tarjetas */
     width: 100%;
     margin-top: 40px;
+    flex-wrap: nowrap;       /* Evita que se amontonen en vertical en PC */
 }
 
+/* --- Estilo de Tarjeta --- */
 .card {
     background: var(--glass);
     backdrop-filter: blur(15px);
@@ -54,14 +63,11 @@ body {
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     
-    /* Definimos un ancho fijo pero flexible */
-    flex: 1;
-    min-width: 350px; 
-    max-width: 550px; 
-    
+    /* Control de Tamaño */
+    flex: 1;                 /* Ambas tarjetas ocupan el mismo ancho */
+    max-width: 500px;        /* Evita que se estiren demasiado */
     display: flex;
-    flex-direction: column;
-    text-align: left;
+    flex-direction: column;  /* Organiza el contenido interno de arriba a abajo */
 }
 
 .card-banner {
@@ -75,56 +81,70 @@ body {
 
 .card-body {
     padding: 35px;
+    flex-grow: 1;            /* Hace que el cuerpo crezca para llenar la tarjeta */
     display: flex;
     flex-direction: column;
-    height: 100%;
 }
 
 /* --- Tipografía y Colores --- */
 .card-body h2 {
     font-size: 1.8rem;
-    margin: 15px 0 10px 0;
+    font-weight: 700;
+    margin-bottom: 15px;
 }
 
 .my-work h2 { color: var(--hoh-primary); }
 .guest-work h2 {
-    background: linear-gradient(90deg, var(--qlt-cyan), var(--qlt-purple));
+    background: linear-gradient(90deg, var(--qlt-cyan) 0%, var(--qlt-purple) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
-/* --- Botones --- */
+/* --- Botones Alineados al Fondo --- */
 .btn-group {
+    margin-top: auto;        /* Empuja los botones siempre al final de la tarjeta */
     display: flex;
-    gap: 10px;
-    margin-top: auto; /* Empuja los botones al fondo de la tarjeta */
-    padding-top: 20px;
+    gap: 15px;
+    padding-top: 25px;
 }
 
-.btn-itch { background: var(--qlt-violet); color: white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; }
-.btn-bsky { border: 1px solid var(--qlt-cyan); color: var(--qlt-cyan); padding: 10px 18px; border-radius: 8px; text-decoration: none; }
-.btn-patreon { background: #f96854; color: #052d49; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; }
-
-/* --- Efectos de Hover --- */
-.my-work:hover { border-color: var(--hoh-primary); box-shadow: 0 10px 30px var(--hoh-glow); transform: translateY(-5px); }
-.guest-work:hover { border-color: var(--qlt-cyan); box-shadow: 0 10px 30px var(--qlt-glow); transform: translateY(-5px); }
-
-.card:hover .card-banner { filter: brightness(1) grayscale(0%); }
-
-/* Desenfoque ambiental */
-.grid-container:hover .card:not(:hover) {
-    filter: blur(5px);
-    opacity: 0.5;
-}
-
-.back-button {
-    margin-top: 60px;
-    padding: 12px 30px;
-    border-radius: 50px;
-    border: 1px solid var(--border-glass);
-    color: rgba(255,255,255,0.6);
+.btn-itch, .btn-bsky, .btn-patreon {
     text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
     transition: 0.3s;
+    text-align: center;
 }
 
-.back-button:hover { background: rgba(255,255,255,0.1); color: white; }
+.btn-itch { background-color: var(--qlt-violet); color: white; }
+.btn-bsky { border: 1px solid var(--qlt-cyan); color: var(--qlt-cyan); }
+.btn-patreon { background-color: #f96854; color: #052d49; }
+
+/* --- Hovers y Efectos --- */
+.my-work:hover { border-color: var(--hoh-primary); box-shadow: 0 15px 40px var(--hoh-glow); transform: translateY(-5px); }
+.guest-work:hover { border-color: var(--qlt-cyan); box-shadow: 0 15px 40px var(--qlt-glow); transform: translateY(-5px); }
+
+.card:hover .card-banner { filter: brightness(1) grayscale(0%); transform: scale(1.05); }
+
+/* Desenfoque cuando pasas el mouse por el contenedor */
+.grid-container:hover .card:not(:hover) {
+    filter: blur(8px);
+    opacity: 0.4;
+    transform: scale(0.96);
+}
+
+/* --- Ajuste para Móviles --- */
+@media (max-width: 900px) {
+    .grid-container {
+        flex-direction: column;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .card {
+        width: 100%;
+        max-width: 450px;
+    }
+}
