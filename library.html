@@ -1,11 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Novel Nexus</title>
-    <link rel="stylesheet" href="nexus/nexus-style.css">
-</head>
 <body>
     <div id="nexus-wrapper">
         <header class="main-header">
@@ -13,45 +5,53 @@
             <p>Explora nuestras historias</p>
         </header>
 
+        <!-- Se agregó el contenedor faltante para el orden horizontal -->
+        <section class="grid-container">
+            
+            <!-- Tarjeta 1: Hues of Heart -->
             <article class="card my-work">
-                <!-- PLACEHOLDER: Sube tu imagen a /assets-hub/hoh-banner.jpg -->
                 <div class="card-banner" style="background-image: url('assets-hub/hoh-banner.jpg');"></div>
                 <div class="card-body">
-                    <span class="badge">Original Story</span>
+                    <span class="project-type">Original Story</span>
                     <h2>Hues of Heart</h2>
-                    <p class="desc">Una historia de misterio y calidez en el corazón del invierno.</p>
+                    <p class="description">Una historia de misterio y calidez en el corazón del invierno.</p>
+                    
                     <div class="meta-info">
-                        <span class="version">Versión: v0.0.1 (Pre-Alpha)</span>
+                        <span class="version-tag">v0.0.1 (Pre-Alpha)</span>
                         <span class="status-tag">En desarrollo temprano</span>
                     </div>
+
+                    <!-- Si decides agregar botones a HoH en el futuro, irán aquí -->
                 </div>
             </article>
             
+            <!-- Tarjeta 2: QLT -->
             <article class="card guest-work">
-                    <!-- PLACEHOLDER: Sube tu imagen a /assets-hub/qlt-banner.jpg -->
-                    <div class="card-banner" style="background-image: url('assets-hub/qlt-banner.jpg');"></div>
-                    <div class="card-body">
-                        <span class="badge">Guest Project</span>
-                        <h2>Quantum Love Theory</h2>
-                        <p class="desc">Simulación, lógica y narrativa entrelazada por DarknessMinotaur.</p>
-                        <div class="meta-info">
-                            <span class="version">Versión: v0.1.2</span>
-                        </div>
-                        <div class="btn-group">
-                            <a href="https://darknessminotaur.itch.io/quantumlove" target="_blank" class="btn-itch">Itch.io</a>
-                            <a href="https://www.patreon.com/cw/Darknessminotaur" target="_blank" class="btn-patreon">Patreon</a>
-                            <a href="https://bsky.app/profile/quantumlovetheory.bsky.social" target="_blank" class="btn-bsky">Bluesky</a>
-                        </div>
+                <div class="card-banner" style="background-image: url('assets-hub/qlt-banner.jpg');"></div>
+                <div class="card-body">
+                    <span class="project-type">Guest Project</span>
+                    <h2>Quantum Love Theory</h2>
+                    <p class="description">Simulación, lógica y narrativa entrelazada por DarknessMinotaur.</p>
+                    
+                    <div class="meta-info">
+                        <span class="version-tag">v0.1.2</span>
                     </div>
+
+                    <div class="btn-group">
+                        <a href="https://darknessminotaur.itch.io/quantumlove" target="_blank" class="btn-action btn-itch">Itch.io</a>
+                        <a href="https://www.patreon.com/cw/Darknessminotaur" target="_blank" class="btn-action btn-patreon">Patreon</a>
+                        <a href="https://bsky.app/profile/quantumlovetheory.bsky.social" target="_blank" class="btn-action btn-bsky">Bluesky</a>
+                    </div>
+                </div>
             </article>
-        </section>
+
+        </section> <!-- Cierre correcto del grid -->
             
-            <footer class="navigation-footer">
-                <a href="index.html" class="back-button">
-                    <span class="arrow">←</span> Volver al Inicio
-                </a>
-            </footer>
+        <footer class="navigation-footer">
+            <a href="index.html" class="back-home-btn">
+                <span class="arrow">←</span> Volver al Inicio
+            </a>
+        </footer>
     </div>
     <script src="nexus/nexus-logic.js"></script>
 </body>
-</html>
