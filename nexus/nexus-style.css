@@ -4,18 +4,20 @@
     --glass: rgba(255, 255, 255, 0.02);
     --border-glass: rgba(255, 255, 255, 0.08);
     
-    /* Paleta Hues of Heart (HoH) */
-    --hoh-primary: #aaff00;   /* Lima neón */
+    /* Colores de Identidad */
+    --hoh-primary: #aaff00;
     --hoh-glow: rgba(170, 255, 0, 0.3);
-
-    /* Paleta Quantum Love Theory (QLT) */
     --qlt-cyan: #00e5ff;
     --qlt-purple: #6a1b9a;
     --qlt-violet: #4a148c;
     --qlt-glow: rgba(0, 229, 255, 0.3);
+    
+    /* Grises de Interfaz */
+    --text-description: #b0b0b0;
+    --text-version: #666666; /* Gris distintivo para la versión */
 }
 
-/* --- Reset General --- */
+/* --- Reset y Tipografía Base --- */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -25,126 +27,182 @@
 body {
     background-color: var(--bg-dark);
     color: white;
-    font-family: 'Inter', -apple-system, sans-serif;
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     min-height: 100vh;
 }
 
-/* --- Contenedor Principal --- */
+/* --- Contenedor Nexus --- */
 #nexus-wrapper {
     width: 100%;
     max-width: 1200px;
-    padding: 60px 20px;
+    padding: 80px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* --- El Grid Horizontal (Corregido) --- */
+/* --- Orden Horizontal de Tarjetas --- */
 .grid-container {
     display: flex;
-    flex-direction: row;     /* Fuerza el orden de izquierda a derecha */
-    justify-content: center; /* Centra el conjunto de tarjetas */
-    align-items: stretch;    /* OBLIGA a que todas midan lo mismo de alto */
-    gap: 40px;               /* Espacio constante entre tarjetas */
+    flex-direction: row; 
+    justify-content: center;
+    align-items: stretch; /* Garantiza que todas tengan el mismo alto */
+    gap: 40px;
     width: 100%;
-    margin-top: 40px;
-    flex-wrap: nowrap;       /* Evita que se amontonen en vertical en PC */
+    margin-top: 50px;
 }
 
-/* --- Estilo de Tarjeta --- */
+/* --- Diseño de Tarjeta --- */
 .card {
     background: var(--glass);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--border-glass);
-    border-radius: 28px;
+    border-radius: 32px;
     overflow: hidden;
     transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     
-    /* Control de Tamaño */
-    flex: 1;                 /* Ambas tarjetas ocupan el mismo ancho */
-    max-width: 500px;        /* Evita que se estiren demasiado */
-    display: flex;
-    flex-direction: column;  /* Organiza el contenido interno de arriba a abajo */
-}
-
-.card-banner {
-    height: 220px;
-    background-color: #111;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.5) grayscale(30%);
-    transition: 0.6s ease;
-}
-
-.card-body {
-    padding: 35px;
-    flex-grow: 1;            /* Hace que el cuerpo crezca para llenar la tarjeta */
+    flex: 1;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
 }
 
-/* --- Tipografía y Colores --- */
+/* Espacio para el Banner */
+.card-banner {
+    height: 240px;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(0.6);
+}
+
+.card-body {
+    padding: 40px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Tipos de Proyectos (Badges) --- */
+.project-type {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    width: fit-content;
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- Títulos --- */
 .card-body h2 {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
 }
 
 .my-work h2 { color: var(--hoh-primary); }
 .guest-work h2 {
-    background: linear-gradient(90deg, var(--qlt-cyan) 0%, var(--qlt-purple) 100%);
+    background: linear-gradient(135deg, var(--qlt-cyan), var(--qlt-purple));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
-/* --- Botones Alineados al Fondo --- */
+/* --- Estilo Único de Descripción --- */
+.description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-description);
+    font-style: italic; /* Toque distintivo */
+    margin-bottom: 20px;
+}
+
+/* --- Estilo de Versión (Gris Distinto y Letra Mono) --- */
+.version-tag {
+    font-family: 'JetBrains Mono', 'Fira Code', monospace; /* Fuente técnica */
+    font-size: 0.85rem;
+    color: var(--text-version);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 4px 10px;
+    border-radius: 6px;
+    width: fit-content;
+    margin-top: auto; /* La empuja hacia arriba de los botones */
+}
+
+/* --- Botones --- */
 .btn-group {
-    margin-top: auto;        /* Empuja los botones siempre al final de la tarjeta */
     display: flex;
-    gap: 15px;
-    padding-top: 25px;
+    gap: 12px;
+    margin-top: 25px;
 }
 
-.btn-itch, .btn-bsky, .btn-patreon {
+.btn-action {
+    flex: 1;
     text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 10px;
+    padding: 14px;
+    border-radius: 12px;
     font-weight: 700;
     font-size: 0.9rem;
-    transition: 0.3s;
     text-align: center;
+    transition: 0.3s ease;
 }
 
-.btn-itch { background-color: var(--qlt-violet); color: white; }
-.btn-bsky { border: 1px solid var(--qlt-cyan); color: var(--qlt-cyan); }
-.btn-patreon { background-color: #f96854; color: #052d49; }
+.btn-primary { background: var(--qlt-violet); color: white; }
+.btn-outline { border: 1px solid var(--qlt-cyan); color: var(--qlt-cyan); }
+.btn-patreon { background: #f96854; color: #052d49; }
 
-/* --- Hovers y Efectos --- */
-.my-work:hover { border-color: var(--hoh-primary); box-shadow: 0 15px 40px var(--hoh-glow); transform: translateY(-5px); }
-.guest-work:hover { border-color: var(--qlt-cyan); box-shadow: 0 15px 40px var(--qlt-glow); transform: translateY(-5px); }
-
-.card:hover .card-banner { filter: brightness(1) grayscale(0%); transform: scale(1.05); }
-
-/* Desenfoque cuando pasas el mouse por el contenedor */
-.grid-container:hover .card:not(:hover) {
-    filter: blur(8px);
-    opacity: 0.4;
-    transform: scale(0.96);
+/* --- Botón Volver al Inicio (Nuevo Diseño) --- */
+.navigation-footer {
+    margin-top: 80px;
 }
 
-/* --- Ajuste para Móviles --- */
-@media (max-width: 900px) {
-    .grid-container {
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: wrap;
-    }
-    .card {
-        width: 100%;
-        max-width: 450px;
-    }
+.back-home-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 40px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--border-glass);
+    border-radius: 100px; /* Estilo píldora */
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+}
+
+.back-home-btn:hover {
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    background: rgba(255,255,255,0.1);
+}
+
+/* --- Hovers y Animaciones --- */
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.my-work:hover { border-color: var(--hoh-primary); box-shadow: 0 20px 50px var(--hoh-glow); }
+.guest-work:hover { border-color: var(--qlt-cyan); box-shadow: 0 20px 50px var(--qlt-glow); }
+
+.card:hover .card-banner {
+    filter: brightness(1);
+    transform: scale(1.05);
+}
+
+/* Ajuste móvil */
+@media (max-width: 950px) {
+    .grid-container { flex-direction: column; align-items: center; }
+    .card { width: 100%; min-width: unset; }
 }
