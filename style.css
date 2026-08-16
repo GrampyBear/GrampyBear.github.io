@@ -170,8 +170,8 @@ body {
 }
 
 .signal-indicator {
-    color: #ff3366;
-    text-shadow: 0 0 8px rgba(255, 51, 102, 0.7);
+    color: currentColor;
+    text-shadow: 0 0 8px currentColor;
     animation: blink 1.5s infinite;
 }
 
@@ -394,7 +394,7 @@ body {
     box-shadow: 0 5px 8px rgba(0,0,0,0.6);
 }
 
-/* --- CHANNEL STYLES & INTERACTIVE EFFECTS --- */
+/* --- CHANNEL STYLES --- */
 
 /* CH-01: NO SIGNAL / COLORBARS */
 .screen.mode-no-signal {
@@ -460,7 +460,7 @@ body {
     background: #120214;
 }
 
-/* GLITCH / INTERFERENCE EFFECT ON CHANNEL SWITCH */
+/* GLITCH / INTERFERENCE EFFECT */
 .screen.glitch {
     animation: crtGlitch 0.25s ease;
 }
@@ -471,7 +471,7 @@ body {
     100% { filter: brightness(1) contrast(1) hue-rotate(0deg); transform: scaleX(1); }
 }
 
-/* 100% ACCURATE CRT POWER OFF ANIMATION */
+/* CRT POWER OFF ANIMATION */
 .screen.power-off {
     animation: tvTurnOff 0.45s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
