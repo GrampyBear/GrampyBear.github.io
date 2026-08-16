@@ -1,1 +1,356 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'VT323', monospace;
+    background-color: #0d0d11;
+}
+
+/* Fondo dinámico del cielo con transición suave de degradados */
+#sky-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: background 3s ease-in-out;
+    background: linear-gradient(135deg, #020208, #0b0c1b, #1b1c38);
+}
+
+/* Chasis de la Televisión */
+.tv-casing {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Antenas */
+.antenna {
+    position: absolute;
+    top: -90px;
+    width: 6px;
+    height: 100px;
+    background: linear-gradient(to top, #444, #999, #ccc);
+    border-radius: 3px;
+    transform-origin: bottom center;
+}
+.antenna.left { left: 35%; transform: rotate(-28deg); }
+.antenna.right { right: 35%; transform: rotate(28deg); }
+.antenna::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -5px;
+    width: 16px;
+    height: 16px;
+    background: #ccc;
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+/* Mueble Principal de Madera / Baquelita */
+.tv-body {
+    display: flex;
+    background: linear-gradient(145deg, #2c1a0e, #180d06);
+    border: 12px solid #3d2314;
+    border-radius: 35px;
+    padding: 25px;
+    box-shadow: 
+        0 20px 50px rgba(0, 0, 0, 0.8),
+        inset 0 2px 5px rgba(255, 255, 255, 0.2),
+        inset 0 -5px 10px rgba(0, 0, 0, 0.7);
+    width: 820px;
+    height: 520px;
+}
+
+/* Bisel de la Pantalla */
+.screen-bezel {
+    flex: 1;
+    background: #151515;
+    border-radius: 40px / 30px;
+    padding: 18px;
+    box-shadow: inset 0 0 18px rgba(0,0,0,0.9), 0 0 2px #000;
+    display: flex;
+}
+
+/* Pantalla CRT Curvada */
+.screen {
+    position: relative;
+    flex: 1;
+    background: #050b0e;
+    border-radius: 35px / 25px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+    border: 3px solid #222;
+}
+
+/* Efectos CRT: Líneas de escaneo, curvatura y brillo */
+.scanlines {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        rgba(0, 0, 0, 0.35) 50%,
+        rgba(0, 0, 0, 0.35)
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.crt-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.65) 100%);
+    pointer-events: none;
+    z-index: 6;
+}
+
+.screen-glare {
+    position: absolute;
+    top: -20%; left: -20%; width: 70%; height: 70%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 7;
+}
+
+/* Disposición Interna */
+.screen-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 20px;
+    color: #00ffcc;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+}
+
+.tv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+}
+
+.ch-badge {
+    background: rgba(0, 255, 204, 0.15);
+    padding: 2px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 255, 204, 0.4);
+}
+
+.signal-indicator {
+    color: #ff3366;
+    text-shadow: 0 0 8px rgba(255, 51, 102, 0.7);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Reloj Cúbico Isométrico (3D) */
+.clock-cube-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.cube-digit-group {
+    display: flex;
+    gap: 5px;
+}
+
+.cube-block {
+    width: 58px;
+    height: 75px;
+    background: #081a17;
+    border: 2px solid #00ffcc;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5rem;
+    font-weight: bold;
+    box-shadow: 
+        0 0 12px rgba(0, 255, 204, 0.3),
+        inset 0 0 10px rgba(0, 255, 204, 0.15);
+    position: relative;
+    transform: perspective(300px) rotateX(4deg);
+}
+
+.cube-block::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: 2px; right: -5px;
+    height: 5px;
+    background: #00b38f;
+    border-radius: 3px 3px 0 0;
+    transform: skewX(-45deg);
+}
+
+.cube-block::after {
+    content: '';
+    position: absolute;
+    top: 2px; right: -5px; bottom: -5px;
+    width: 5px;
+    background: #008066;
+    border-radius: 0 3px 3px 0;
+    transform: skewY(-45deg);
+}
+
+.cube-separator {
+    font-size: 3.2rem;
+    line-height: 75px;
+    animation: blink 1s infinite;
+}
+
+/* Panel Inferior de Información */
+.info-panel {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 255, 204, 0.2);
+}
+
+.date-display {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    color: #ccffff;
+}
+
+.phase-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.6rem;
+    color: #ffdd66;
+    text-shadow: 0 0 10px rgba(255, 221, 102, 0.7);
+}
+
+.phase-desc {
+    font-size: 1.1rem;
+    color: #a0e0dd;
+    font-style: italic;
+}
+
+/* Controles de la TV (Derecha) */
+.tv-controls {
+    width: 140px;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+
+.brand-logo {
+    color: #d4af37;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.knob-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.knob {
+    width: 52px;
+    height: 52px;
+    background: radial-gradient(circle, #555, #222);
+    border-radius: 50%;
+    border: 3px solid #111;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.6), inset 0 2px 3px rgba(255,255,255,0.3);
+    position: relative;
+    cursor: pointer;
+}
+
+.knob-line {
+    position: absolute;
+    top: 6px; left: 50%;
+    width: 4px; height: 18px;
+    background: #eee;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.knob-label {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.speaker-grille {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 80%;
+}
+
+.speaker-grille span {
+    height: 4px;
+    background: #110904;
+    border-bottom: 1px solid #4a2815;
+    border-radius: 2px;
+}
+
+.power-btn {
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #cc2222, #880000);
+    border-radius: 50%;
+    border: 2px solid #440000;
+    box-shadow: 0 3px 5px rgba(0,0,0,0.8);
+    cursor: pointer;
+}
+
+.power-label {
+    font-size: 0.85rem;
+    color: #cc8888;
+}
+
+/* Patas */
+.tv-feet {
+    display: flex;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: -5px;
+}
+
+.foot {
+    width: 60px;
+    height: 18px;
+    background: #221208;
+    border-radius: 0 0 10px 10px;
+}
