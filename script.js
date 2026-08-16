@@ -26,7 +26,7 @@ const DAY_PHASES = [
     { startHour: 23, title: "Final Hour", icon: "💤", desc: "The day fades away, preparing for a new cycle.", gradient: "linear-gradient(135deg, #02020a, #060512, #0d0817)" }
 ];
 
-// Channel Profiles (Filters & Signal Labels)
+// Channel Profiles
 const CHANNELS = [
     { num: 1, class: "mode-no-signal", signal: "⚠ NO SIGNAL" },
     { num: 2, class: "mode-green",     signal: "● GREEN MATRIX" },
@@ -61,7 +61,7 @@ const signalText = document.getElementById('signal-text');
 
 let currentPhaseIndex = -1;
 let isTvOn = true;
-let channelIndex = 0;
+let channelIndex = 2; // Default CH-03
 let tuneAngle = 0;
 let volAngle = 0;
 
@@ -94,7 +94,7 @@ function updateClock() {
     }
 }
 
-// Power Toggle (CRT Turn Off Animation)
+// Power Toggle
 powerBtn.addEventListener('click', () => {
     isTvOn = !isTvOn;
 
@@ -107,22 +107,18 @@ powerBtn.addEventListener('click', () => {
     }
 });
 
-// Channel Tuning & Interference
+// Channel Tuning
 knobTune.addEventListener('click', () => {
     if (!isTvOn) return;
 
-    // Rotate Knob 45 degrees
     tuneAngle = (tuneAngle + 45) % 360;
     knobTune.style.transform = `rotate(${tuneAngle}deg)`;
 
-    // Change Channel Index
     channelIndex = (channelIndex + 1) % CHANNELS.length;
     const ch = CHANNELS[channelIndex];
 
-    // Remove previous channel CSS classes
     CHANNELS.forEach(c => tvScreen.classList.remove(c.class));
 
-    // Apply glitch effect & new channel styling
     tvScreen.classList.add('glitch');
     tvScreen.classList.add(ch.class);
     
@@ -134,12 +130,22 @@ knobTune.addEventListener('click', () => {
     }, 250);
 });
 
-// Volume Knob Rotate
+// Volume Knob
 knobVol.addEventListener('click', () => {
     volAngle = (volAngle + 30) % 360;
     knobVol.style.transform = `rotate(${volAngle}deg)`;
 });
 
-// Init
-updateClock();
-setInterval(updateClock, 1000);
+// Initialize Default Channel State & Clock
+function initTV() {
+    const defaultCh = CHANNELS[channelIndex];
+    CHANNELS.forEach(c => tvScreen.classList.remove(c.class));
+    tvScreen.classList.add(defaultCh.class);
+    chBadge.textContent = `CH-${String(defaultCh.num).padStart(2, '0')}`;
+    signalText.textContent = defaultCh.signal;
+
+    updateClock();
+    setInterval(updateClock, 1000);
+}
+
+initTV();
