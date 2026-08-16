@@ -61,7 +61,7 @@ const signalText = document.getElementById('signal-text');
 
 let currentPhaseIndex = -1;
 let isTvOn = true;
-let channelIndex = 2; // CH-03 default index
+let channelIndex = 0;
 let tuneAngle = 0;
 let volAngle = 0;
 
