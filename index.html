@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro TV Digital Clock</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font VT323 for retro digital/CRT feel -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
@@ -17,25 +16,21 @@
 
     <!-- TV Frame Container -->
     <div class="tv-casing">
-        <!-- Antennas -->
         <div class="antenna left"></div>
         <div class="antenna right"></div>
 
-        <!-- TV Main Box -->
         <div class="tv-body">
-            <!-- Screen Area -->
             <div class="screen-bezel">
-                <div class="screen">
+                <div class="screen" id="tv-screen">
                     <div class="crt-overlay"></div>
                     <div class="scanlines"></div>
                     <div class="screen-glare"></div>
 
                     <!-- Screen Content -->
                     <div class="screen-content">
-                        <!-- Top Channel Indicator -->
                         <div class="tv-header">
-                            <span class="ch-badge">CH-03</span>
-                            <span class="signal-indicator">● LIVE SIGNAL</span>
+                            <span class="ch-badge" id="ch-badge">CH-03</span>
+                            <span class="signal-indicator" id="signal-text">● LIVE SIGNAL</span>
                         </div>
 
                         <!-- Central Cubic Digital Clock -->
@@ -56,7 +51,7 @@
                             </div>
                         </div>
 
-                        <!-- Date & Phase Info Below -->
+                        <!-- Date & Phase Info -->
                         <div class="info-panel">
                             <div class="date-display" id="date-text">LOADING DATE...</div>
                             <div class="phase-badge">
@@ -74,14 +69,14 @@
                 <div class="brand-logo">RETRO-VISION</div>
                 
                 <div class="knob-group">
-                    <div class="knob">
+                    <div class="knob" id="knob-tune">
                         <div class="knob-line"></div>
                     </div>
                     <span class="knob-label">TUNE</span>
                 </div>
 
                 <div class="knob-group">
-                    <div class="knob">
+                    <div class="knob" id="knob-vol">
                         <div class="knob-line"></div>
                     </div>
                     <span class="knob-label">VOL</span>
@@ -99,7 +94,6 @@
             </div>
         </div>
 
-        <!-- TV Stand Feet -->
         <div class="tv-feet">
             <div class="foot left"></div>
             <div class="foot right"></div>
