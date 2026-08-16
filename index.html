@@ -3,21 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Título de la Página</title>
+    <title>Retro TV Digital Clock</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fuente estilo CRT/Retro Digital -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <h1>Encabezado Principal</h1>
-    </header>
+    <!-- Fondo de degradado dinámico según la hora del día -->
+    <div id="sky-bg"></div>
 
-    <main>
-        <p>Contenido principal aquí.</p>
-    </main>
+    <!-- Mueble de Televisión Retro -->
+    <div class="tv-casing">
+        <div class="antenna left"></div>
+        <div class="antenna right"></div>
 
-    <footer>
-        <p>&copy; 2026 Tu Nombre o Empresa</p>
-    </footer>
+        <div class="tv-body">
+            <!-- Marco de la Pantalla -->
+            <div class="screen-bezel">
+                <div class="screen">
+                    <div class="crt-overlay"></div>
+                    <div class="scanlines"></div>
+                    <div class="screen-glare"></div>
 
+                    <div class="screen-content">
+                        <!-- Indicador de canal superior -->
+                        <div class="tv-header">
+                            <span class="ch-badge">CH-03</span>
+                            <span class="signal-indicator">● LIVE SIGNAL</span>
+                        </div>
+
+                        <!-- Reloj Cúbico Central en 3D -->
+                        <div class="clock-cube-container">
+                            <div class="cube-digit-group">
+                                <div class="cube-block" id="h1">0</div>
+                                <div class="cube-block" id="h2">0</div>
+                            </div>
+                            <div class="cube-separator">:</div>
+                            <div class="cube-digit-group">
+                                <div class="cube-block" id="m1">0</div>
+                                <div class="cube-block" id="m2">0</div>
+                            </div>
+                            <div class="cube-separator">:</div>
+                            <div class="cube-digit-group">
+                                <div class="cube-block" id="s1">0</div>
+                                <div class="cube-block" id="s2">0</div>
+                            </div>
+                        </div>
+
+                        <!-- Panel Inferior: Fecha y Momento del Día -->
+                        <div class="info-panel">
+                            <div class="date-display" id="date-text">CARGANDO FECHA...</div>
+                            <div class="phase-badge">
+                                <span class="phase-icon" id="phase-icon">🌌</span>
+                                <span class="phase-title" id="phase-title">MEDIANOCHE PROFUNDA</span>
+                            </div>
+                            <div class="phase-desc" id="phase-desc">Iniciando sistema...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Controles Laterales (Perillas / Botón Power) -->
+            <div class="tv-controls">
+                <div class="brand-logo">RETRO-VISION</div>
+                
+                <div class="knob-group">
+                    <div class="knob"><div class="knob-line"></div></div>
+                    <span class="knob-label">TUNE</span>
+                </div>
+
+                <div class="knob-group">
+                    <div class="knob"><div class="knob-line"></div></div>
+                    <span class="knob-label">VOL</span>
+                </div>
+
+                <div class="speaker-grille">
+                    <span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span>
+                </div>
+
+                <div class="power-button-container">
+                    <div class="power-btn" id="power-btn"></div>
+                    <span class="power-label">POWER</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patas del Mueble -->
+        <div class="tv-feet">
+            <div class="foot left"></div>
+            <div class="foot right"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
