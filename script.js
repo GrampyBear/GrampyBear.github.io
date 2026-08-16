@@ -26,7 +26,19 @@ const DAY_PHASES = [
     { startHour: 23, title: "Final Hour", icon: "💤", desc: "The day fades away, preparing for a new cycle.", gradient: "linear-gradient(135deg, #02020a, #060512, #0d0817)" }
 ];
 
-// References to DOM elements
+// Channel Profiles (Filters & Signal Labels)
+const CHANNELS = [
+    { num: 1, class: "mode-no-signal", signal: "⚠ NO SIGNAL" },
+    { num: 2, class: "mode-green",     signal: "● GREEN MATRIX" },
+    { num: 3, class: "mode-default",   signal: "● LIVE SIGNAL" },
+    { num: 4, class: "mode-static",    signal: "⚡ STATIC NOISE" },
+    { num: 5, class: "mode-bw",        signal: "● B&W RETRO" },
+    { num: 6, class: "mode-amber",     signal: "● AMBER CRT" },
+    { num: 7, class: "mode-offair",    signal: "✖ SEARCHING..." },
+    { num: 8, class: "mode-magenta",   signal: "● CYBER VISION" }
+];
+
+// DOM Elements
 const elH1 = document.getElementById('h1');
 const elH2 = document.getElementById('h2');
 const elM1 = document.getElementById('m1');
@@ -40,17 +52,26 @@ const phaseTitle = document.getElementById('phase-title');
 const phaseDesc = document.getElementById('phase-desc');
 const skyBg = document.getElementById('sky-bg');
 
+const tvScreen = document.getElementById('tv-screen');
+const powerBtn = document.getElementById('power-btn');
+const knobTune = document.getElementById('knob-tune');
+const knobVol = document.getElementById('knob-vol');
+const chBadge = document.getElementById('ch-badge');
+const signalText = document.getElementById('signal-text');
+
 let currentPhaseIndex = -1;
+let isTvOn = true;
+let channelIndex = 2; // CH-03 default index
+let tuneAngle = 0;
+let volAngle = 0;
 
 function updateClock() {
     const now = new Date();
 
-    // Hours, Minutes, Seconds
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
-    // Update cubic digits
     elH1.textContent = hours[0];
     elH2.textContent = hours[1];
     elM1.textContent = minutes[0];
@@ -58,27 +79,67 @@ function updateClock() {
     elS1.textContent = seconds[0];
     elS2.textContent = seconds[1];
 
-    // Format Date in English (e.g., SATURDAY, AUGUST 15, 2026)
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const dateFormatted = now.toLocaleDateString('en-US', options).toUpperCase();
-    dateText.textContent = dateFormatted;
+    dateText.textContent = now.toLocaleDateString('en-US', options).toUpperCase();
 
-    // Determine Day Phase
     const currentHour = now.getHours();
     const phase = DAY_PHASES.find(p => p.startHour === currentHour) || DAY_PHASES[0];
 
-    // Update phase information & background if phase changed
     if (currentPhaseIndex !== currentHour) {
         currentPhaseIndex = currentHour;
         phaseIcon.textContent = phase.icon;
         phaseTitle.textContent = phase.title.toUpperCase();
         phaseDesc.textContent = phase.desc;
-        
-        // Smooth background gradient transition
         skyBg.style.background = phase.gradient;
     }
 }
 
-// Initial Call & Interval
+// Power Toggle (CRT Turn Off Animation)
+powerBtn.addEventListener('click', () => {
+    isTvOn = !isTvOn;
+
+    if (isTvOn) {
+        tvScreen.classList.remove('power-off');
+        powerBtn.classList.remove('off');
+    } else {
+        tvScreen.classList.add('power-off');
+        powerBtn.classList.add('off');
+    }
+});
+
+// Channel Tuning & Interference
+knobTune.addEventListener('click', () => {
+    if (!isTvOn) return;
+
+    // Rotate Knob 45 degrees
+    tuneAngle = (tuneAngle + 45) % 360;
+    knobTune.style.transform = `rotate(${tuneAngle}deg)`;
+
+    // Change Channel Index
+    channelIndex = (channelIndex + 1) % CHANNELS.length;
+    const ch = CHANNELS[channelIndex];
+
+    // Remove previous channel CSS classes
+    CHANNELS.forEach(c => tvScreen.classList.remove(c.class));
+
+    // Apply glitch effect & new channel styling
+    tvScreen.classList.add('glitch');
+    tvScreen.classList.add(ch.class);
+    
+    chBadge.textContent = `CH-${String(ch.num).padStart(2, '0')}`;
+    signalText.textContent = ch.signal;
+
+    setTimeout(() => {
+        tvScreen.classList.remove('glitch');
+    }, 250);
+});
+
+// Volume Knob Rotate
+knobVol.addEventListener('click', () => {
+    volAngle = (volAngle + 30) % 360;
+    knobVol.style.transform = `rotate(${volAngle}deg)`;
+});
+
+// Init
 updateClock();
 setInterval(updateClock, 1000);
