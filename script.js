@@ -26,6 +26,13 @@ const DAY_PHASES = [
     { startHour: 23, title: "Final Hour", icon: "💤", desc: "The day fades away, preparing for a new cycle.", gradient: "linear-gradient(135deg, #02020a, #060512, #0d0817)" }
 ];
 
+// Seasonal Weather Configurations
+const WEATHER_TYPES = [
+    { type: 'rain', icon: '🌧️', name: 'RETRO RAIN' },
+    { type: 'snow', icon: '❄️', name: 'PIXEL SNOW' },
+    { type: 'clear', icon: '✨', name: 'CLEAR ATMOSPHERE' }
+];
+
 // Channel Profiles
 const CHANNELS = [
     { num: 1, class: "mode-no-signal", signal: "⚠ NO SIGNAL" },
@@ -53,18 +60,114 @@ const phaseDesc = document.getElementById('phase-desc');
 const skyBg = document.getElementById('sky-bg');
 
 const tvScreen = document.getElementById('tv-screen');
+const tvGlare = document.getElementById('screen-glare');
+const tvCasing = document.getElementById('tv-casing');
 const powerBtn = document.getElementById('power-btn');
 const knobTune = document.getElementById('knob-tune');
 const knobVol = document.getElementById('knob-vol');
 const chBadge = document.getElementById('ch-badge');
 const signalText = document.getElementById('signal-text');
 
+const weatherIcon = document.getElementById('weather-icon');
+const weatherText = document.getElementById('weather-text');
+const particlesContainer = document.getElementById('weather-particles');
+const canvas = document.getElementById('noise-canvas');
+const ctx = canvas.getContext('2d');
+
 let currentPhaseIndex = -1;
 let isTvOn = true;
-let channelIndex = 2; // Default CH-03
+let channelIndex = 2; // CH-03 default
 let tuneAngle = 0;
 let volAngle = 0;
+let noiseAnimationId = null;
 
+// --- FEATURE 1: DYNAMIC CANVAS STATIC NOISE ---
+function resizeCanvas() {
+    canvas.width = tvScreen.clientWidth;
+    canvas.height = tvScreen.clientHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+
+function generateNoise() {
+    if (!isTvOn || CHANNELS[channelIndex].class !== 'mode-static') return;
+
+    const w = canvas.width;
+    const h = canvas.height;
+    const imgData = ctx.createImageData(w, h);
+    const buffer = new Uint32Array(imgData.data.buffer);
+
+    for (let i = 0; i < buffer.length; i++) {
+        const val = Math.random() * 255 | 0;
+        buffer[i] = (255 << 24) | (val << 16) | (val << 8) | val;
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+    noiseAnimationId = requestAnimationFrame(generateNoise);
+}
+
+function updateStaticNoiseState() {
+    if (CHANNELS[channelIndex].class === 'mode-static' && isTvOn) {
+        canvas.style.opacity = '0.35';
+        if (!noiseAnimationId) generateNoise();
+    } else {
+        canvas.style.opacity = '0';
+        if (noiseAnimationId) {
+            cancelAnimationFrame(noiseAnimationId);
+            noiseAnimationId = null;
+        }
+    }
+}
+
+// --- FEATURE 2: PARALLAX & DYNAMIC GLARE REFLECTION ---
+window.addEventListener('mousemove', (e) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    const xRel = (clientX / innerWidth) - 0.5;
+    const yRel = (clientY / innerHeight) - 0.5;
+
+    // Shift screen reflection gradient
+    const glareX = yRel * 40;
+    const glareY = xRel * 40;
+    tvGlare.style.transform = `translate(${glareY}px, ${glareX}px)`;
+
+    // Slight 3D tilt on TV body
+    tvCasing.style.transform = `rotateY(${xRel * 6}deg) rotateX(${-yRel * 6}deg)`;
+});
+
+// --- FEATURE 3: SEASONAL WEATHER EFFECTS ---
+function updateWeatherAndSeason(month) {
+    let weather;
+    // Dec, Jan, Feb -> Winter/Snow; Mar-Nov -> Rain/Clear
+    if (month === 11 || month === 0 || month === 1) {
+        weather = WEATHER_TYPES[1]; // Snow
+    } else if (month >= 2 && month <= 4) {
+        weather = WEATHER_TYPES[0]; // Rain
+    } else {
+        weather = WEATHER_TYPES[2]; // Clear
+    }
+
+    weatherIcon.textContent = weather.icon;
+    weatherText.textContent = weather.name;
+
+    // Generate Particles
+    particlesContainer.innerHTML = '';
+    if (weather.type === 'clear') return;
+
+    const particleCount = weather.type === 'rain' ? 30 : 25;
+    for (let i = 0; i < particleCount; i++) {
+        const p = document.createElement('div');
+        p.className = weather.type === 'rain' ? 'drop' : 'flake';
+        p.style.left = `${Math.random() * 100}%`;
+        p.style.animationDuration = weather.type === 'rain' 
+            ? `${0.5 + Math.random() * 0.4}s` 
+            : `${2 + Math.random() * 3}s`;
+        p.style.animationDelay = `${Math.random() * 2}s`;
+        particlesContainer.appendChild(p);
+    }
+}
+
+// Main Clock Routine
 function updateClock() {
     const now = new Date();
 
@@ -91,10 +194,11 @@ function updateClock() {
         phaseTitle.textContent = phase.title.toUpperCase();
         phaseDesc.textContent = phase.desc;
         skyBg.style.background = phase.gradient;
+        updateWeatherAndSeason(now.getMonth());
     }
 }
 
-// Power Toggle
+// Controls Logic
 powerBtn.addEventListener('click', () => {
     isTvOn = !isTvOn;
 
@@ -105,9 +209,9 @@ powerBtn.addEventListener('click', () => {
         tvScreen.classList.add('power-off');
         powerBtn.classList.add('off');
     }
+    updateStaticNoiseState();
 });
 
-// Channel Tuning
 knobTune.addEventListener('click', () => {
     if (!isTvOn) return;
 
@@ -125,19 +229,21 @@ knobTune.addEventListener('click', () => {
     chBadge.textContent = `CH-${String(ch.num).padStart(2, '0')}`;
     signalText.textContent = ch.signal;
 
+    updateStaticNoiseState();
+
     setTimeout(() => {
         tvScreen.classList.remove('glitch');
     }, 250);
 });
 
-// Volume Knob
 knobVol.addEventListener('click', () => {
     volAngle = (volAngle + 30) % 360;
     knobVol.style.transform = `rotate(${volAngle}deg)`;
 });
 
-// Initialize Default Channel State & Clock
+// Initialization
 function initTV() {
+    resizeCanvas();
     const defaultCh = CHANNELS[channelIndex];
     CHANNELS.forEach(c => tvScreen.classList.remove(c.class));
     tvScreen.classList.add(defaultCh.class);
