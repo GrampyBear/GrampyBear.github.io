@@ -13,7 +13,7 @@ body {
     align-items: center;
     font-family: 'VT323', monospace;
     background-color: #0d0d11;
-    perspective: 1000px;
+    /* Se remueve perspective: 1000px; */
 }
 
 /* Dynamic Sky Background */
@@ -35,7 +35,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.1s ease-out;
+    /* Se remueve transition: transform 0.1s ease-out; */
 }
 
 /* Antennas */
