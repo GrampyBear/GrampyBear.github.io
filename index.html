@@ -15,17 +15,24 @@
     <div id="sky-bg"></div>
 
     <!-- TV Frame Container -->
-    <div class="tv-casing">
+    <div class="tv-casing" id="tv-casing">
         <div class="antenna left"></div>
         <div class="antenna right"></div>
 
         <div class="tv-body">
             <div class="screen-bezel">
-                <!-- Se añade .mode-default desde el HTML para prevenir pantalla oscura al cargar -->
                 <div class="screen mode-default" id="tv-screen">
                     <div class="crt-overlay"></div>
                     <div class="scanlines"></div>
-                    <div class="screen-glare"></div>
+                    
+                    <!-- Dinamic Screen Glare -->
+                    <div class="screen-glare" id="screen-glare"></div>
+
+                    <!-- Canvas for Static Noise -->
+                    <canvas id="noise-canvas"></canvas>
+
+                    <!-- Weather Particles Container -->
+                    <div id="weather-particles"></div>
 
                     <!-- Screen Content -->
                     <div class="screen-content">
@@ -52,7 +59,7 @@
                             </div>
                         </div>
 
-                        <!-- Date & Phase Info -->
+                        <!-- Date, Phase & Weather Info -->
                         <div class="info-panel">
                             <div class="date-display" id="date-text">LOADING DATE...</div>
                             <div class="phase-badge">
@@ -60,6 +67,12 @@
                                 <span class="phase-title" id="phase-title">DEEP MIDNIGHT</span>
                             </div>
                             <div class="phase-desc" id="phase-desc">Booting system...</div>
+                            
+                            <!-- Weather Badge -->
+                            <div class="weather-badge" id="weather-badge">
+                                <span id="weather-icon">🌧️</span>
+                                <span id="weather-text">RETRO RAIN</span>
+                            </div>
                         </div>
                     </div>
                 </div>
