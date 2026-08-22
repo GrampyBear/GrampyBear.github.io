@@ -130,9 +130,6 @@ window.addEventListener('mousemove', (e) => {
     const glareX = yRel * 40;
     const glareY = xRel * 40;
     tvGlare.style.transform = `translate(${glareY}px, ${glareX}px)`;
-
-    // Slight 3D tilt on TV body
-    tvCasing.style.transform = `rotateY(${xRel * 6}deg) rotateX(${-yRel * 6}deg)`;
 });
 
 // --- FEATURE 3: SEASONAL WEATHER EFFECTS ---
